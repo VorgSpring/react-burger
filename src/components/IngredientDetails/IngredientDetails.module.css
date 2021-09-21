@@ -1,0 +1,33 @@
+.title {
+  margin-top: 12px;
+  margin-bottom: 13px;
+}
+
+.image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 240px;
+}
+
+.name {
+  text-align: center;
+}
+
+.ingredients {
+  display: flex;
+  justify-content: center;
+}
+
+.ingredient {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-basis: 112px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.ingredient:last-child {
+  margin-right: 0
+}
