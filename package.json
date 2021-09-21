@@ -38,7 +38,7 @@
     "eslint": "eslint --ext .jsx --ext .js src/",
     "editorconfig": "editorconfig-checker --exclude '.git|node_modules|.DS_Store|build|public'",
     "stylelint": "stylelint 'src/**/*.css'",
-    "lint": "npm run eslint & npm stylelint & npm run editorconfig"
+    "lint": "npm run eslint & npm run stylelint & npm run editorconfig"
   },
   "eslintConfig": {
     "extends": [
