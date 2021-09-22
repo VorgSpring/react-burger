@@ -71,7 +71,7 @@ export const BurgerIngredient = ({ item, onClick }) => {
 
 BurgerIngredient.propTypes = {
   item: PropTypes.shape({
-    _id: PropTypes.number.isRequired,
+    _id: PropTypes.string.isRequired,
     count: PropTypes.number,
     calories: PropTypes.number.isRequired,
     carbohydrates: PropTypes.number.isRequired,

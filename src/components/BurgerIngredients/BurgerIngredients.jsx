@@ -10,6 +10,7 @@ import {
   INGREDIENT_SAUCE_TYPE,
 } from '../../constants/ingredients';
 import styles from './BurgerIngredients.module.css';
+import Modal from '../Modal';
 
 export const BurgerIngredients = ({ items }) => {
   const [currentTab, setCurrentTab] = useState('bun');
@@ -109,12 +110,13 @@ export const BurgerIngredients = ({ items }) => {
       </ul>
 
       {currentIngredient && (
-        <IngredientDetails
-          image={currentIngredient.image}
-          name={currentIngredient.name}
-          ingredients={currentIngredient.ingredients}
-          onClose={handleCloseIngredientModal}
-        />
+        <Modal onClose={handleCloseIngredientModal}>
+          <IngredientDetails
+            image={currentIngredient.image}
+            name={currentIngredient.name}
+            ingredients={currentIngredient.ingredients}
+          />
+        </Modal>
       )}
     </section>
   );
@@ -122,6 +124,6 @@ export const BurgerIngredients = ({ items }) => {
 
 BurgerIngredients.propTypes = {
   items: PropTypes.arrayOf(
-    BurgerIngredient.propTypes,
+    BurgerIngredient.propTypes.item,
   ).isRequired,
 };

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import ModalOverlay from '../ModalOverlay';
 import styles from './Modal.module.css';
 
 const modalRoot = document.getElementById('modal');
@@ -32,7 +33,7 @@ export const Modal = ({
         {children}
       </section>
 
-      <div className={styles.overlay} onClick={onClose} />
+      <ModalOverlay onClick={onClose} />
     </>,
     modalRoot,
   );

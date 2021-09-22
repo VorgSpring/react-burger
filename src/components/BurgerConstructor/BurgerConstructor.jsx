@@ -10,6 +10,7 @@ import BurgerIngredient from '../BurgerIngredient';
 import OrderDetails from '../OrderDetails';
 import { INGREDIENT_BUN_TYPE } from '../../constants/ingredients';
 import styles from './BurgerConstructor.module.css';
+import Modal from '../Modal';
 
 export const BurgerConstructor = ({ items }) => {
   const [isOpenModal, setOpenModal] = useState(false);
@@ -41,9 +42,12 @@ export const BurgerConstructor = ({ items }) => {
         </div>
 
         <ul className={`${styles.constructor_list} pr-2`}>
-          {otherElements.map((item) => (
+          {otherElements.map((item, i) => (
             <li
-              key={item._id}
+              // в бургере могут быть одинаковые ингредиенты
+              // идентификатор элемента списка может быть не уникальным
+              // eslint-disable-next-line react/no-array-index-key
+              key={`${item._id} ${i}`}
               className={`${styles.constructor_item} mb-4`}
             >
               <span className="mr-2">
@@ -87,7 +91,9 @@ export const BurgerConstructor = ({ items }) => {
       </div>
 
       {isOpenModal && (
-        <OrderDetails onClose={handleCloseModal} />
+        <Modal onClose={handleCloseModal}>
+          <OrderDetails />
+        </Modal>
       )}
     </section>
   );
@@ -95,6 +101,6 @@ export const BurgerConstructor = ({ items }) => {
 
 BurgerConstructor.propTypes = {
   items: PropTypes.arrayOf(
-    BurgerIngredient.propTypes,
+    BurgerIngredient.propTypes.item,
   ).isRequired,
 };

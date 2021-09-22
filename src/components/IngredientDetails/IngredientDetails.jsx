@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from '../Modal';
 import { IngredientDictionary } from '../../constants/ingredients';
 import styles from './IngredientDetails.module.css';
 
@@ -8,14 +7,8 @@ export const IngredientDetails = ({
   image,
   name,
   ingredients,
-  isOpen,
-  onClose,
 }) => (
-  <Modal
-    isOpen={isOpen}
-    onClose={onClose}
-    className="pt-10 pr-10 pl-10 pb-15"
-  >
+  <section className="pt-10 pr-10 pl-10 pb-15">
     <h2 className={`${styles.title} text text_type_main-large`}>
       Детали ингредиента
     </h2>
@@ -46,18 +39,16 @@ export const IngredientDetails = ({
         </p>
       ))}
     </div>
-  </Modal>
+  </section>
 );
 
 IngredientDetails.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   ingredients: PropTypes.shape({
-    calories: PropTypes.string.isRequired,
-    proteins: PropTypes.string.isRequired,
-    fat: PropTypes.string.isRequired,
-    carbohydrates: PropTypes.string.isRequired,
+    calories: PropTypes.number.isRequired,
+    proteins: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    carbohydrates: PropTypes.number.isRequired,
   }).isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
 };
