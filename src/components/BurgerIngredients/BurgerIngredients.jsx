@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useRef, useContext } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from '../IngredientDetails';
 import BurgerIngredient from '../BurgerIngredient';
+import { BurgerContext } from '../../services/appContext';
 import {
   IngredientsTypes,
   INGREDIENT_BUN_TYPE,
@@ -12,7 +12,8 @@ import {
 import styles from './BurgerIngredients.module.css';
 import Modal from '../Modal';
 
-export const BurgerIngredients = ({ items }) => {
+export const BurgerIngredients = () => {
+  const { items } = useContext(BurgerContext);
   const [currentTab, setCurrentTab] = useState('bun');
   const [currentIngredient, setCurrentIngredient] = useState(null);
 
@@ -36,6 +37,10 @@ export const BurgerIngredients = ({ items }) => {
         return null;
     }
   };
+
+  if (!items) {
+    return null;
+  }
 
   const handleChoiceTab = (value) => {
     setCurrentTab(value);
@@ -120,10 +125,4 @@ export const BurgerIngredients = ({ items }) => {
       )}
     </section>
   );
-};
-
-BurgerIngredients.propTypes = {
-  items: PropTypes.arrayOf(
-    BurgerIngredient.propTypes.item,
-  ).isRequired,
 };

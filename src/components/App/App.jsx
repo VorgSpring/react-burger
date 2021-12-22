@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../AppHeader';
 import BurgerConstructor from '../BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients';
+import { BurgerContext } from '../../services/appContext';
 import { API_URL } from '../../constants/api';
 import styles from './App.module.css';
 
@@ -43,13 +44,12 @@ export const App = () => {
           Соберите бургер
         </h1>
 
-        {items && (
-          <div className={`${styles.container} pb-10`}>
-            <BurgerIngredients items={items} />
-
-            <BurgerConstructor items={items} />
-          </div>
-        )}
+        <div className={`${styles.container} pb-10`}>
+          <BurgerContext.Provider value={{ items }}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </BurgerContext.Provider>
+        </div>
       </main>
     </>
   );
