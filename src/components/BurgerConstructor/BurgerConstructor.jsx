@@ -19,7 +19,7 @@ export const BurgerConstructor = () => {
     return null;
   }
 
-  const buns = items.filter((item) => item.type === INGREDIENT_BUN_TYPE);
+  const bun = items.filter((item) => item.type === INGREDIENT_BUN_TYPE)[0];
   const otherElements = items.filter((item) => item.type !== INGREDIENT_BUN_TYPE);
 
   const sum = items.reduce((acc, item) => acc + item.price, 0);
@@ -39,9 +39,9 @@ export const BurgerConstructor = () => {
           <ConstructorElement
             type="top"
             isLocked
-            text={buns[0].name}
-            price={buns[0].price}
-            thumbnail={buns[0].image}
+            text={`${bun.name} (верх)`}
+            price={bun.price}
+            thumbnail={bun.image}
           />
         </div>
 
@@ -71,9 +71,9 @@ export const BurgerConstructor = () => {
           <ConstructorElement
             type="bottom"
             isLocked
-            text={buns[1].name}
-            price={buns[1].price}
-            thumbnail={buns[1].image}
+            text={`${bun.name} (низ)`}
+            price={bun.price}
+            thumbnail={bun.image}
           />
         </div>
       </div>
