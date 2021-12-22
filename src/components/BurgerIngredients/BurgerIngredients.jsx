@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from '../IngredientDetails';
 import BurgerIngredient from '../BurgerIngredient';
-import { BurgerContext } from '../../services/appContext';
+import { IngredientsContext } from '../../services/appContext';
 import {
   IngredientsTypes,
   INGREDIENT_BUN_TYPE,
@@ -13,8 +13,8 @@ import styles from './BurgerIngredients.module.css';
 import Modal from '../Modal';
 
 export const BurgerIngredients = () => {
-  const { items } = useContext(BurgerContext);
-  const [currentTab, setCurrentTab] = useState('bun');
+  const { ingredients } = useContext(IngredientsContext);
+  const [currentTab, setCurrentTab] = useState(INGREDIENT_BUN_TYPE);
   const [currentIngredient, setCurrentIngredient] = useState(null);
 
   const listRef = useRef(null);
@@ -38,7 +38,7 @@ export const BurgerIngredients = () => {
     }
   };
 
-  if (!items) {
+  if (!ingredients) {
     return null;
   }
 
@@ -99,7 +99,7 @@ export const BurgerIngredients = () => {
             </h3>
 
             <ul className={`${styles.ingredients_list} pl-4 pr-4`}>
-              {items
+              {ingredients
                 .filter((item) => item.type === type)
                 .map((item) => (
                   <BurgerIngredient

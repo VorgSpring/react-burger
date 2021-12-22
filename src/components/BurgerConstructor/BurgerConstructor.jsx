@@ -1,4 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useReducer,
+} from 'react';
 import {
   ConstructorElement,
   CurrencyIcon,
@@ -7,22 +12,49 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from '../OrderDetails';
 import { BurgerContext } from '../../services/appContext';
-import { INGREDIENT_BUN_TYPE } from '../../constants/ingredients';
+import { getSum } from '../../helpers/burger';
 import styles from './BurgerConstructor.module.css';
 import Modal from '../Modal';
 
+// Временное решение
+const initialState = { sum: 0 };
+const sumReducer = (state, action) => {
+  switch (action.type) {
+    case 'change':
+      return {
+        sum: getSum(action.burger),
+      };
+
+    default:
+      return state;
+  }
+};
+
 export const BurgerConstructor = () => {
-  const { items } = useContext(BurgerContext);
+  const { burger } = useContext(BurgerContext);
   const [isOpenModal, setOpenModal] = useState(false);
 
-  if (!items) {
+  // Временное решение
+  const [state, dispatch] = useReducer(sumReducer, initialState);
+  const { sum } = state;
+
+  // Временное решение
+  useEffect(() => {
+    if (!burger) {
+      return;
+    }
+
+    dispatch({
+      type: 'change',
+      burger,
+    });
+  }, [burger, dispatch]);
+
+  if (!burger) {
     return null;
   }
 
-  const bun = items.filter((item) => item.type === INGREDIENT_BUN_TYPE)[0];
-  const otherElements = items.filter((item) => item.type !== INGREDIENT_BUN_TYPE);
-
-  const sum = items.reduce((acc, item) => acc + item.price, 0);
+  const { bun, ingredients } = burger;
 
   const handleCloseModal = () => {
     setOpenModal(false);
@@ -46,7 +78,7 @@ export const BurgerConstructor = () => {
         </div>
 
         <ul className={`${styles.constructor_list} pr-2`}>
-          {otherElements.map((item, i) => (
+          {ingredients.map((item, i) => (
             <li
               // в бургере могут быть одинаковые ингредиенты
               // идентификатор элемента списка может быть не уникальным

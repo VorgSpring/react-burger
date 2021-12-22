@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Header from '../AppHeader';
 import BurgerConstructor from '../BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients';
-import { BurgerContext } from '../../services/appContext';
+import { BurgerContext, IngredientsContext } from '../../services/appContext';
+import { getMainBurger } from '../../helpers/burger';
 import { API_URL } from '../../constants/api';
 import styles from './App.module.css';
 
 export const App = () => {
-  const [items, setItems] = useState(null);
+  const [ingredients, setIngredients] = useState(null);
+  const [burger, setBurger] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -18,7 +20,11 @@ export const App = () => {
           throw new Error('Что-то пошло не так!');
         }
 
-        setItems(data);
+        setIngredients(data);
+
+        // Временное решение
+        // Пока выбирать ингредиенты нельзя
+        setBurger(getMainBurger(data));
       })
       .catch(({ message }) => {
         setError(message);
@@ -45,8 +51,11 @@ export const App = () => {
         </h1>
 
         <div className={`${styles.container} pb-10`}>
-          <BurgerContext.Provider value={{ items }}>
+          <IngredientsContext.Provider value={{ ingredients }}>
             <BurgerIngredients />
+          </IngredientsContext.Provider>
+
+          <BurgerContext.Provider value={{ burger }}>
             <BurgerConstructor />
           </BurgerContext.Provider>
         </div>
