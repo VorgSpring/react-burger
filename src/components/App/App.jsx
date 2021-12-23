@@ -3,8 +3,8 @@ import Header from '../AppHeader';
 import BurgerConstructor from '../BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients';
 import { BurgerContext, IngredientsContext } from '../../services/appContext';
+import { getIngredient } from '../../api/ingredient';
 import { getMainBurger } from '../../helpers/burger';
-import { API_URL } from '../../constants/api';
 import styles from './App.module.css';
 
 export const App = () => {
@@ -13,8 +13,7 @@ export const App = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(API_URL)
-      .then((responce) => responce.json())
+    getIngredient
       .then(({ success, data }) => {
         if (!success) {
           throw new Error('Что-то пошло не так!');
