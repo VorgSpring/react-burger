@@ -152,7 +152,7 @@ export const BurgerConstructor = () => {
         </div>
 
         <Button onClick={handleCreateOrder} disabled={isCreating}>
-          Оформить заказ
+          {isCreating ? 'Подождите...' : 'Оформить заказ'}
         </Button>
       </div>
 
