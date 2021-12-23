@@ -1,3 +1,6 @@
-export const getBodyForCreateOrders = (burger) => ({
-  ingredients: burger.ingredients.map((item) => item._id).push(burger.bun._id),
+export const getBodyForCreateOrders = (burger) => JSON.stringify({
+  ingredients: burger.ingredients.reduce((acc, item) => {
+    acc.push(item._id);
+    return acc;
+  }, [burger.bun._id]),
 });

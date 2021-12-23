@@ -1,12 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import DoneImage from './resource/done.gif';
 import DoneImage2x from './resource/done@2x.gif';
 import styles from './OrderDetails.module.css';
 
-export const OrderDetails = () => (
+export const OrderDetails = ({ number }) => (
   <section className={`${styles.root} pt-30 pb-30`}>
     <h2 className="text text_type_digits-large mb-8">
-      034536
+      {number}
     </h2>
 
     <p className="text text_type_main-medium mb-15">
@@ -30,3 +31,7 @@ export const OrderDetails = () => (
     </p>
   </section>
 );
+
+OrderDetails.propTypes = {
+  number: PropTypes.number.isRequired,
+};

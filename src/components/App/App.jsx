@@ -13,7 +13,7 @@ export const App = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getIngredient
+    getIngredient()
       .then(({ success, data }) => {
         if (!success) {
           throw new Error('Что-то пошло не так!');

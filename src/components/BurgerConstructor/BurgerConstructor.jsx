@@ -11,7 +11,9 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from '../OrderDetails';
+import ErrorOrderDetails from '../ErrorOrderDetails';
 import { BurgerContext } from '../../services/appContext';
+import { createOrder } from '../../api/order';
 import { getSum } from '../../helpers/burger';
 import styles from './BurgerConstructor.module.css';
 import Modal from '../Modal';
@@ -33,6 +35,9 @@ const sumReducer = (state, action) => {
 export const BurgerConstructor = () => {
   const { burger } = useContext(BurgerContext);
   const [isOpenModal, setOpenModal] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
+  const [orderNumber, setOrderNumber] = useState(null);
+  const [error, setError] = useState(null);
 
   // Временное решение
   const [state, dispatch] = useReducer(sumReducer, initialState);
@@ -60,8 +65,33 @@ export const BurgerConstructor = () => {
     setOpenModal(false);
   };
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
+  const handleCreateOrder = () => {
+    if (isCreating) {
+      return;
+    }
+
+    setError(null);
+    setIsCreating(true);
+
+    createOrder(burger)
+      .then(({
+        success, message, order,
+      }) => {
+        setIsCreating(false);
+        setOpenModal(true);
+
+        if (!success) {
+          setError(message);
+          return;
+        }
+
+        setOrderNumber(order.number);
+      })
+      .catch((e) => {
+        setOpenModal(true);
+        setIsCreating(false);
+        setError(e.message);
+      });
   };
 
   return (
@@ -121,14 +151,18 @@ export const BurgerConstructor = () => {
           </span>
         </div>
 
-        <Button onClick={handleOpenModal}>
+        <Button onClick={handleCreateOrder} disabled={isCreating}>
           Оформить заказ
         </Button>
       </div>
 
       {isOpenModal && (
         <Modal onClose={handleCloseModal}>
-          <OrderDetails />
+          {error ? (
+            <ErrorOrderDetails error={error} />
+          ) : (
+            <OrderDetails number={orderNumber} />
+          )}
         </Modal>
       )}
     </section>

@@ -6,6 +6,9 @@ export const createOrder = (burger) => {
 
   return fetch(CREATE_ORDER_API_URL, {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
     body,
   }).then((responce) => responce.json());
 };
