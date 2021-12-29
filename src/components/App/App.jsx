@@ -2,22 +2,28 @@ import React, { useEffect, useState } from 'react';
 import Header from '../AppHeader';
 import BurgerConstructor from '../BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients';
-import { API_URL } from '../../constants/api';
+import { BurgerContext, IngredientsContext } from '../../services/appContext';
+import { getIngredient } from '../../api/ingredient';
+import { getMainBurger } from '../../helpers/burger';
 import styles from './App.module.css';
 
 export const App = () => {
-  const [items, setItems] = useState(null);
+  const [ingredients, setIngredients] = useState(null);
+  const [burger, setBurger] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(API_URL)
-      .then((responce) => responce.json())
+    getIngredient()
       .then(({ success, data }) => {
         if (!success) {
           throw new Error('Что-то пошло не так!');
         }
 
-        setItems(data);
+        setIngredients(data);
+
+        // Временное решение
+        // Пока выбирать ингредиенты нельзя
+        setBurger(getMainBurger(data));
       })
       .catch(({ message }) => {
         setError(message);
@@ -43,13 +49,15 @@ export const App = () => {
           Соберите бургер
         </h1>
 
-        {items && (
-          <div className={`${styles.container} pb-10`}>
-            <BurgerIngredients items={items} />
+        <div className={`${styles.container} pb-10`}>
+          <IngredientsContext.Provider value={{ ingredients }}>
+            <BurgerIngredients />
+          </IngredientsContext.Provider>
 
-            <BurgerConstructor items={items} />
-          </div>
-        )}
+          <BurgerContext.Provider value={{ burger }}>
+            <BurgerConstructor />
+          </BurgerContext.Provider>
+        </div>
       </main>
     </>
   );

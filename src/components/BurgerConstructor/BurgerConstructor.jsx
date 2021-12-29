@@ -1,31 +1,98 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useReducer,
+} from 'react';
 import {
   ConstructorElement,
   CurrencyIcon,
   DragIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import BurgerIngredient from '../BurgerIngredient';
 import OrderDetails from '../OrderDetails';
-import { INGREDIENT_BUN_TYPE } from '../../constants/ingredients';
+import ErrorOrderDetails from '../ErrorOrderDetails';
+import { BurgerContext } from '../../services/appContext';
+import { createOrder } from '../../api/order';
+import { getSum } from '../../helpers/burger';
+import { ERROR_CREATING_ORDER } from '../../constants/errors';
 import styles from './BurgerConstructor.module.css';
 import Modal from '../Modal';
 
-export const BurgerConstructor = ({ items }) => {
+// Временное решение
+const initialState = { orderSumm: 0 };
+const sumReducer = (state, action) => {
+  switch (action.type) {
+    case 'CHANGE_INGREDIENTS':
+      return {
+        orderSumm: getSum(action.burger),
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const BurgerConstructor = () => {
+  const { burger } = useContext(BurgerContext);
   const [isOpenModal, setOpenModal] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
+  const [orderNumber, setOrderNumber] = useState(null);
+  const [error, setError] = useState(null);
 
-  const buns = items.filter((item) => item.type === INGREDIENT_BUN_TYPE);
-  const otherElements = items.filter((item) => item.type !== INGREDIENT_BUN_TYPE);
+  // Временное решение
+  const [state, dispatch] = useReducer(sumReducer, initialState);
+  const { orderSumm } = state;
 
-  const sum = items.reduce((acc, item) => acc + item.price, 0);
+  // Временное решение
+  useEffect(() => {
+    if (!burger) {
+      return;
+    }
+
+    dispatch({
+      type: 'CHANGE_INGREDIENTS',
+      burger,
+    });
+  }, [burger, dispatch]);
+
+  if (!burger) {
+    return null;
+  }
+
+  const { bun, ingredients } = burger;
 
   const handleCloseModal = () => {
     setOpenModal(false);
   };
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
+  const handleCreateOrder = () => {
+    if (isCreating) {
+      return;
+    }
+
+    setError(null);
+    setIsCreating(true);
+
+    createOrder(burger)
+      .then(({
+        success, message, order,
+      }) => {
+        setIsCreating(false);
+        setOpenModal(true);
+
+        if (!success) {
+          setError(message);
+          return;
+        }
+
+        setOrderNumber(order.number);
+      })
+      .catch((e) => {
+        setOpenModal(true);
+        setIsCreating(false);
+        setError(e.message || ERROR_CREATING_ORDER);
+      });
   };
 
   return (
@@ -35,14 +102,14 @@ export const BurgerConstructor = ({ items }) => {
           <ConstructorElement
             type="top"
             isLocked
-            text={buns[0].name}
-            price={buns[0].price}
-            thumbnail={buns[0].image}
+            text={`${bun.name} (верх)`}
+            price={bun.price}
+            thumbnail={bun.image}
           />
         </div>
 
         <ul className={`${styles.constructor_list} pr-2`}>
-          {otherElements.map((item, i) => (
+          {ingredients.map((item, i) => (
             <li
               // в бургере могут быть одинаковые ингредиенты
               // идентификатор элемента списка может быть не уникальным
@@ -67,9 +134,9 @@ export const BurgerConstructor = ({ items }) => {
           <ConstructorElement
             type="bottom"
             isLocked
-            text={buns[1].name}
-            price={buns[1].price}
-            thumbnail={buns[1].image}
+            text={`${bun.name} (низ)`}
+            price={bun.price}
+            thumbnail={bun.image}
           />
         </div>
       </div>
@@ -77,7 +144,7 @@ export const BurgerConstructor = ({ items }) => {
       <div className={`${styles.order} pr-4`}>
         <div className={`${styles.order_price} mr-10`}>
           <span className="text text_type_digits-medium mr-2">
-            {sum}
+            {orderSumm}
           </span>
 
           <span className={styles.order_icon}>
@@ -85,22 +152,20 @@ export const BurgerConstructor = ({ items }) => {
           </span>
         </div>
 
-        <Button onClick={handleOpenModal}>
-          Оформить заказ
+        <Button onClick={handleCreateOrder} disabled={isCreating}>
+          {isCreating ? 'Подождите...' : 'Оформить заказ'}
         </Button>
       </div>
 
       {isOpenModal && (
         <Modal onClose={handleCloseModal}>
-          <OrderDetails />
+          {error ? (
+            <ErrorOrderDetails error={error} />
+          ) : (
+            <OrderDetails number={orderNumber} />
+          )}
         </Modal>
       )}
     </section>
   );
-};
-
-BurgerConstructor.propTypes = {
-  items: PropTypes.arrayOf(
-    BurgerIngredient.propTypes.item,
-  ).isRequired,
 };
