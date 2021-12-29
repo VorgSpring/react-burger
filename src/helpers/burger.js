@@ -19,5 +19,5 @@ export const getMainBurger = (items) => {
 export const getSum = (burger) => (
   burger.ingredients.reduce(
     (acc, item) => acc + item.price, 0,
-  ) + (burger.bun.price * 2)
+  ) + ((burger.bun ? burger.bun.price : 0) * 2)
 );

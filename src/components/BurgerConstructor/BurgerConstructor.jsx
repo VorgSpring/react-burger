@@ -15,16 +15,17 @@ import ErrorOrderDetails from '../ErrorOrderDetails';
 import { BurgerContext } from '../../services/appContext';
 import { createOrder } from '../../api/order';
 import { getSum } from '../../helpers/burger';
+import { ERROR_CREATING_ORDER } from '../../constants/errors';
 import styles from './BurgerConstructor.module.css';
 import Modal from '../Modal';
 
 // Временное решение
-const initialState = { sum: 0 };
+const initialState = { orderSumm: 0 };
 const sumReducer = (state, action) => {
   switch (action.type) {
-    case 'change':
+    case 'CHANGE_INGREDIENTS':
       return {
-        sum: getSum(action.burger),
+        orderSumm: getSum(action.burger),
       };
 
     default:
@@ -41,7 +42,7 @@ export const BurgerConstructor = () => {
 
   // Временное решение
   const [state, dispatch] = useReducer(sumReducer, initialState);
-  const { sum } = state;
+  const { orderSumm } = state;
 
   // Временное решение
   useEffect(() => {
@@ -50,7 +51,7 @@ export const BurgerConstructor = () => {
     }
 
     dispatch({
-      type: 'change',
+      type: 'CHANGE_INGREDIENTS',
       burger,
     });
   }, [burger, dispatch]);
@@ -90,7 +91,7 @@ export const BurgerConstructor = () => {
       .catch((e) => {
         setOpenModal(true);
         setIsCreating(false);
-        setError(e.message);
+        setError(e.message || ERROR_CREATING_ORDER);
       });
   };
 
@@ -143,7 +144,7 @@ export const BurgerConstructor = () => {
       <div className={`${styles.order} pr-4`}>
         <div className={`${styles.order_price} mr-10`}>
           <span className="text text_type_digits-medium mr-2">
-            {sum}
+            {orderSumm}
           </span>
 
           <span className={styles.order_icon}>
