@@ -1,3 +1,6 @@
-import { initialState } from './initialState';
+import { combineReducers } from 'redux';
+import { ingredientsReducer } from './ingredients';
 
-export const rootReducer = (state = initialState) => state;
+export const rootReducer = combineReducers({
+  ingredients: ingredientsReducer,
+});

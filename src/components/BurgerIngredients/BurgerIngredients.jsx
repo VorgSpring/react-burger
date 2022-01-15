@@ -1,21 +1,31 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from '../IngredientDetails';
 import BurgerIngredient from '../BurgerIngredient';
-import { IngredientsContext } from '../../services/appContext';
+import Modal from '../Modal';
 import {
   IngredientsTypes,
   INGREDIENT_BUN_TYPE,
   INGREDIENT_MAIN_TYPE,
   INGREDIENT_SAUCE_TYPE,
 } from '../../constants/ingredients';
+import { getIngredients } from '../../services/operations/ingredients';
 import styles from './BurgerIngredients.module.css';
-import Modal from '../Modal';
 
 export const BurgerIngredients = () => {
-  const { ingredients } = useContext(IngredientsContext);
+  const dispatch = useDispatch();
+
   const [currentTab, setCurrentTab] = useState(INGREDIENT_BUN_TYPE);
   const [currentIngredient, setCurrentIngredient] = useState(null);
+
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, []);
+
+  const { ingredients } = useSelector((store) => ({
+    ingredients: store.ingredients.items,
+  }));
 
   const listRef = useRef(null);
   const bunRef = useRef(null);
