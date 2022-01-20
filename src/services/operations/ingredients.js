@@ -3,16 +3,20 @@ import {
   getIngredientsSuccess,
   getIngredientsError,
 } from '../actions/ingredients';
+import {
+  getMainnBurger,
+} from '../actions/burger';
 import { loadIngredients } from '../../api/ingredient';
+import { getMainBurger as getMainBurgerHelper } from '../../helpers/burger';
 
-export const getIngredients = () => (dispatch) => {
+export const getIngredients = () => async (dispatch) => {
   dispatch(getIngredientsRequest());
 
-  return loadIngredients()
-    .then((response) => {
-      dispatch(getIngredientsSuccess(response));
-    })
-    .catch((error) => {
-      dispatch(getIngredientsError(error));
-    });
+  try {
+    const response = await loadIngredients();
+    dispatch(getIngredientsSuccess(response));
+    dispatch(getMainnBurger(getMainBurgerHelper(response)));
+  } catch (error) {
+    dispatch(getIngredientsError(error));
+  }
 };

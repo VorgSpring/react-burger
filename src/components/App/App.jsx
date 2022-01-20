@@ -1,27 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from '../AppHeader';
 import BurgerConstructor from '../BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients';
-import { BurgerContext } from '../../services/appContext';
-import { loadIngredients } from '../../api/ingredient';
-import { getMainBurger } from '../../helpers/burger';
+import { getIngredients } from '../../services/operations/ingredients';
 import styles from './App.module.css';
 
 export const App = () => {
-  const [burger, setBurger] = useState(null);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    loadIngredients()
-      .then((data) => {
-        // Временное решение
-        // Пока выбирать ингредиенты нельзя
-        setBurger(getMainBurger(data));
-      })
-      .catch(({ message }) => {
-        setError(message);
-      });
+    dispatch(getIngredients());
   }, []);
+
+  const { error } = useSelector((store) => ({
+    error: store.ingredients.error,
+  }));
 
   if (error) {
     return (
@@ -44,10 +38,7 @@ export const App = () => {
 
         <div className={`${styles.container} pb-10`}>
           <BurgerIngredients />
-
-          <BurgerContext.Provider value={{ burger }}>
-            <BurgerConstructor />
-          </BurgerContext.Provider>
+          <BurgerConstructor />
         </div>
       </main>
     </>

@@ -1,9 +1,9 @@
 import React, {
   useState,
-  useContext,
   useEffect,
   useReducer,
 } from 'react';
+import { useSelector } from 'react-redux';
 import {
   ConstructorElement,
   CurrencyIcon,
@@ -12,7 +12,6 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from '../OrderDetails';
 import ErrorOrderDetails from '../ErrorOrderDetails';
-import { BurgerContext } from '../../services/appContext';
 import { createOrder } from '../../api/order';
 import { getSum } from '../../helpers/burger';
 import { ERROR_CREATING_ORDER } from '../../constants/errors';
@@ -34,11 +33,14 @@ const sumReducer = (state, action) => {
 };
 
 export const BurgerConstructor = () => {
-  const { burger } = useContext(BurgerContext);
   const [isOpenModal, setOpenModal] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [orderNumber, setOrderNumber] = useState(null);
   const [error, setError] = useState(null);
+
+  const { burger } = useSelector((store) => ({
+    burger: store.burger,
+  }));
 
   // Временное решение
   const [state, dispatch] = useReducer(sumReducer, initialState);
