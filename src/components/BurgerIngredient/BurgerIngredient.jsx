@@ -1,42 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IngredientsTypes } from '../../constants/ingredients';
+import { setCurrentIngredient } from '../../services/actions/currentIngredient';
 import styles from './BurgerIngredient.module.css';
 
-export const BurgerIngredient = ({ item, onClick }) => {
+export const BurgerIngredient = ({ item }) => {
   const {
     image,
     name,
     price,
     count,
   } = item;
+  const dispatch = useDispatch();
 
   const handleClick = () => {
-    const {
-      // eslint-disable-next-line camelcase
-      image_large,
-      calories,
-      proteins,
-      fat,
-      carbohydrates,
-    } = item;
-
-    const prepatedItem = {
-      name,
-      image: image_large,
-      ingredients: {
-        calories,
-        proteins,
-        fat,
-        carbohydrates,
-      },
-    };
-
-    onClick(prepatedItem);
+    dispatch(setCurrentIngredient(item._id));
   };
 
   return (
@@ -86,5 +69,4 @@ BurgerIngredient.propTypes = {
     ).isRequired,
     __v: PropTypes.number.isRequired,
   }).isRequired,
-  onClick: PropTypes.func.isRequired,
 };

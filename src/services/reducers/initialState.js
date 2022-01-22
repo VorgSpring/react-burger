@@ -4,12 +4,9 @@ export const ingredientsState = {
   error: null,
 };
 
-export const burgerState = {
-  bun: null,
-  ingredients: null,
-};
+export const burgerState = null;
 
-export const viewedIngredientState = null;
+export const currentIngredientState = null;
 
 export const orderState = {
   number: null,

@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from '../IngredientDetails';
 import BurgerIngredient from '../BurgerIngredient';
 import Modal from '../Modal';
+import { removeCurrentIngredient } from '../../services/actions/currentIngredient';
 import {
   IngredientsTypes,
   INGREDIENT_BUN_TYPE,
@@ -13,11 +14,12 @@ import {
 import styles from './BurgerIngredients.module.css';
 
 export const BurgerIngredients = () => {
+  const dispatch = useDispatch();
   const [currentTab, setCurrentTab] = useState(INGREDIENT_BUN_TYPE);
-  const [currentIngredient, setCurrentIngredient] = useState(null);
 
-  const { ingredients } = useSelector((store) => ({
+  const { ingredients, currentIngredient } = useSelector((store) => ({
     ingredients: store.ingredients.items,
+    currentIngredient: store.currentIngredient,
   }));
 
   const listRef = useRef(null);
@@ -51,7 +53,7 @@ export const BurgerIngredients = () => {
   };
 
   const handleCloseIngredientModal = () => {
-    setCurrentIngredient(null);
+    dispatch(removeCurrentIngredient());
   };
 
   const handleScroll = () => {
@@ -109,7 +111,6 @@ export const BurgerIngredients = () => {
                     // eslint-disable-next-line no-underscore-dangle
                     key={item._id}
                     item={item}
-                    onClick={setCurrentIngredient}
                   />
                 ))}
             </ul>
@@ -119,11 +120,7 @@ export const BurgerIngredients = () => {
 
       {currentIngredient && (
         <Modal onClose={handleCloseIngredientModal}>
-          <IngredientDetails
-            image={currentIngredient.image}
-            name={currentIngredient.name}
-            ingredients={currentIngredient.ingredients}
-          />
+          <IngredientDetails />
         </Modal>
       )}
     </section>
