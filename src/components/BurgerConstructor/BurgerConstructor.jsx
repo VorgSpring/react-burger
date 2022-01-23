@@ -1,9 +1,5 @@
-import React, {
-  useState,
-  useEffect,
-  useReducer,
-} from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   ConstructorElement,
   CurrencyIcon,
@@ -12,51 +8,28 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from '../OrderDetails';
 import ErrorOrderDetails from '../ErrorOrderDetails';
-import { createOrder } from '../../api/order';
-import { getSum } from '../../helpers/burger';
-import { ERROR_CREATING_ORDER } from '../../constants/errors';
-import styles from './BurgerConstructor.module.css';
 import Modal from '../Modal';
-
-// Временное решение
-const initialState = { orderSumm: 0 };
-const sumReducer = (state, action) => {
-  switch (action.type) {
-    case 'CHANGE_INGREDIENTS':
-      return {
-        orderSumm: getSum(action.burger),
-      };
-
-    default:
-      return state;
-  }
-};
+import { createOrder } from '../../services/operations/order';
+import { removeCurrentOrder } from '../../services/actions/order';
+import { getSum } from '../../helpers/burger';
+import styles from './BurgerConstructor.module.css';
 
 export const BurgerConstructor = () => {
-  const [isOpenModal, setOpenModal] = useState(false);
-  const [isCreating, setIsCreating] = useState(false);
-  const [orderNumber, setOrderNumber] = useState(null);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
 
-  const { burger } = useSelector((store) => ({
+  const {
+    burger,
+    orderSum,
+    orderCreating,
+    errorCreating,
+    currentOrder,
+  } = useSelector((store) => ({
     burger: store.burger,
+    orderSum: store.burger && getSum(store.burger),
+    orderCreating: store.order.isCreating,
+    errorCreating: store.order.error,
+    currentOrder: store.order.currentOrder,
   }));
-
-  // Временное решение
-  const [state, dispatch] = useReducer(sumReducer, initialState);
-  const { orderSumm } = state;
-
-  // Временное решение
-  useEffect(() => {
-    if (!burger) {
-      return;
-    }
-
-    dispatch({
-      type: 'CHANGE_INGREDIENTS',
-      burger,
-    });
-  }, [burger, dispatch]);
 
   if (!burger) {
     return null;
@@ -65,36 +38,15 @@ export const BurgerConstructor = () => {
   const { bun, ingredients } = burger;
 
   const handleCloseModal = () => {
-    setOpenModal(false);
+    dispatch(removeCurrentOrder());
   };
 
   const handleCreateOrder = () => {
-    if (isCreating) {
+    if (orderCreating) {
       return;
     }
 
-    setError(null);
-    setIsCreating(true);
-
-    createOrder(burger)
-      .then(({
-        success, message, order,
-      }) => {
-        setIsCreating(false);
-        setOpenModal(true);
-
-        if (!success) {
-          setError(message);
-          return;
-        }
-
-        setOrderNumber(order.number);
-      })
-      .catch((e) => {
-        setOpenModal(true);
-        setIsCreating(false);
-        setError(e.message || ERROR_CREATING_ORDER);
-      });
+    dispatch(createOrder());
   };
 
   return (
@@ -146,7 +98,7 @@ export const BurgerConstructor = () => {
       <div className={`${styles.order} pr-4`}>
         <div className={`${styles.order_price} mr-10`}>
           <span className="text text_type_digits-medium mr-2">
-            {orderSumm}
+            {orderSum}
           </span>
 
           <span className={styles.order_icon}>
@@ -154,17 +106,17 @@ export const BurgerConstructor = () => {
           </span>
         </div>
 
-        <Button onClick={handleCreateOrder} disabled={isCreating}>
-          {isCreating ? 'Подождите...' : 'Оформить заказ'}
+        <Button onClick={handleCreateOrder}>
+          {orderCreating ? 'Подождите...' : 'Оформить заказ'}
         </Button>
       </div>
 
-      {isOpenModal && (
+      {currentOrder && (
         <Modal onClose={handleCloseModal}>
-          {error ? (
-            <ErrorOrderDetails error={error} />
+          {errorCreating ? (
+            <ErrorOrderDetails />
           ) : (
-            <OrderDetails number={orderNumber} />
+            <OrderDetails />
           )}
         </Modal>
       )}

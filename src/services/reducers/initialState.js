@@ -9,7 +9,8 @@ export const burgerState = null;
 export const currentIngredientState = null;
 
 export const orderState = {
-  number: null,
+  currentOrder: null,
+  orders: [],
   isCreating: false,
   error: null,
 };

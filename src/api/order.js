@@ -1,7 +1,7 @@
 import { getIngredientIds } from '../helpers/api';
 import { CREATE_ORDER_API_URL } from '../constants/api';
 
-export const createOrder = (burger) => {
+export const createOrderApi = (burger) => {
   const ingredientIds = getIngredientIds(burger);
 
   return fetch(CREATE_ORDER_API_URL, {

@@ -4,7 +4,7 @@ import {
   REMOVE_INGREDIENT_IN_BURGER,
 } from './type';
 
-export const getMainnBurger = (burger) => ({
+export const getMainBurger = (burger) => ({
   type: GET_MAIN_BURGER,
   payload: burger,
 });
