@@ -7,6 +7,7 @@ import OrderDetails from '../OrderDetails';
 import ErrorOrderDetails from '../ErrorOrderDetails';
 import Modal from '../Modal';
 import { removeCurrentOrder } from '../../services/actions/order';
+import { ConstructorBunTypes } from '../../constants/constructor';
 import styles from './BurgerConstructor.module.css';
 
 export const BurgerConstructor = () => {
@@ -28,9 +29,9 @@ export const BurgerConstructor = () => {
   return (
     <section className={`${styles.root} pl-4`}>
       <div className={`${styles.constructor} mb-10`}>
-        <BurgerConstructorBun type="top" />
+        <BurgerConstructorBun type={ConstructorBunTypes.TOP} />
         <BurgerConstructorIngredients />
-        <BurgerConstructorBun type="bottom" />
+        <BurgerConstructorBun type={ConstructorBunTypes.BOTTOM} />
       </div>
 
       <BurgerConstructorOrder />

@@ -17,7 +17,9 @@ export const BurgerConstructorOrder = () => {
     orderCreating,
   } = useSelector((store) => ({
     isDisabledButton:
-      store.order.isCreating || !store.burger.bun || !store.burger.ingredients,
+      store.order.isCreating
+      || !store.burger.bun
+      || !store.burger.ingredients.length,
     orderSum: getSum(store.burger, store.ingredients.items),
     orderCreating: store.order.isCreating,
   }));

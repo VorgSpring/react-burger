@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BurgerConstructorBunEmpty } from './BurgerConstructorBunEmpty';
 import { getIngredientById } from '../../helpers/ingredients';
+import { ConstructorBunTypes } from '../../constants/constructor';
 import styles from './BurgerConstructorBun.module.css';
 
 export const BurgerConstructorBun = ({ type }) => {
@@ -19,8 +20,10 @@ export const BurgerConstructorBun = ({ type }) => {
 
   const { name, price, image } = bun;
 
-  const additionalText = type === 'top' ? '(верх)' : '(низ)';
-  const additionalStyle = type === 'top' ? 'mb-4' : 'mt-4';
+  const additionalText = type === ConstructorBunTypes.TOP
+    ? '(верх)' : '(низ)';
+  const additionalStyle = type === ConstructorBunTypes.TOP
+    ? 'mb-4' : 'mt-4';
 
   return (
     <div className={`${styles.root} ${additionalStyle} pr-4`}>
@@ -36,5 +39,7 @@ export const BurgerConstructorBun = ({ type }) => {
 };
 
 BurgerConstructorBun.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(
+    Object.values(ConstructorBunTypes),
+  ).isRequired,
 };

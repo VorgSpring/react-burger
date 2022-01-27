@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ConstructorBunTypes } from '../../constants/constructor';
 import styles from './BurgerConstructorBun.module.css';
 
 export const BurgerConstructorBunEmpty = ({ type }) => (
@@ -9,5 +10,7 @@ export const BurgerConstructorBunEmpty = ({ type }) => (
 );
 
 BurgerConstructorBunEmpty.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(
+    Object.values(ConstructorBunTypes),
+  ).isRequired,
 };
