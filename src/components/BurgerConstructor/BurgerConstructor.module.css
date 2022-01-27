@@ -4,48 +4,12 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   overflow: hidden;
 }
 
 .constructor {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-}
-
-.constructor_list {
-  padding-left: 0;
-  margin: 0;
-  list-style: none;
-  overflow-y: scroll;
-}
-
-.constructor_item {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.constructor_item:last-child {
-  margin-bottom: 0;
-}
-
-.order {
-  display: flex;
-  align-items: center;
-}
-
-.order_price {
-  display: flex;
-  align-items: center;
-}
-
-.order_icon {
-  width: 33px;
-}
-
-.order_icon svg {
-  width: 100%;
-  height: 100%;
 }

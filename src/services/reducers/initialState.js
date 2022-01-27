@@ -4,7 +4,10 @@ export const ingredientsState = {
   error: null,
 };
 
-export const burgerState = null;
+export const burgerState = {
+  bun: null,
+  ingredients: [],
+};
 
 export const currentIngredientState = null;
 

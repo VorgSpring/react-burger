@@ -7,7 +7,6 @@ import {
   getMainBurger,
 } from '../actions/burger';
 import { loadIngredients } from '../../api/ingredient';
-import { getMainBurger as getMainBurgerHelper } from '../../helpers/burger';
 
 export const getIngredients = () => async (dispatch) => {
   dispatch(getIngredientsRequest());
@@ -15,7 +14,7 @@ export const getIngredients = () => async (dispatch) => {
   try {
     const response = await loadIngredients();
     dispatch(getIngredientsSuccess(response));
-    dispatch(getMainBurger(getMainBurgerHelper(response)));
+    dispatch(getMainBurger());
   } catch (error) {
     dispatch(getIngredientsError(error));
   }
