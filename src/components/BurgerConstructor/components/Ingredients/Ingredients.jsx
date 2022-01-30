@@ -1,10 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import {
-  ConstructorElement,
-  DragIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components';
 import { IngredientsEmpty } from './IngredientsEmpty';
+import Ingredient from '../Ingredient';
 import { getIngredientById } from '../../../../helpers/ingredients';
 import styles from './Ingredients.module.css';
 
@@ -27,24 +24,15 @@ export const Ingredients = () => {
 
   return (
     <ul className={`${styles.root} pr-2`}>
-      {ingredients.map((item, i) => (
-        <li
+      {ingredients.map((item, index) => (
+        <Ingredient
           // в бургере могут быть одинаковые ингредиенты
           // идентификатор элемента списка может быть не уникальным
           // eslint-disable-next-line react/no-array-index-key
-          key={`${item._id} ${i}`}
-          className={`${styles.item} mb-4`}
-        >
-          <span className="mr-2">
-            <DragIcon type="primary" />
-          </span>
-
-          <ConstructorElement
-            text={item.name}
-            price={item.price}
-            thumbnail={item.image}
-          />
-        </li>
+          key={`${item._id} ${index}`}
+          index={index}
+          item={item}
+        />
       ))}
     </ul>
   );

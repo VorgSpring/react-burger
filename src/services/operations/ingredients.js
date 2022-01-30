@@ -3,9 +3,8 @@ import {
   getIngredientsSuccess,
   getIngredientsError,
 } from '../actions/ingredients';
-import {
-  getMainBurger,
-} from '../actions/burger';
+import { getMainBurger } from '../actions/burger';
+import { getPreparedIngredients } from '../../helpers/ingredients';
 import { loadIngredients } from '../../api/ingredient';
 
 export const getIngredients = () => async (dispatch) => {
@@ -13,7 +12,8 @@ export const getIngredients = () => async (dispatch) => {
 
   try {
     const response = await loadIngredients();
-    dispatch(getIngredientsSuccess(response));
+    const preparedIngredients = getPreparedIngredients(response);
+    dispatch(getIngredientsSuccess(preparedIngredients));
     dispatch(getMainBurger());
   } catch (error) {
     dispatch(getIngredientsError(error));

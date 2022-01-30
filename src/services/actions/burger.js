@@ -14,7 +14,7 @@ export const addIngredientInBurger = (ingredient) => ({
   payload: ingredient,
 });
 
-export const removeIngredientInnBurger = (ingredient) => ({
+export const removeIngredientInBurger = (ingredient) => ({
   type: REMOVE_INGREDIENT_IN_BURGER,
   payload: ingredient,
 });

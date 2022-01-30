@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { useDrag } from 'react-dnd';
 import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { setCurrentIngredient } from '../../../../services/actions/currentIngredient';
+import { ConstructorElementTypes } from '../../../../constants/constructor';
 import styles from './Ingredient.module.css';
 
 export const Ingredient = ({ item }) => {
   const {
-    _id: id,
+    id,
+    constructorType,
     image,
     name,
     price,
@@ -19,13 +22,25 @@ export const Ingredient = ({ item }) => {
 
   const dispatch = useDispatch();
 
+  const [{ isDrag }, dragRef, preview] = useDrag({
+    type: 'ingregient',
+    item: {
+      id,
+      type: constructorType,
+    },
+    collect: (monitor) => ({
+      isDrag: monitor.isDragging(),
+    }),
+  });
+
   const handleClick = () => {
     dispatch(setCurrentIngredient(id));
   };
 
   return (
     <li
-      className={`${styles.root} mt-8`}
+      ref={dragRef}
+      className={`${styles.root} ${isDrag ? styles.drag : ''} mt-6 pb-4`}
       onClick={handleClick}
     >
       {count && (
@@ -33,6 +48,7 @@ export const Ingredient = ({ item }) => {
       )}
 
       <img
+        ref={preview}
         className={`${styles.image} mb-2`}
         src={image}
         alt={name}
@@ -46,7 +62,7 @@ export const Ingredient = ({ item }) => {
         <CurrencyIcon type="primary" />
       </div>
 
-      <h4 className={`${styles.name} text text_type_main-default`}>
+      <h4 className={`${styles.name} text text_type_main-default pr-2 pl-2`}>
         {name}
       </h4>
     </li>
@@ -55,7 +71,10 @@ export const Ingredient = ({ item }) => {
 
 Ingredient.propTypes = {
   item: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    constructorType: PropTypes.oneOf(
+      Object.values(ConstructorElementTypes),
+    ).isRequired,
     count: PropTypes.number,
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

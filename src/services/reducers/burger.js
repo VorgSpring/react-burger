@@ -21,9 +21,8 @@ export const burgerReducer = (state = burgerState, action) => {
           action.payload.type === ConstructorElementTypes.BUN
             ? action.payload.id
             : [
-              ...state.ingredients.slice(0, action.payload.index),
+              ...state.ingredients,
               action.payload.id,
-              ...state.ingredients.slice(action.payload.index),
             ],
       };
 
@@ -55,3 +54,9 @@ export const burgerReducer = (state = burgerState, action) => {
 
   return newState;
 };
+
+// : [
+//   ...state.ingredients.slice(0, action.payload.index),
+//   action.payload.id,
+//   ...state.ingredients.slice(action.payload.index),
+// ],

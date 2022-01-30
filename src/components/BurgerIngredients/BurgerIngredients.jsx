@@ -1,10 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import IngredientDetails from '../IngredientDetails';
 import Modal from '../Modal';
 import Tabs from './components/Tabs';
 import Ingredients from './components/Ingredients';
 import LoadError from './components/LoadError';
+import { getIngredients } from '../../services/operations/ingredients';
 import { removeCurrentIngredient } from '../../services/actions/currentIngredient';
 import {
   IngredientsTypes,
@@ -16,6 +17,11 @@ import styles from './BurgerIngredients.module.css';
 
 export const BurgerIngredients = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, []);
+
   const [currentTab, setCurrentTab] = useState(INGREDIENT_BUN_TYPE);
 
   const { error, currentIngredient } = useSelector((store) => ({
@@ -88,7 +94,7 @@ export const BurgerIngredients = () => {
         {Object.keys(IngredientsTypes).map((type) => (
           <li
             key={`${type}ingredients`}
-            className={`${styles.ingredients_type} mb-10`}
+            className={`${styles.ingredients_type} mb-6`}
             ref={getRef(type)}
           >
             <h3 className="text text_type_main-medium mb-6">

@@ -11,20 +11,10 @@ export const IngredientDetails = () => {
 
   const {
     // eslint-disable-next-line camelcase
-    image_large: image,
-    calories,
-    proteins,
-    fat,
-    carbohydrates,
+    imageLarge: image,
     name,
+    structure,
   } = item;
-
-  const ingredients = {
-    calories,
-    proteins,
-    fat,
-    carbohydrates,
-  };
 
   return (
     <section className="pt-10 pr-10 pl-10 pb-15">
@@ -53,7 +43,7 @@ export const IngredientDetails = () => {
             </span>
 
             <span className="text text_type_digits-default text_color_inactive">
-              {ingredients[ingredient]}
+              {structure[ingredient]}
             </span>
           </p>
         ))}
