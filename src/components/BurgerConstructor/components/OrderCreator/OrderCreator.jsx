@@ -4,22 +4,21 @@ import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { createOrder } from '../../services/operations/order';
-import { getSum } from '../../helpers/burger';
-import styles from './BurgerConstructorOrder.module.css';
+import { createOrder } from '../../../../services/operations/order';
+import { getSum } from '../../../../helpers/burger';
+import styles from './OrderCreator.module.css';
 
-export const BurgerConstructorOrder = () => {
+export const OrderCreator = () => {
   const dispatch = useDispatch();
 
   const {
-    isDisabledButton,
+    isCreatingOrder,
+    isEmptyOrder,
     orderSum,
     orderCreating,
   } = useSelector((store) => ({
-    isDisabledButton:
-      store.order.isCreating
-      || !store.burger.bun
-      || !store.burger.ingredients.length,
+    isCreatingOrder: store.order.isCreating,
+    isEmptyOrder: !store.burger.bun || !store.burger.ingredients.length,
     orderSum: getSum(store.burger, store.ingredients.items),
     orderCreating: store.order.isCreating,
   }));
@@ -34,6 +33,12 @@ export const BurgerConstructorOrder = () => {
 
   return (
     <div className={`${styles.root} pr-4`}>
+      {isEmptyOrder && (
+        <p className={`${styles.empty_oreder} text text_type_main-small text_color_inactive pr-4`}>
+          Добавте булку и ингредиенты, чтобы совершить заказ
+        </p>
+      )}
+
       <div className={`${styles.price} mr-10`}>
         <span className="text text_type_digits-medium mr-2">
           {orderSum}
@@ -44,7 +49,7 @@ export const BurgerConstructorOrder = () => {
         </span>
       </div>
 
-      <Button onClick={handleCreateOrder} disabled={isDisabledButton}>
+      <Button onClick={handleCreateOrder} disabled={isCreatingOrder || isEmptyOrder}>
         {orderCreating ? 'Подождите...' : 'Оформить заказ'}
       </Button>
     </div>

@@ -4,11 +4,11 @@ import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { BurgerConstructorIngredientsEmpty } from './BurgerConstructorIngredientsEmpty';
-import { getIngredientById } from '../../helpers/ingredients';
-import styles from './BurgerConstructorIngredients.module.css';
+import { IngredientsEmpty } from './IngredientsEmpty';
+import { getIngredientById } from '../../../../helpers/ingredients';
+import styles from './Ingredients.module.css';
 
-export const BurgerConstructorIngredients = () => {
+export const Ingredients = () => {
   const ingredients = useSelector((store) => {
     if (!store.burger.ingredients.length) {
       return null;
@@ -21,7 +21,7 @@ export const BurgerConstructorIngredients = () => {
 
   if (!ingredients) {
     return (
-      <BurgerConstructorIngredientsEmpty />
+      <IngredientsEmpty />
     );
   }
 

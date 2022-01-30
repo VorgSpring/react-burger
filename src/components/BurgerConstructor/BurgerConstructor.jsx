@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import BurgerConstructorBun from '../BurgerConstructorBun';
-import BurgerConstructorIngredients from '../BurgerConstructorIngredients';
-import BurgerConstructorOrder from '../BurgerConstructorOrder';
+import Bun from './components/Bun';
+import Ingredients from './components/Ingredients';
+import OrderCreator from './components/OrderCreator';
 import OrderDetails from '../OrderDetails';
 import Modal from '../Modal';
 import { removeCurrentOrder } from '../../services/actions/order';
@@ -25,12 +25,12 @@ export const BurgerConstructor = () => {
   return (
     <section className={`${styles.root} pl-4`}>
       <div className={`${styles.constructor} mb-10`}>
-        <BurgerConstructorBun type={ConstructorBunTypes.TOP} />
-        <BurgerConstructorIngredients />
-        <BurgerConstructorBun type={ConstructorBunTypes.BOTTOM} />
+        <Bun type={ConstructorBunTypes.TOP} />
+        <Ingredients />
+        <Bun type={ConstructorBunTypes.BOTTOM} />
       </div>
 
-      <BurgerConstructorOrder />
+      <OrderCreator />
 
       {currentOrder && (
         <Modal onClose={handleCloseModal}>
