@@ -15,7 +15,7 @@ export const BurgerConstructorIngredients = () => {
     }
 
     return store.burger.ingredients.map(
-      ((ingredientId) => getIngredientById(store.ingredients.items, ingredientId)),
+      (ingredientId) => getIngredientById(store.ingredients.items, ingredientId),
     );
   });
 

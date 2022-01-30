@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AppError } from './AppError';
 import Header from '../AppHeader';
 import BurgerConstructor from '../BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients';
@@ -19,11 +20,7 @@ export const App = () => {
 
   if (error) {
     return (
-      <main className={styles.root}>
-        <h1 className="text text_type_main-large mt-10 mb-5">
-          {error}
-        </h1>
-      </main>
+      <AppError error={error} />
     );
   }
 
