@@ -12,13 +12,13 @@
   left: 0;
   top: 0;
   bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(138, 138, 155, 0.3), transparent);
+  transform: translateX(-100%) ;
   z-index: 1;
   animation: loading 1.3s infinite;
 }
 
-@keyframes ssc-loading {
+@keyframes loading {
   from {
     transform: translateX(-100%);
   }

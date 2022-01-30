@@ -5,21 +5,22 @@ import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { IngredientsTypes } from '../../constants/ingredients';
-import { setCurrentIngredient } from '../../services/actions/currentIngredient';
-import styles from './BurgerIngredient.module.css';
+import { setCurrentIngredient } from '../../../../services/actions/currentIngredient';
+import styles from './Ingredient.module.css';
 
-export const BurgerIngredient = ({ item }) => {
+export const Ingredient = ({ item }) => {
   const {
+    _id: id,
     image,
     name,
     price,
     count,
   } = item;
+
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(setCurrentIngredient(item._id));
+    dispatch(setCurrentIngredient(id));
   };
 
   return (
@@ -52,21 +53,12 @@ export const BurgerIngredient = ({ item }) => {
   );
 };
 
-BurgerIngredient.propTypes = {
+Ingredient.propTypes = {
   item: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     count: PropTypes.number,
-    calories: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    type: PropTypes.oneOf(
-      Object.keys(IngredientsTypes),
-    ).isRequired,
-    __v: PropTypes.number.isRequired,
   }).isRequired,
 };

@@ -1,0 +1,13 @@
+.root {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.skeleton {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

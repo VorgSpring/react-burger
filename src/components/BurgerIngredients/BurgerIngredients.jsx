@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from '../IngredientDetails';
-import BurgerIngredient from '../BurgerIngredient';
 import Modal from '../Modal';
+import Tabs from './components/Tabs';
+import Ingredients from './components/Ingredients';
+import LoadError from './components/LoadError';
 import { removeCurrentIngredient } from '../../services/actions/currentIngredient';
 import {
   IngredientsTypes,
@@ -17,10 +18,16 @@ export const BurgerIngredients = () => {
   const dispatch = useDispatch();
   const [currentTab, setCurrentTab] = useState(INGREDIENT_BUN_TYPE);
 
-  const { ingredients, currentIngredient } = useSelector((store) => ({
-    ingredients: store.ingredients.items,
+  const { error, currentIngredient } = useSelector((store) => ({
+    error: store.ingredients.error,
     currentIngredient: store.currentIngredient,
   }));
+
+  if (error) {
+    return (
+      <LoadError />
+    );
+  }
 
   const listRef = useRef(null);
   const bunRef = useRef(null);
@@ -42,10 +49,6 @@ export const BurgerIngredients = () => {
         return null;
     }
   };
-
-  if (!ingredients) {
-    return null;
-  }
 
   const handleChoiceTab = (value) => {
     setCurrentTab(value);
@@ -75,18 +78,7 @@ export const BurgerIngredients = () => {
 
   return (
     <section className={styles.root}>
-      <div className={`${styles.tabs} mb-10`}>
-        {Object.keys(IngredientsTypes).map((type) => (
-          <Tab
-            key={`${type}tab`}
-            value={type}
-            active={currentTab === type}
-            onClick={handleChoiceTab}
-          >
-            {IngredientsTypes[type]}
-          </Tab>
-        ))}
-      </div>
+      <Tabs currentTab={currentTab} onChoiceTab={handleChoiceTab} />
 
       <ul
         className={styles.ingredients}
@@ -96,24 +88,14 @@ export const BurgerIngredients = () => {
         {Object.keys(IngredientsTypes).map((type) => (
           <li
             key={`${type}ingredients`}
-            className={`${styles.ingredients_item} mb-10`}
+            className={`${styles.ingredients_type} mb-10`}
             ref={getRef(type)}
           >
             <h3 className="text text_type_main-medium mb-6">
               {IngredientsTypes[type]}
             </h3>
 
-            <ul className={`${styles.ingredients_list} pl-4 pr-4`}>
-              {ingredients
-                .filter((item) => item.type === type)
-                .map((item) => (
-                  <BurgerIngredient
-                    // eslint-disable-next-line no-underscore-dangle
-                    key={item._id}
-                    item={item}
-                  />
-                ))}
-            </ul>
+            <Ingredients type={type} />
           </li>
         ))}
       </ul>

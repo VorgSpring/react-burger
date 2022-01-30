@@ -1,43 +1,22 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppError } from './AppError';
+import React from 'react';
 import Header from '../AppHeader';
 import BurgerConstructor from '../BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients';
-import { getIngredients } from '../../services/operations/ingredients';
 import styles from './App.module.css';
 
-export const App = () => {
-  const dispatch = useDispatch();
+export const App = () => (
+  <>
+    <Header />
 
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, []);
+    <main className={styles.root}>
+      <h1 className="text text_type_main-large mt-10 mb-5">
+        Соберите бургер
+      </h1>
 
-  const { error } = useSelector((store) => ({
-    error: store.ingredients.error,
-  }));
-
-  if (error) {
-    return (
-      <AppError error={error} />
-    );
-  }
-
-  return (
-    <>
-      <Header />
-
-      <main className={styles.root}>
-        <h1 className="text text_type_main-large mt-10 mb-5">
-          Соберите бургер
-        </h1>
-
-        <div className={`${styles.container} pb-10`}>
-          <BurgerIngredients />
-          <BurgerConstructor />
-        </div>
-      </main>
-    </>
-  );
-};
+      <div className={`${styles.container} pb-10`}>
+        <BurgerIngredients />
+        <BurgerConstructor />
+      </div>
+    </main>
+  </>
+);
