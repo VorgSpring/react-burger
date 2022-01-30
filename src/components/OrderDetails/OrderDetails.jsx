@@ -1,11 +1,18 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { ErrorOrderDetails } from './ErrorOrderDetails';
 import DoneImage from './resource/done.gif';
 import DoneImage2x from './resource/done@2x.gif';
 import styles from './OrderDetails.module.css';
 
 export const OrderDetails = () => {
-  const { currentOrder } = useSelector((store) => store.order);
+  const { currentOrder, error } = useSelector((store) => store.order);
+
+  if (error) {
+    return (
+      <ErrorOrderDetails error={error} />
+    );
+  }
 
   return (
     <section className={`${styles.root} pt-30 pb-30`}>

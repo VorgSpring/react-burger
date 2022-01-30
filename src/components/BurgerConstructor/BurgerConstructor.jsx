@@ -4,7 +4,6 @@ import BurgerConstructorBun from '../BurgerConstructorBun';
 import BurgerConstructorIngredients from '../BurgerConstructorIngredients';
 import BurgerConstructorOrder from '../BurgerConstructorOrder';
 import OrderDetails from '../OrderDetails';
-import ErrorOrderDetails from '../ErrorOrderDetails';
 import Modal from '../Modal';
 import { removeCurrentOrder } from '../../services/actions/order';
 import { ConstructorBunTypes } from '../../constants/constructor';
@@ -13,10 +12,7 @@ import styles from './BurgerConstructor.module.css';
 export const BurgerConstructor = () => {
   const dispatch = useDispatch();
 
-  const {
-    errorCreating,
-    currentOrder,
-  } = useSelector((store) => ({
+  const { currentOrder } = useSelector((store) => ({
     orderCreating: store.order.isCreating,
     errorCreating: store.order.error,
     currentOrder: store.order.currentOrder,
@@ -38,11 +34,7 @@ export const BurgerConstructor = () => {
 
       {currentOrder && (
         <Modal onClose={handleCloseModal}>
-          {errorCreating ? (
-            <ErrorOrderDetails />
-          ) : (
-            <OrderDetails />
-          )}
+          <OrderDetails />
         </Modal>
       )}
     </section>
