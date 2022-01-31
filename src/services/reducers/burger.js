@@ -1,10 +1,12 @@
 import {
   GET_MAIN_BURGER,
   ADD_INGREDIENT_IN_BURGER,
+  MOVE_INGREDIENT_IN_BURGER,
   REMOVE_INGREDIENT_IN_BURGER,
 } from '../actions/type';
 import { ConstructorElementTypes } from '../../constants/constructor';
 import { burgerState } from './initialState';
+import { arrayMove } from '../../helpers/array';
 
 export const burgerReducer = (state = burgerState, action) => {
   let newState;
@@ -22,8 +24,26 @@ export const burgerReducer = (state = burgerState, action) => {
             ? action.payload.id
             : [
               ...state.ingredients,
-              action.payload.id,
+              {
+                id: action.payload.id,
+                key: action.payload.key,
+              },
             ],
+      };
+
+      // записываем конфигурацию бургера,
+      // чтобы не терялся при перезагрузке страницы
+      localStorage.burger = JSON.stringify(newState);
+      break;
+
+    case MOVE_INGREDIENT_IN_BURGER:
+      newState = {
+        ...state,
+        ingredients: arrayMove(
+          state.ingredients,
+          action.payload.currentIndex,
+          action.payload.moveIndex,
+        ),
       };
 
       // записываем конфигурацию бургера,
@@ -54,9 +74,3 @@ export const burgerReducer = (state = burgerState, action) => {
 
   return newState;
 };
-
-// : [
-//   ...state.ingredients.slice(0, action.payload.index),
-//   action.payload.id,
-//   ...state.ingredients.slice(action.payload.index),
-// ],

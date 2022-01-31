@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import Bun from './components/Bun';
@@ -9,15 +10,16 @@ import Modal from '../Modal';
 import { removeCurrentOrder } from '../../services/actions/order';
 import { addIngredientInBurger } from '../../services/actions/burger';
 import { ConstructorBunTypes } from '../../constants/constructor';
+import { DndTypes } from '../../constants/dndTypes';
 import styles from './BurgerConstructor.module.css';
 
 export const BurgerConstructor = () => {
   const dispatch = useDispatch();
 
   const [{ isHover }, dropTarget] = useDrop({
-    accept: 'ingregient',
+    accept: DndTypes.INGREDIENT,
     drop(item) {
-      dispatch(addIngredientInBurger(item));
+      dispatch(addIngredientInBurger(item.type, item.id, uuid()));
     },
     collect: (monitor) => ({
       isHover: monitor.isOver(),

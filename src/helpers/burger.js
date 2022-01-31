@@ -6,7 +6,7 @@ export const getSum = (burger, ingredients) => {
 
   if (burger.ingredients) {
     ingredientsPrice = burger.ingredients
-      .map((ingredientId) => getIngredientById(ingredients, ingredientId).price)
+      .map(({ id }) => getIngredientById(ingredients, id).price)
       .reduce((acc, price) => acc + price, 0);
   }
 

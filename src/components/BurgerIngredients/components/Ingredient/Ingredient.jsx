@@ -8,6 +8,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { setCurrentIngredient } from '../../../../services/actions/currentIngredient';
 import { ConstructorElementTypes } from '../../../../constants/constructor';
+import { DndTypes } from '../../../../constants/dndTypes';
 import styles from './Ingredient.module.css';
 
 export const Ingredient = ({ item }) => {
@@ -23,7 +24,7 @@ export const Ingredient = ({ item }) => {
   const dispatch = useDispatch();
 
   const [{ isDrag }, dragRef, preview] = useDrag({
-    type: 'ingregient',
+    type: DndTypes.INGREDIENT,
     item: {
       id,
       type: constructorType,
