@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { setCurrentIngredient } from '../../../../services/actions/currentIngredient';
+import { getCountIngredientinBurger } from '../../../../helpers/ingredients';
 import { ConstructorElementTypes } from '../../../../constants/constructor';
 import { DndTypes } from '../../../../constants/dndTypes';
 import styles from './Ingredient.module.css';
@@ -18,10 +19,13 @@ export const Ingredient = ({ item }) => {
     image,
     name,
     price,
-    count,
   } = item;
 
   const dispatch = useDispatch();
+
+  const count = useSelector(
+    (store) => getCountIngredientinBurger(constructorType, id, store.burger),
+  );
 
   const [{ isDrag }, dragRef, preview] = useDrag({
     type: DndTypes.INGREDIENT,
@@ -41,11 +45,11 @@ export const Ingredient = ({ item }) => {
   return (
     <li
       ref={dragRef}
-      className={`${styles.root} ${isDrag ? styles.drag : ''} mt-6 pb-4`}
+      className={`${styles.root} ${isDrag ? styles.drag : ''} mt-2 pb-4 pt-9`}
       onClick={handleClick}
     >
-      {count && (
-        <Counter count={1} size="default" />
+      {!!count && (
+        <Counter count={count} size="default" />
       )}
 
       <img
@@ -76,7 +80,6 @@ Ingredient.propTypes = {
     constructorType: PropTypes.oneOf(
       Object.values(ConstructorElementTypes),
     ).isRequired,
-    count: PropTypes.number,
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,

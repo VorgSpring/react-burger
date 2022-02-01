@@ -1,4 +1,5 @@
 import { getConstructorElementType } from './constructor';
+import { ConstructorElementTypes } from '../constants/constructor';
 
 export const getIngredientById = (ingredients, ingredientId) => {
   if (!ingredientId) {
@@ -8,12 +9,24 @@ export const getIngredientById = (ingredients, ingredientId) => {
   return ingredients.find(({ id }) => id === ingredientId);
 };
 
+export const getCountIngredientinBurger = (type, ingredientId, burger) => {
+  switch (type) {
+    case ConstructorElementTypes.BUN:
+      return burger.bun === ingredientId ? 1 : 0;
+
+    case ConstructorElementTypes.INGEDIENTS:
+      return burger.ingredients.filter(({ id }) => id === ingredientId).length;
+
+    default:
+      return null;
+  }
+};
+
 export const getPreparedIngredients = (ingredients) => (
   ingredients.map((
     {
       _id,
       type,
-      count,
       image,
       // eslint-disable-next-line camelcase
       image_large,
@@ -28,7 +41,6 @@ export const getPreparedIngredients = (ingredients) => (
     id: _id,
     type,
     constructorType: getConstructorElementType(type),
-    count,
     image,
     imageLarge: image_large,
     name,
