@@ -26,10 +26,8 @@ export const BurgerConstructor = () => {
     }),
   });
 
-  const { currentOrder } = useSelector((store) => ({
-    orderCreating: store.order.isCreating,
-    errorCreating: store.order.error,
-    currentOrder: store.order.currentOrder,
+  const { isShowModal } = useSelector((store) => ({
+    isShowModal: store.order.currentOrder || store.order.error,
   }));
 
   const handleCloseModal = () => {
@@ -51,7 +49,7 @@ export const BurgerConstructor = () => {
 
       <OrderCreator />
 
-      {currentOrder && (
+      {isShowModal && (
         <Modal onClose={handleCloseModal}>
           <OrderDetails />
         </Modal>

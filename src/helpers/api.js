@@ -1,6 +1,7 @@
-export const getIngredientIds = (burger) => JSON.stringify({
-  ingredients: [
-    ...burger.ingredients,
-    burger.bun.id,
-  ],
-});
+export const checkResponce = ({ success, message, ...data }) => {
+  if (!success) {
+    throw new Error(message);
+  }
+
+  return data;
+};

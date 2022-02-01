@@ -29,16 +29,16 @@ export const BurgerIngredients = () => {
     currentIngredient: store.currentIngredient,
   }));
 
-  if (error) {
-    return (
-      <LoadError />
-    );
-  }
-
   const listRef = useRef(null);
   const bunRef = useRef(null);
   const mainRef = useRef(null);
   const sauceRef = useRef(null);
+
+  if (error) {
+    return (
+      <LoadError error={error} />
+    );
+  }
 
   const getRef = (ref) => {
     switch (ref) {

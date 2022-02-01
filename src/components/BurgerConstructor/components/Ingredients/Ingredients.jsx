@@ -7,7 +7,7 @@ import styles from './Ingredients.module.css';
 export const Ingredients = () => {
   const ingredients = useSelector((store) => store.burger.ingredients);
 
-  if (!ingredients) {
+  if (!ingredients.length) {
     return (
       <IngredientsEmpty />
     );
@@ -17,9 +17,6 @@ export const Ingredients = () => {
     <ul className={`${styles.root} pr-2`}>
       {ingredients.map((item, index) => (
         <Ingredient
-          // в бургере могут быть одинаковые ингредиенты
-          // идентификатор элемента списка может быть не уникальным
-          // eslint-disable-next-line react/no-array-index-key
           key={item.key}
           index={index}
           id={item.id}

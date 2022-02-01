@@ -1,12 +1,12 @@
 import {
-  GET_MAIN_BURGER,
+  SET_BURGER,
   ADD_INGREDIENT_IN_BURGER,
   MOVE_INGREDIENT_IN_BURGER,
   REMOVE_INGREDIENT_IN_BURGER,
 } from './type';
 
-export const getMainBurger = (burger) => ({
-  type: GET_MAIN_BURGER,
+export const setBurger = (burger) => ({
+  type: SET_BURGER,
   payload: burger,
 });
 

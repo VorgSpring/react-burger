@@ -1,5 +1,5 @@
 import {
-  GET_MAIN_BURGER,
+  SET_BURGER,
   ADD_INGREDIENT_IN_BURGER,
   MOVE_INGREDIENT_IN_BURGER,
   REMOVE_INGREDIENT_IN_BURGER,
@@ -9,15 +9,12 @@ import { burgerState } from './initialState';
 import { arrayMove } from '../../helpers/array';
 
 export const burgerReducer = (state = burgerState, action) => {
-  let newState;
-
   switch (action.type) {
-    case GET_MAIN_BURGER:
-      newState = localStorage.burger ? JSON.parse(localStorage.burger) : state;
-      break;
+    case SET_BURGER:
+      return action.payload;
 
     case ADD_INGREDIENT_IN_BURGER:
-      newState = {
+      return {
         ...state,
         [action.payload.type]:
           action.payload.type === ConstructorElementTypes.BUN
@@ -31,13 +28,8 @@ export const burgerReducer = (state = burgerState, action) => {
             ],
       };
 
-      // записываем конфигурацию бургера,
-      // чтобы не терялся при перезагрузке страницы
-      localStorage.burger = JSON.stringify(newState);
-      break;
-
     case MOVE_INGREDIENT_IN_BURGER:
-      newState = {
+      return {
         ...state,
         ingredients: arrayMove(
           state.ingredients,
@@ -46,13 +38,8 @@ export const burgerReducer = (state = burgerState, action) => {
         ),
       };
 
-      // записываем конфигурацию бургера,
-      // чтобы не терялся при перезагрузке страницы
-      localStorage.burger = JSON.stringify(newState);
-      break;
-
     case REMOVE_INGREDIENT_IN_BURGER:
-      newState = {
+      return {
         ...state,
         [action.payload.type]:
           action.payload.type === ConstructorElementTypes.BUN
@@ -62,15 +49,7 @@ export const burgerReducer = (state = burgerState, action) => {
             ),
       };
 
-      // записываем конфигурацию бургера,
-      // чтобы не терялся при перезагрузке страницы
-      localStorage.burger = JSON.stringify(newState);
-      break;
-
     default:
-      newState = { ...state };
-      break;
+      return state;
   }
-
-  return newState;
 };

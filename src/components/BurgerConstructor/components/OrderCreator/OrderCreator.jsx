@@ -50,7 +50,9 @@ export const OrderCreator = () => {
       </div>
 
       <Button onClick={handleCreateOrder} disabled={isCreatingOrder || isEmptyOrder}>
-        {orderCreating ? 'Подождите...' : 'Оформить заказ'}
+        <span className={styles.button_content}>
+          {orderCreating ? 'Подождите...' : 'Оформить заказ'}
+        </span>
       </Button>
     </div>
   );

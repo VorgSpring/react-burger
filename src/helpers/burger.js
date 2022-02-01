@@ -1,5 +1,14 @@
 import { getIngredientById } from './ingredients';
 
+export const getIngredientIdsInBurger = (burger) => JSON.stringify({
+  ingredients: [
+    ...burger.ingredients.map(({ id }) => id),
+    burger.bun.id,
+    null,
+    null,
+  ],
+});
+
 export const getSum = (burger, ingredients) => {
   let ingredientsPrice = 0;
   let bunPrice = 0;

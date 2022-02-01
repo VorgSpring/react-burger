@@ -11,20 +11,12 @@ export const createOrder = () => async (dispatch, getState) => {
 
   try {
     const { burger } = getState();
-    const {
-      success, message, order,
-    } = await createOrderApi(burger);
-
-    if (!success) {
-      dispatch(createOrderError(message));
-      return;
-    }
-
+    const { order } = await createOrderApi(burger);
     const { number } = order;
 
     dispatch(createOrderSuccess(number));
     dispatch(setCurrentOrder(number));
-  } catch (error) {
-    dispatch(createOrderError(error));
+  } catch ({ message }) {
+    dispatch(createOrderError(message));
   }
 };
