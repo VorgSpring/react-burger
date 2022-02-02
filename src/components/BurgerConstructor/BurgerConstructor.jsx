@@ -1,169 +1,57 @@
-import React, {
-  useState,
-  useContext,
-  useEffect,
-  useReducer,
-} from 'react';
-import {
-  ConstructorElement,
-  CurrencyIcon,
-  DragIcon,
-  Button,
-} from '@ya.praktikum/react-developer-burger-ui-components';
+import React from 'react';
+import { v4 as uuid } from 'uuid';
+import { useSelector, useDispatch } from 'react-redux';
+import { useDrop } from 'react-dnd';
+import Bun from './components/Bun';
+import Ingredients from './components/Ingredients';
+import OrderCreator from './components/OrderCreator';
 import OrderDetails from '../OrderDetails';
-import ErrorOrderDetails from '../ErrorOrderDetails';
-import { BurgerContext } from '../../services/appContext';
-import { createOrder } from '../../api/order';
-import { getSum } from '../../helpers/burger';
-import { ERROR_CREATING_ORDER } from '../../constants/errors';
-import styles from './BurgerConstructor.module.css';
 import Modal from '../Modal';
-
-// Временное решение
-const initialState = { orderSumm: 0 };
-const sumReducer = (state, action) => {
-  switch (action.type) {
-    case 'CHANGE_INGREDIENTS':
-      return {
-        orderSumm: getSum(action.burger),
-      };
-
-    default:
-      return state;
-  }
-};
+import { removeCurrentOrder } from '../../services/actions/order';
+import { addIngredientInBurger } from '../../services/actions/burger';
+import { ConstructorBunTypes } from '../../constants/constructor';
+import { DndTypes } from '../../constants/dndTypes';
+import styles from './BurgerConstructor.module.css';
 
 export const BurgerConstructor = () => {
-  const { burger } = useContext(BurgerContext);
-  const [isOpenModal, setOpenModal] = useState(false);
-  const [isCreating, setIsCreating] = useState(false);
-  const [orderNumber, setOrderNumber] = useState(null);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
 
-  // Временное решение
-  const [state, dispatch] = useReducer(sumReducer, initialState);
-  const { orderSumm } = state;
+  const [{ isHover }, dropTarget] = useDrop({
+    accept: DndTypes.INGREDIENT,
+    drop(item) {
+      dispatch(addIngredientInBurger(item.type, item.id, uuid()));
+    },
+    collect: (monitor) => ({
+      isHover: monitor.isOver(),
+    }),
+  });
 
-  // Временное решение
-  useEffect(() => {
-    if (!burger) {
-      return;
-    }
-
-    dispatch({
-      type: 'CHANGE_INGREDIENTS',
-      burger,
-    });
-  }, [burger, dispatch]);
-
-  if (!burger) {
-    return null;
-  }
-
-  const { bun, ingredients } = burger;
+  const { isShowModal } = useSelector((store) => ({
+    isShowModal: store.order.currentOrder || store.order.error,
+  }));
 
   const handleCloseModal = () => {
-    setOpenModal(false);
-  };
-
-  const handleCreateOrder = () => {
-    if (isCreating) {
-      return;
-    }
-
-    setError(null);
-    setIsCreating(true);
-
-    createOrder(burger)
-      .then(({
-        success, message, order,
-      }) => {
-        setIsCreating(false);
-        setOpenModal(true);
-
-        if (!success) {
-          setError(message);
-          return;
-        }
-
-        setOrderNumber(order.number);
-      })
-      .catch((e) => {
-        setOpenModal(true);
-        setIsCreating(false);
-        setError(e.message || ERROR_CREATING_ORDER);
-      });
+    dispatch(removeCurrentOrder());
   };
 
   return (
     <section className={`${styles.root} pl-4`}>
-      <div className={`${styles.constructor} mb-10`}>
-        <div className={`${styles.constructor_item} mb-4 pr-4`}>
-          <ConstructorElement
-            type="top"
-            isLocked
-            text={`${bun.name} (верх)`}
-            price={bun.price}
-            thumbnail={bun.image}
-          />
-        </div>
-
-        <ul className={`${styles.constructor_list} pr-2`}>
-          {ingredients.map((item, i) => (
-            <li
-              // в бургере могут быть одинаковые ингредиенты
-              // идентификатор элемента списка может быть не уникальным
-              // eslint-disable-next-line react/no-array-index-key
-              key={`${item._id} ${i}`}
-              className={`${styles.constructor_item} mb-4`}
-            >
-              <span className="mr-2">
-                <DragIcon type="primary" />
-              </span>
-
-              <ConstructorElement
-                text={item.name}
-                price={item.price}
-                thumbnail={item.image}
-              />
-            </li>
-          ))}
-        </ul>
-
-        <div className={`${styles.constructor_item} mb-4 mt-4 pr-4`}>
-          <ConstructorElement
-            type="bottom"
-            isLocked
-            text={`${bun.name} (низ)`}
-            price={bun.price}
-            thumbnail={bun.image}
-          />
-        </div>
+      <div
+        className={
+          `${styles.constructor} ${isHover ? styles.constructor_hover : ''} mb-10`
+        }
+        ref={dropTarget}
+      >
+        <Bun type={ConstructorBunTypes.TOP} />
+        <Ingredients />
+        <Bun type={ConstructorBunTypes.BOTTOM} />
       </div>
 
-      <div className={`${styles.order} pr-4`}>
-        <div className={`${styles.order_price} mr-10`}>
-          <span className="text text_type_digits-medium mr-2">
-            {orderSumm}
-          </span>
+      <OrderCreator />
 
-          <span className={styles.order_icon}>
-            <CurrencyIcon type="primary" />
-          </span>
-        </div>
-
-        <Button onClick={handleCreateOrder} disabled={isCreating}>
-          {isCreating ? 'Подождите...' : 'Оформить заказ'}
-        </Button>
-      </div>
-
-      {isOpenModal && (
+      {isShowModal && (
         <Modal onClose={handleCloseModal}>
-          {error ? (
-            <ErrorOrderDetails error={error} />
-          ) : (
-            <OrderDetails number={orderNumber} />
-          )}
+          <OrderDetails />
         </Modal>
       )}
     </section>

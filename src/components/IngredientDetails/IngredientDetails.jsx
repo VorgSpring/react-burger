@@ -1,54 +1,53 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { IngredientDictionary } from '../../constants/ingredients';
+import { getIngredientById } from '../../helpers/ingredients';
 import styles from './IngredientDetails.module.css';
 
-export const IngredientDetails = ({
-  image,
-  name,
-  ingredients,
-}) => (
-  <section className="pt-10 pr-10 pl-10 pb-15">
-    <h2 className={`${styles.title} text text_type_main-large`}>
-      Детали ингредиента
-    </h2>
+export const IngredientDetails = () => {
+  const item = useSelector(
+    (store) => getIngredientById(store.ingredients.items, store.currentIngredient),
+  );
 
-    <img
-      className={`${styles.image} mb-4`}
-      src={image}
-      alt={name}
-    />
+  const {
+    // eslint-disable-next-line camelcase
+    imageLarge: image,
+    name,
+    structure,
+  } = item;
 
-    <h3 className={`${styles.name} text text_type_main-medium mb-8`}>
-      {name}
-    </h3>
+  return (
+    <section className="pt-10 pr-10 pl-10 pb-15">
+      <h2 className={`${styles.title} text text_type_main-large`}>
+        Детали ингредиента
+      </h2>
 
-    <div className={styles.ingredients}>
-      {Object.keys(IngredientDictionary).map((item) => (
-        <p
-          key={item}
-          className={`${styles.ingredient} mr-5`}
-        >
-          <span className="text text_type_main-default text_color_inactive mb-1">
-            {IngredientDictionary[item]}
-          </span>
+      <img
+        className={`${styles.image} mb-4`}
+        src={image}
+        alt={name}
+      />
 
-          <span className="text text_type_digits-default text_color_inactive">
-            {ingredients[item]}
-          </span>
-        </p>
-      ))}
-    </div>
-  </section>
-);
+      <h3 className={`${styles.name} text text_type_main-medium mb-8`}>
+        {name}
+      </h3>
 
-IngredientDetails.propTypes = {
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  ingredients: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-  }).isRequired,
+      <div className={styles.ingredients}>
+        {Object.keys(IngredientDictionary).map((ingredient) => (
+          <p
+            key={ingredient}
+            className={`${styles.ingredient} mr-5`}
+          >
+            <span className="text text_type_main-default text_color_inactive mb-1">
+              {IngredientDictionary[ingredient]}
+            </span>
+
+            <span className="text text_type_digits-default text_color_inactive">
+              {structure[ingredient]}
+            </span>
+          </p>
+        ))}
+      </div>
+    </section>
+  );
 };

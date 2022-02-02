@@ -8,6 +8,11 @@
   margin-top: 0;
 }
 
+.drag {
+  border-radius: var(--common-border-radius-s);
+  background: var(--background-element);
+}
+
 .image {
   width: 240px;
   height: 120px;

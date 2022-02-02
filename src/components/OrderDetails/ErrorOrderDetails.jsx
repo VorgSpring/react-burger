@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './ErrorOrderDetails.module.css';
+import styles from './OrderDetails.module.css';
 
 export const ErrorOrderDetails = ({ error }) => (
   <section className={`${styles.root} pt-30 pb-30`}>

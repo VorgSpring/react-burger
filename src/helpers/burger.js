@@ -1,23 +1,27 @@
-import { INGREDIENT_BUN_TYPE } from '../constants/ingredients';
-import { BurgerIngredients } from '../constants/burger';
+import { getIngredientById } from './ingredients';
 
-/**
- * Временная функция создания бургера
- * чтобы было чего вернуть в BurgerConstructor
- * @param {Object} items
- * @returns {Object}
- */
-export const getMainBurger = (items) => {
-  const bun = items.filter((item) => item.type === INGREDIENT_BUN_TYPE)[0];
-  const ingredients = items.filter((item) => (
-    item.type !== INGREDIENT_BUN_TYPE && BurgerIngredients.includes(item.name)
-  ));
+export const getIngredientIdsInBurger = (burger) => JSON.stringify({
+  ingredients: [
+    ...burger.ingredients.map(({ id }) => id),
+    burger.bun.id,
+    null,
+    null,
+  ],
+});
 
-  return { bun, ingredients };
+export const getSum = (burger, ingredients) => {
+  let ingredientsPrice = 0;
+  let bunPrice = 0;
+
+  if (burger.ingredients) {
+    ingredientsPrice = burger.ingredients
+      .map(({ id }) => getIngredientById(ingredients, id).price)
+      .reduce((acc, price) => acc + price, 0);
+  }
+
+  if (burger.bun) {
+    bunPrice = getIngredientById(ingredients, burger.bun).price * 2;
+  }
+
+  return ingredientsPrice + bunPrice;
 };
-
-export const getSum = (burger) => (
-  burger.ingredients.reduce(
-    (acc, item) => acc + item.price, 0,
-  ) + ((burger.bun ? burger.bun.price : 0) * 2)
-);

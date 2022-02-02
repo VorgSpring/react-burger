@@ -1,8 +1,12 @@
-import React, { useState, useRef, useContext } from 'react';
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import React, { useState, useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import IngredientDetails from '../IngredientDetails';
-import BurgerIngredient from '../BurgerIngredient';
-import { IngredientsContext } from '../../services/appContext';
+import Modal from '../Modal';
+import Tabs from './components/Tabs';
+import Ingredients from './components/Ingredients';
+import LoadError from './components/LoadError';
+import { getIngredients } from '../../services/operations/ingredients';
+import { removeCurrentIngredient } from '../../services/actions/currentIngredient';
 import {
   IngredientsTypes,
   INGREDIENT_BUN_TYPE,
@@ -10,17 +14,31 @@ import {
   INGREDIENT_SAUCE_TYPE,
 } from '../../constants/ingredients';
 import styles from './BurgerIngredients.module.css';
-import Modal from '../Modal';
 
 export const BurgerIngredients = () => {
-  const { ingredients } = useContext(IngredientsContext);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, []);
+
   const [currentTab, setCurrentTab] = useState(INGREDIENT_BUN_TYPE);
-  const [currentIngredient, setCurrentIngredient] = useState(null);
+
+  const { error, currentIngredient } = useSelector((store) => ({
+    error: store.ingredients.error,
+    currentIngredient: store.currentIngredient,
+  }));
 
   const listRef = useRef(null);
   const bunRef = useRef(null);
   const mainRef = useRef(null);
   const sauceRef = useRef(null);
+
+  if (error) {
+    return (
+      <LoadError error={error} />
+    );
+  }
 
   const getRef = (ref) => {
     switch (ref) {
@@ -38,17 +56,13 @@ export const BurgerIngredients = () => {
     }
   };
 
-  if (!ingredients) {
-    return null;
-  }
-
   const handleChoiceTab = (value) => {
     setCurrentTab(value);
     getRef(value).current.scrollIntoView();
   };
 
   const handleCloseIngredientModal = () => {
-    setCurrentIngredient(null);
+    dispatch(removeCurrentIngredient());
   };
 
   const handleScroll = () => {
@@ -70,18 +84,7 @@ export const BurgerIngredients = () => {
 
   return (
     <section className={styles.root}>
-      <div className={`${styles.tabs} mb-10`}>
-        {Object.keys(IngredientsTypes).map((type) => (
-          <Tab
-            key={`${type}tab`}
-            value={type}
-            active={currentTab === type}
-            onClick={handleChoiceTab}
-          >
-            {IngredientsTypes[type]}
-          </Tab>
-        ))}
-      </div>
+      <Tabs currentTab={currentTab} onChoiceTab={handleChoiceTab} />
 
       <ul
         className={styles.ingredients}
@@ -91,36 +94,21 @@ export const BurgerIngredients = () => {
         {Object.keys(IngredientsTypes).map((type) => (
           <li
             key={`${type}ingredients`}
-            className={`${styles.ingredients_item} mb-10`}
+            className={`${styles.ingredients_type} mb-6`}
             ref={getRef(type)}
           >
             <h3 className="text text_type_main-medium mb-6">
               {IngredientsTypes[type]}
             </h3>
 
-            <ul className={`${styles.ingredients_list} pl-4 pr-4`}>
-              {ingredients
-                .filter((item) => item.type === type)
-                .map((item) => (
-                  <BurgerIngredient
-                    // eslint-disable-next-line no-underscore-dangle
-                    key={item._id}
-                    item={item}
-                    onClick={setCurrentIngredient}
-                  />
-                ))}
-            </ul>
+            <Ingredients type={type} />
           </li>
         ))}
       </ul>
 
       {currentIngredient && (
         <Modal onClose={handleCloseIngredientModal}>
-          <IngredientDetails
-            image={currentIngredient.image}
-            name={currentIngredient.name}
-            ingredients={currentIngredient.ingredients}
-          />
+          <IngredientDetails />
         </Modal>
       )}
     </section>

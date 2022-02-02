@@ -1,0 +1,25 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  border-radius: var(--common-border-radius-s);
+  background: var(--background-element);
+  max-width: 488px;
+  min-height: 48px;
+  flex-grow: 0;
+}
+
+.empty_top {
+  border-radius: var(--top-constructor-item-border-radius);
+}
+
+.empty_bottom {
+  border-radius: var(--bottom-constructor-item-border-radius);
+}

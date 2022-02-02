@@ -1,0 +1,39 @@
+.root {
+  position: relative;
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+}
+
+.root button:disabled {
+  background: #6b6b74;
+  pointer-events: none;
+}
+
+.empty_oreder {
+  position: absolute;
+  top: 130%;
+  width: 436px;
+  right: 0;
+  text-align: right;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 33px;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.button_content {
+  display: inline-block;
+  width: 135px;
+  text-align: center;
+}
