@@ -5,9 +5,9 @@ import {
   ListIcon,
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './AppHeader.module.css';
+import styles from './Header.module.css';
 
-export const AppHeader = () => (
+export const Header = () => (
   <header className={`${styles.root} pt-4 pb-3`}>
     <nav className={styles.navigation}>
       <ul className={styles.navigation_list}>

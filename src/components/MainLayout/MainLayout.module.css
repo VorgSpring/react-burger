@@ -6,10 +6,3 @@
   flex-direction: column;
   overflow: hidden;
 }
-
-.container {
-  display: flex;
-  overflow: hidden;
-  justify-content: space-between;
-  flex-grow: 1;
-}
