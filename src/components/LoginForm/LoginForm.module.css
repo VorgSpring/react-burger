@@ -1,0 +1,13 @@
+.root {
+  width: 480px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.root :global(.input__container) {
+  width: auto;
+}
+
+.root :global(.input) {
+  width: 100%;
+}
