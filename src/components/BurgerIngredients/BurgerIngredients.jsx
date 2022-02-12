@@ -18,16 +18,19 @@ import styles from './BurgerIngredients.module.css';
 export const BurgerIngredients = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, []);
-
   const [currentTab, setCurrentTab] = useState(INGREDIENT_BUN_TYPE);
 
-  const { error, currentIngredient } = useSelector((store) => ({
+  const { isEmpty, error, currentIngredient } = useSelector((store) => ({
+    isEmpty: store.ingredients.items === null,
     error: store.ingredients.error,
     currentIngredient: store.currentIngredient,
   }));
+
+  useEffect(() => {
+    if (isEmpty) {
+      dispatch(getIngredients());
+    }
+  }, []);
 
   const listRef = useRef(null);
   const bunRef = useRef(null);

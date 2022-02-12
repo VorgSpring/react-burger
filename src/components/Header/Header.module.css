@@ -16,9 +16,22 @@
   display: flex;
 }
 
+.navigation_list:last-child {
+  margin-right: 0;
+}
+
 .navigation_link {
   display: flex;
+  transition: color 0.3s ease-in;
   text-decoration: none;
+}
+
+.navigation_link span {
+  transition: color 0.3s ease-in;
+}
+
+.navigation_link_inactive:hover span{
+  color: #ffffff;
 }
 
 .navigation_logo {

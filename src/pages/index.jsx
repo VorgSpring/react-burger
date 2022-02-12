@@ -13,7 +13,7 @@ import { RoutePaths } from '../constants/routes';
 export default () => (
   <MainLayout>
     <Routes>
-      <Route path={RoutePaths.MAIN} element={<MainPage />} />
+      <Route path={RoutePaths.CONSTRUCTOR} element={<MainPage />} />
       <Route path={RoutePaths.LOGIN} element={<LoginPage />} />
       <Route path={RoutePaths.REGISTER} element={<RegisterPage />} />
       <Route path={RoutePaths.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />

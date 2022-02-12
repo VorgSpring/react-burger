@@ -14,11 +14,11 @@
 
 .link {
   text-decoration: none;
-  trasition: opacity 0.3s;
+  transition: color 0.3s ease-in;
 }
 
 .link_inactive:hover {
-  opacity: 0.8;
+  color: #ffffff;
 }
 
 .description {
