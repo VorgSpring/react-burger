@@ -1,0 +1,16 @@
+.title {
+  text-align: center;
+}
+
+.links {
+  text-align: center;
+}
+
+.links p:last-child {
+  margin-bottom: 0;
+}
+
+.link {
+  color: #4c4cff;
+  text-decoration: none;
+}

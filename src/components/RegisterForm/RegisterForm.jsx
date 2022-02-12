@@ -5,8 +5,16 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import FormLayout from '../FormLayout';
 
-export const LoginForm = () => (
+export const RegisterForm = () => (
   <FormLayout submitText="Войти" onChange={() => {}}>
+    <div className="mb-6">
+      <Input
+        type="text"
+        name="name"
+        placeholder="Имя"
+      />
+    </div>
+
     <div className="mb-6">
       <Input
         type="text"
