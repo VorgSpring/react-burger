@@ -1,14 +1,18 @@
 import React from 'react';
 import EntrancePageLayout from '../../components/EntrancePageLayout';
-import LoginForm from '../../components/LoginForm';
+import RegisterForm from '../../components/RegisterForm';
 import { RoutePaths } from '../../constants/routes';
 import { EntrancePageData } from '../../constants/page';
 
-export const RegisterPage = () => (
-  <EntrancePageLayout
-    title={EntrancePageData[RoutePaths.REGISTER].title}
-    links={EntrancePageData[RoutePaths.REGISTER].links}
-  >
-    <LoginForm />
-  </EntrancePageLayout>
-);
+export const RegisterPage = () => {
+  const { title, links } = EntrancePageData[RoutePaths.REGISTER];
+
+  return (
+    <EntrancePageLayout
+      title={title}
+      links={links}
+    >
+      <RegisterForm />
+    </EntrancePageLayout>
+  );
+};
