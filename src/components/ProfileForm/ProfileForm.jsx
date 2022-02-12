@@ -1,13 +1,9 @@
 import React from 'react';
-import {
-  Input,
-  PasswordInput,
-} from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import FormLayout from '../FormLayout';
 
-export const RegisterForm = () => (
+export const ProfileForm = () => (
   <FormLayout
-    submitText="Войти"
     onChange={() => {}}
     onSubmit={() => {}}
   >
@@ -15,6 +11,7 @@ export const RegisterForm = () => (
       <Input
         type="text"
         name="name"
+        icon="EditIcon"
         placeholder="Имя"
       />
     </div>
@@ -23,12 +20,18 @@ export const RegisterForm = () => (
       <Input
         type="text"
         name="email"
-        placeholder="E-mail"
+        icon="EditIcon"
+        placeholder="Логин"
       />
     </div>
 
     <div className="mb-6">
-      <PasswordInput name="password" />
+      <Input
+        type="password"
+        name="password"
+        icon="EditIcon"
+        placeholder="Пароль"
+      />
     </div>
   </FormLayout>
 );

@@ -6,7 +6,11 @@ import {
 import FormLayout from '../FormLayout';
 
 export const ResetPasswordForm = () => (
-  <FormLayout submitText="Сохранить" onChange={() => {}}>
+  <FormLayout
+    submitText="Сохранить"
+    onChange={() => {}}
+    onSubmit={() => {}}
+  >
     <div className="mb-6">
       <PasswordInput
         name="password"

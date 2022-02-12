@@ -9,7 +9,9 @@ export const EntrancePageLayout = ({ title, links, children }) => (
       {title}
     </h1>
 
-    {children}
+    <div className={styles.form}>
+      {children}
+    </div>
 
     <div className={`${styles.links} mt-20`}>
       {links.map(({ description, route, text }) => (

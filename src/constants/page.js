@@ -16,6 +16,7 @@ export const EntrancePageData = {
       },
     ],
   },
+
   [RoutePaths.REGISTER]: {
     title: 'Регистрация',
     links: [
@@ -26,6 +27,7 @@ export const EntrancePageData = {
       },
     ],
   },
+
   [RoutePaths.FORGOT_PASSWORD]: {
     title: 'Восстановление пароля',
     links: [
@@ -36,6 +38,7 @@ export const EntrancePageData = {
       },
     ],
   },
+
   [RoutePaths.RESET_PASSWORD]: {
     title: 'Восстановление пароля',
     links: [
@@ -47,3 +50,20 @@ export const EntrancePageData = {
     ],
   },
 };
+
+export const ProfileNavigationData = [
+  {
+    path: RoutePaths.PROFILE,
+    title: 'Профиль',
+  },
+
+  {
+    path: RoutePaths.ORDERS,
+    title: 'История заказов',
+  },
+
+  {
+    path: RoutePaths.EXIT,
+    title: 'Выход',
+  },
+];

@@ -3,7 +3,11 @@ import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import FormLayout from '../FormLayout';
 
 export const ForgotPasswordForm = () => (
-  <FormLayout submitText="Восстановить" onChange={() => {}}>
+  <FormLayout
+    submitText="Восстановить"
+    onChange={() => {}}
+    onSubmit={() => {}}
+  >
     <div className="mb-6">
       <Input
         type="text"

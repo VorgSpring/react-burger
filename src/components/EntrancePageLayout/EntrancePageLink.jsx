@@ -7,7 +7,7 @@ import styles from './EntrancePageLayout.module.css';
 export const EntrancePageLink = ({ description, route, text }) => (
   <p key={route} className="text text_type_main-default text_color_inactive mb-4">
     {description}
-    <Link to={route} className={`${styles.link} ml-2`}>
+    <Link to={route} className={`${styles.link} text_color_accent ml-2`}>
       {text}
     </Link>
   </p>

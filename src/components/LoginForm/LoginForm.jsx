@@ -6,7 +6,11 @@ import {
 import FormLayout from '../FormLayout';
 
 export const LoginForm = () => (
-  <FormLayout submitText="Войти" onChange={() => {}}>
+  <FormLayout
+    submitText="Войти"
+    onChange={() => {}}
+    onSubmit={() => {}}
+  >
     <div className="mb-6">
       <Input
         type="text"
