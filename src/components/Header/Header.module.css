@@ -16,7 +16,7 @@
   display: flex;
 }
 
-.navigation_list:last-child {
+.navigation_list li:last-child {
   margin-right: 0;
 }
 

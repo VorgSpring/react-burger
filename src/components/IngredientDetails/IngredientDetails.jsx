@@ -10,8 +10,7 @@ export const IngredientDetails = () => {
   );
 
   const {
-    // eslint-disable-next-line camelcase
-    imageLarge: image,
+    imageLarge,
     name,
     structure,
   } = item;
@@ -24,7 +23,7 @@ export const IngredientDetails = () => {
 
       <img
         className={`${styles.image} mb-4`}
-        src={image}
+        src={imageLarge}
         alt={name}
       />
 
