@@ -1,17 +1,17 @@
-export const ingredientsState = {
+export const IngredientsState = {
   items: null,
   isLoading: false,
   error: null,
 };
 
-export const burgerState = {
+export const BurgerState = {
   bun: null,
   ingredients: [],
 };
 
-export const currentIngredientState = null;
+export const CurrentIngredientState = null;
 
-export const orderState = {
+export const OrderState = {
   currentOrder: null,
   orders: [],
   isCreating: false,

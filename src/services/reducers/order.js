@@ -5,9 +5,9 @@ import {
   SET_CURRENT_ORDER,
   REMOVE_CURRENT_ORDER,
 } from '../actions/type';
-import { orderState } from './initialState';
+import { OrderState } from './initialState';
 
-export const orderReducer = (state = orderState, action) => {
+export const orderReducer = (state = OrderState, action) => {
   switch (action.type) {
     case CREATE_ORDER_REQUEST:
       return {

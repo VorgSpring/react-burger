@@ -5,10 +5,10 @@ import {
   REMOVE_INGREDIENT_IN_BURGER,
 } from '../actions/type';
 import { ConstructorElementTypes } from '../../constants/constructor';
-import { burgerState } from './initialState';
+import { BurgerState } from './initialState';
 import { arrayMove } from '../../helpers/array';
 
-export const burgerReducer = (state = burgerState, action) => {
+export const burgerReducer = (state = BurgerState, action) => {
   switch (action.type) {
     case SET_BURGER:
       return action.payload;
