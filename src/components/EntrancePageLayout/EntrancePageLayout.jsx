@@ -29,7 +29,9 @@ export const EntrancePageLayout = ({ title, links, children }) => (
 EntrancePageLayout.propTypes = {
   title: PropTypes.string.isRequired,
   links: PropTypes.arrayOf(
-    EntrancePageLink.propTypes,
+    PropTypes.shape(
+      EntrancePageLink.propTypes,
+    ).isRequired,
   ).isRequired,
   children: PropTypes.node.isRequired,
 };

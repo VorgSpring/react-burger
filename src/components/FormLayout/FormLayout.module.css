@@ -10,3 +10,30 @@
 .root :global(.input) {
   width: 100%;
 }
+
+.error {
+  color: #e52b1a;
+  text-align: center;
+}
+
+.load button {
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.load button::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(138, 138, 155, 0.6), transparent);
+  transform: translateX(-100%);
+  z-index: 1;
+}
+
+.load button::before :global {
+  animation: loading 1.3s infinite;
+}

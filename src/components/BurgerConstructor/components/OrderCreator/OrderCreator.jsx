@@ -12,12 +12,10 @@ export const OrderCreator = () => {
   const dispatch = useDispatch();
 
   const {
-    isCreatingOrder,
     isEmptyOrder,
     orderSum,
     orderCreating,
   } = useSelector((store) => ({
-    isCreatingOrder: store.order.isCreating,
     isEmptyOrder: !store.burger.bun || !store.burger.ingredients.length,
     orderSum: getSum(store.burger, store.ingredients.items),
     orderCreating: store.order.isCreating,
@@ -32,7 +30,7 @@ export const OrderCreator = () => {
   };
 
   return (
-    <div className={`${styles.root} pr-4`}>
+    <div className={`${styles.root} ${orderCreating ? styles.creating : ''} pr-4`}>
       {isEmptyOrder && (
         <p className={`${styles.empty_oreder} text text_type_main-small text_color_inactive pr-4`}>
           Добавте булку и ингредиенты, чтобы совершить заказ
@@ -49,10 +47,8 @@ export const OrderCreator = () => {
         </span>
       </div>
 
-      <Button onClick={handleCreateOrder} disabled={isCreatingOrder || isEmptyOrder}>
-        <span className={styles.button_content}>
-          {orderCreating ? 'Подождите...' : 'Оформить заказ'}
-        </span>
+      <Button onClick={handleCreateOrder} disabled={isEmptyOrder}>
+        Оформить заказ
       </Button>
     </div>
   );

@@ -33,5 +33,5 @@ HeaderNavLink.propTypes = {
   path: PropTypes.oneOf(
     Object.values(RoutePaths),
   ).isRequired,
-  Icon: PropTypes.element.isRequired,
+  Icon: PropTypes.func.isRequired,
 };

@@ -18,7 +18,7 @@ export const loginFormSubmitSuccess = () => ({
   type: LOGIN_FORM_SUBMIT_SUCCESS,
 });
 
-export const loginFormSubmitError = ({ field, message }) => ({
+export const loginFormSetError = ({ field, message }) => ({
   type: LOGIN_FORM_SET_ERROR,
   payload: { field, message },
 });

@@ -1,8 +1,8 @@
-import { LoginFieldTypes } from '../../../constants/forms';
+import { LoginFieldNames } from '../../../constants/forms';
 
 export const LoginState = {
-  [LoginFieldTypes.EMAIL]: '',
-  [LoginFieldTypes.PASSWORD]: '',
+  [LoginFieldNames.EMAIL]: '',
+  [LoginFieldNames.PASSWORD]: '',
   isRequest: false,
   errors: {},
 };
