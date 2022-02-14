@@ -17,7 +17,7 @@ export const FormLayout = ({
 
     {children}
 
-    {submitText.length && (
+    {submitText && submitText.length && (
       <Button
         type="primary"
         size="medium"

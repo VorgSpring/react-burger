@@ -1,22 +1,23 @@
-import {
-  loginFormSubmitRequest,
-  loginFormSubmitSuccess,
-  loginFormSetError,
-} from '../actions/forms/login';
+import { formAtionsCreator } from '../actions/formActionCreator';
 import { requestLoginApi } from '../../api/login';
-import { LoginFieldNames } from '../../constants/forms';
+import { LoginFieldNames, FormTypes } from '../../constants/forms';
+import {
+  FORM_SUBMIT_REQUEST,
+  FORM_SUBMIT_SUCCESS,
+  FORM_SET_ERROR,
+} from '../actions/type';
 
 export const requestLogin = () => async (dispatch, getState) => {
-  dispatch(loginFormSubmitRequest());
+  dispatch(formAtionsCreator(FormTypes.LOGIN, FORM_SUBMIT_REQUEST));
 
   try {
     const { forms } = getState();
     const { email, password } = forms.login;
 
     await requestLoginApi({ email, password });
-    dispatch(loginFormSubmitSuccess());
+    dispatch(formAtionsCreator(FormTypes.LOGIN, FORM_SUBMIT_SUCCESS));
   } catch ({ message }) {
-    dispatch(loginFormSetError({
+    dispatch(formAtionsCreator(FormTypes.LOGIN, FORM_SET_ERROR, {
       field: LoginFieldNames.REQUEST,
       message,
     }));

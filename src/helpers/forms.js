@@ -9,15 +9,15 @@ import {
 
 export const resetError = (field, errors) => {
   if (errors[field]) {
-    const { ...newErrors } = errors;
-    newErrors.delete(field);
+    const newErrors = { ...errors };
+    delete newErrors[field];
     return newErrors;
   }
 
   return errors;
 };
 
-export const ValidateFormFields = {
+export const FormFieldsValidator = {
   [EMAIL_FIELD_NAME](email) {
     return REG_EXP_FOR_CHECK_EMAIL.test(email);
   },
@@ -26,3 +26,11 @@ export const ValidateFormFields = {
     return REG_EXP_FOR_CHECK_PASSWORD.test(password);
   },
 };
+
+export const clearValues = (values) => (
+  Object.keys(values)
+    .reduce((acc, field) => {
+      acc[field] = '';
+      return acc;
+    }, {})
+);

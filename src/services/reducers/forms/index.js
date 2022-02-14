@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
-import { loginFormReducer } from './login';
+import { reducerCreator, stateCreator } from './creators';
+import {
+  FormTypes,
+  LoginFormValues,
+} from '../../../constants/forms';
 
 export const formsReducer = combineReducers({
-  login: loginFormReducer,
+  login: reducerCreator(stateCreator(LoginFormValues), FormTypes.LOGIN),
 });

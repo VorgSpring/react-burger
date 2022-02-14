@@ -5,10 +5,11 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import FormLayout from '../FormLayout';
-import { loginFormSetValue, loginFormSetError } from '../../services/actions/forms/login';
+import { formAtionsCreator } from '../../services/actions/formActionCreator';
+import { FORM_SET_VALUE, FORM_SET_ERROR } from '../../services/actions/type';
 import { requestLogin } from '../../services/operations/login';
-import { LoginFieldNames, FormFieldErrors } from '../../constants/forms';
-import { ValidateFormFields } from '../../helpers/forms';
+import { LoginFieldNames, FormFieldErrors, FormTypes } from '../../constants/forms';
+import { FormFieldsValidator } from '../../helpers/forms';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -21,8 +22,8 @@ export const LoginForm = () => {
     passwordError,
     requestError,
   } = useSelector(({ forms }) => ({
-    emailValue: forms.login[LoginFieldNames.EMAIL],
-    passwordValue: forms.login[LoginFieldNames.PASSWORD],
+    emailValue: forms.login.values[LoginFieldNames.EMAIL],
+    passwordValue: forms.login.values[LoginFieldNames.PASSWORD],
     isRequest: forms.login.isRequest,
     emailError: forms.login.errors[LoginFieldNames.EMAIL],
     passwordError: forms.login.errors[LoginFieldNames.PASSWORD],
@@ -32,11 +33,11 @@ export const LoginForm = () => {
   const validateForm = () => {
     let isValid = true;
 
-    const isEmailValid = ValidateFormFields[LoginFieldNames.EMAIL](emailValue);
-    const isPasswordValid = ValidateFormFields[LoginFieldNames.PASSWORD](passwordValue);
+    const isEmailValid = FormFieldsValidator[LoginFieldNames.EMAIL](emailValue);
+    const isPasswordValid = FormFieldsValidator[LoginFieldNames.PASSWORD](passwordValue);
 
     if (!isEmailValid) {
-      dispatch(loginFormSetError({
+      dispatch(formAtionsCreator(FormTypes.LOGIN, FORM_SET_ERROR, {
         field: LoginFieldNames.EMAIL,
         message: FormFieldErrors[LoginFieldNames.EMAIL],
       }));
@@ -45,7 +46,7 @@ export const LoginForm = () => {
     }
 
     if (!isPasswordValid) {
-      dispatch(loginFormSetError({
+      dispatch(formAtionsCreator(FormTypes.LOGIN, FORM_SET_ERROR, {
         field: LoginFieldNames.PASSWORD,
         message: FormFieldErrors[LoginFieldNames.PASSWORD],
       }));
@@ -57,7 +58,7 @@ export const LoginForm = () => {
   };
 
   const changeHandler = ({ target }) => {
-    dispatch(loginFormSetValue({
+    dispatch(formAtionsCreator(FormTypes.LOGIN, FORM_SET_VALUE, {
       field: target.name,
       value: target.value,
     }));
@@ -86,7 +87,7 @@ export const LoginForm = () => {
           placeholder="E-mail"
           value={emailValue}
           errorText={emailError}
-          error={emailError}
+          error={!!emailError}
           disabled={isRequest}
           onChange={changeHandler}
         />
@@ -98,7 +99,7 @@ export const LoginForm = () => {
           value={passwordValue}
           disabled={isRequest}
           errorText={passwordError}
-          error={passwordError}
+          error={!!passwordError}
           onChange={changeHandler}
         />
       </div>
