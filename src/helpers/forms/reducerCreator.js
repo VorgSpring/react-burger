@@ -3,11 +3,29 @@ import {
   FORM_SUBMIT_REQUEST,
   FORM_SUBMIT_SUCCESS,
   FORM_SET_ERROR,
-} from '../../actions/type';
-import { resetError, clearValues } from '../../../helpers/forms';
+} from '../../services/actions/type';
+import { InitialStates } from '../../constants/forms/states';
 
-export const reducerCreator = (initialState, formType) => (
-  (state = initialState, action) => {
+const resetError = (field, errors) => {
+  if (errors[field]) {
+    const newErrors = { ...errors };
+    delete newErrors[field];
+    return newErrors;
+  }
+
+  return errors;
+};
+
+const clearValues = (values) => (
+  Object.keys(values)
+    .reduce((acc, field) => {
+      acc[field] = '';
+      return acc;
+    }, {})
+);
+
+export const reducerCreator = (formType) => (
+  (state = InitialStates[formType], action) => {
     switch (action.type) {
       case `${formType}_${FORM_SET_VALUE}`:
         return {
@@ -48,9 +66,3 @@ export const reducerCreator = (initialState, formType) => (
     }
   }
 );
-
-export const stateCreator = (values) => ({
-  values,
-  isRequest: false,
-  errors: {},
-});

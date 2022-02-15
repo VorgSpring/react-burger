@@ -8,7 +8,9 @@ import FormLayout from '../FormLayout';
 import { formAtionsCreator } from '../../services/actions/formActionCreator';
 import { FORM_SET_VALUE, FORM_SET_ERROR } from '../../services/actions/type';
 import { requestLogin } from '../../services/operations/login';
-import { LoginFieldNames, FormFieldErrors, FormTypes } from '../../constants/forms';
+import { FormTypes } from '../../constants/forms/types';
+import { LoginFieldNames } from '../../constants/forms/fields';
+import { FormFieldErrors } from '../../constants/errors';
 import { FormFieldsValidator } from '../../helpers/forms';
 
 export const LoginForm = () => {
