@@ -1,6 +1,6 @@
 import { FormTypes } from '../../constants/forms/types';
-import { formRequester } from '../../helpers/forms';
+import { formApiRequester } from '../../helpers/forms/apiRequester';
 
 export const requestLogin = () => async (dispatch, getState) => {
-  await formRequester(FormTypes.LOGIN, dispatch, getState);
+  await formApiRequester(FormTypes.LOGIN, dispatch, getState);
 };

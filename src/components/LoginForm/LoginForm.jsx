@@ -5,13 +5,13 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import FormLayout from '../FormLayout';
-import { formAtionsCreator } from '../../services/actions/formActionCreator';
 import { FORM_SET_VALUE, FORM_SET_ERROR } from '../../services/actions/type';
 import { requestLogin } from '../../services/operations/login';
 import { FormTypes } from '../../constants/forms/types';
 import { LoginFieldNames } from '../../constants/forms/fields';
 import { FormFieldErrors } from '../../constants/errors';
-import { FormFieldsValidator } from '../../helpers/forms';
+import { FormFieldsValidator } from '../../helpers/forms/validator';
+import { formAtionsCreator } from '../../helpers/forms/actionCreator';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
