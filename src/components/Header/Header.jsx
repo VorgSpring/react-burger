@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import { HeaderNavLink } from './HeaderNavLink';
 import {
@@ -8,7 +9,7 @@ import {
 import styles from './Header.module.css';
 
 export const Header = () => (
-  <header className={`${styles.root} pt-4 pb-3`}>
+  <header className={cn(styles.root, 'pt-4 pb-3')}>
     <nav className={styles.navigation}>
       <ul className={styles.navigation_list}>
         {HeaderLeftNavigationData.map(({ title, path, Icon }) => (
@@ -21,7 +22,7 @@ export const Header = () => (
         ))}
       </ul>
 
-      <div className={`${styles.navigation_logo} mt-1`}>
+      <div className={cn(styles.navigation_logo, 'mt-1')}>
         <Logo />
       </div>
 

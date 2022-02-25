@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import { useSelector } from 'react-redux';
 import { IngredientDictionary } from '../../constants/ingredients';
 import { getIngredientById } from '../../helpers/ingredients';
@@ -17,17 +18,17 @@ export const IngredientDetails = () => {
 
   return (
     <section className="pt-10 pr-10 pl-10 pb-15">
-      <h2 className={`${styles.title} text text_type_main-large`}>
+      <h2 className={cn(styles.title, 'text text_type_main-large')}>
         Детали ингредиента
       </h2>
 
       <img
-        className={`${styles.image} mb-4`}
+        className={cn(styles.image, 'mb-4')}
         src={imageLarge}
         alt={name}
       />
 
-      <h3 className={`${styles.name} text text_type_main-medium mb-8`}>
+      <h3 className={cn(styles.name, 'text text_type_main-medium mb-8')}>
         {name}
       </h3>
 
@@ -35,7 +36,7 @@ export const IngredientDetails = () => {
         {Object.keys(IngredientDictionary).map((ingredient) => (
           <p
             key={ingredient}
-            className={`${styles.ingredient} mr-5`}
+            className={cn(styles.ingredient, 'mr-5')}
           >
             <span className="text text_type_main-default text_color_inactive mb-1">
               {IngredientDictionary[ingredient]}

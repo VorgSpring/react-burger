@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './FormLayout.module.css';
 
@@ -11,7 +12,9 @@ export const FormLayout = ({
   children,
 }) => (
   <form
-    className={`${styles.root} ${isRequest ? styles.load : ''}`}
+    className={cn(styles.root, {
+      [styles.load]: isRequest,
+    })}
     onSubmit={onSubmit}
   >
 
@@ -28,7 +31,7 @@ export const FormLayout = ({
     )}
 
     {error && (
-      <p className={`${styles.error} text text_type_main-default mt-10`}>
+      <p className={cn(styles.error, 'text text_type_main-default mt-10')}>
         {error}
       </p>
     )}

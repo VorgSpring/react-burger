@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import { Route, Routes, NavLink } from 'react-router-dom';
 import ProfileForm from '../../components/ProfileForm';
 import { ProfileNavigationData } from '../../constants/page';
@@ -12,16 +13,17 @@ export const ProfilePage = () => (
         <NavLink
           key={path}
           to={path}
-          className={({ isActive }) => (
-            `${styles.link} text text_type_main-medium pb-4 pt-4
-            ${isActive ? 'text_color_primary' : `${styles.link_inactive} text_color_inactive`}`
-          )}
+          className={({ isActive }) => cn(styles.link, 'text text_type_main-medium pb-4 pt-4', {
+            text_color_primary: isActive,
+            [styles.link_inactive]: !isActive,
+            text_color_inactive: !isActive,
+          })}
         >
           {title}
         </NavLink>
       ))}
 
-      <p className={`${styles.description} text text_color_inactive text_type_main-default mt-20`}>
+      <p className={cn(styles.description, 'text text_color_inactive text_type_main-default mt-20')}>
         В этом разделе вы можете изменить&nbsp;свои персональные данные
       </p>
     </nav>

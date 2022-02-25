@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import ReactDOM from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../ModalOverlay';
@@ -25,7 +26,7 @@ export const Modal = ({
 
   return ReactDOM.createPortal(
     <>
-      <section className={`${styles.root} ${className}`}>
+      <section className={cn(styles.root, className)}>
         <button type="button" className={styles.button} onClick={onClose}>
           <CloseIcon type="primary" />
         </button>

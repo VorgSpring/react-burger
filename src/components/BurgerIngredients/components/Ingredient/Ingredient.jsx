@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import {
@@ -45,7 +46,9 @@ export const Ingredient = ({ item }) => {
   return (
     <li
       ref={dragRef}
-      className={`${styles.root} ${isDrag ? styles.drag : ''} mt-2 pb-4 pt-9`}
+      className={cn(styles.root, 'mt-2 pb-4 pt-9', {
+        [styles.drag]: isDrag,
+      })}
       onClick={handleClick}
     >
       {!!count && (
@@ -54,12 +57,12 @@ export const Ingredient = ({ item }) => {
 
       <img
         ref={preview}
-        className={`${styles.image} mb-2`}
+        className={cn(styles.image, 'mb-2')}
         src={image}
         alt={name}
       />
 
-      <div className={`${styles.price} mb-1`}>
+      <div className={cn(styles.price, 'mb-1')}>
         <span className="text text_type_digits-default mr-1">
           {price}
         </span>
@@ -67,7 +70,7 @@ export const Ingredient = ({ item }) => {
         <CurrencyIcon type="primary" />
       </div>
 
-      <h4 className={`${styles.name} text text_type_main-default pr-2 pl-2`}>
+      <h4 className={cn(styles.name, 'text text_type_main-default pr-2 pl-2')}>
         {name}
       </h4>
     </li>

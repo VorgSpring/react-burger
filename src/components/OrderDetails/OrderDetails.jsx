@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import { useSelector } from 'react-redux';
 import { ErrorOrderDetails } from './ErrorOrderDetails';
 import DoneImage from './resource/done.gif';
@@ -15,7 +16,7 @@ export const OrderDetails = () => {
   }
 
   return (
-    <section className={`${styles.root} pt-30 pb-30`}>
+    <section className={cn(styles.root, 'pt-30 pb-30')}>
       <h2 className="text text_type_digits-large mb-8">
         {currentOrder}
       </h2>
@@ -25,7 +26,7 @@ export const OrderDetails = () => {
       </p>
 
       <img
-        className={`${styles.image} mb-15`}
+        className={cn(styles.image, 'mb-15')}
         height="120"
         src={DoneImage}
         srcSet={`${DoneImage} 1x, ${DoneImage2x} 2x`}

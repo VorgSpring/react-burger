@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 import IngredientDetails from '../IngredientDetails';
 import Modal from '../Modal';
 import Tabs from './components/Tabs';
@@ -97,7 +98,7 @@ export const BurgerIngredients = () => {
         {Object.keys(IngredientsTypes).map((type) => (
           <li
             key={`${type}ingredients`}
-            className={`${styles.ingredients_type} mb-6`}
+            className={cn(styles.ingredients_type, 'mb-6')}
             ref={getRef(type)}
           >
             <h3 className="text text_type_main-medium mb-6">

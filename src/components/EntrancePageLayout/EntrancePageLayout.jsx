@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import { EntrancePageLink } from './EntrancePageLink';
 import styles from './EntrancePageLayout.module.css';
 
 export const EntrancePageLayout = ({ title, links, children }) => (
   <>
-    <h1 className={`${styles.title} text text_type_main-medium mb-6`}>
+    <h1 className={cn(styles.title, 'text text_type_main-medium mb-6')}>
       {title}
     </h1>
 
@@ -13,7 +14,7 @@ export const EntrancePageLayout = ({ title, links, children }) => (
       {children}
     </div>
 
-    <div className={`${styles.links} mt-20`}>
+    <div className={cn(styles.links, 'mt-20')}>
       {links.map(({ description, route, text }) => (
         <EntrancePageLink
           key={route}

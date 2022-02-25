@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import { useSelector } from 'react-redux';
 import Ingredient from '../Ingredient';
 import { IngredientsSkeleton } from './IngredientsSkeleton';
@@ -19,7 +20,7 @@ export const Ingredients = ({ type }) => {
   }
 
   return (
-    <ul className={`${styles.root} pl-4 pr-4`}>
+    <ul className={cn(styles.root, 'pl-4 pr-4')}>
       {ingredients
         .filter((item) => item.type === type)
         .map((item) => (
