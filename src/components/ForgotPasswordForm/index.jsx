@@ -1,3 +1,6 @@
+import { withForm } from '../../hoc/withForm';
 import { ForgotPasswordForm } from './ForgotPasswordForm';
+import { requestForgotPassword } from '../../services/operations/forgotPassword';
+import { FormTypes } from '../../constants/forms/types';
 
-export default ForgotPasswordForm;
+export default withForm(ForgotPasswordForm, FormTypes.FORGOT_PASSWORD, requestForgotPassword);
