@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import {
   Input,
   PasswordInput,
@@ -52,13 +52,13 @@ export const LoginForm = ({
 
 LoginForm.propTypes = {
   values: PropTypes.shape({
-    [EMAIL_FIELD_TYPE]: string,
-    [PASSWORD_FIELD_TYPE]: string,
+    [EMAIL_FIELD_TYPE]: PropTypes.string,
+    [PASSWORD_FIELD_TYPE]: PropTypes.string,
   }).isRequired,
   errors: PropTypes.shape({
-    [EMAIL_FIELD_TYPE]: string,
-    [PASSWORD_FIELD_TYPE]: string,
-    [REQUEST_FIELD_TYPE]: string,
+    [EMAIL_FIELD_TYPE]: PropTypes.string,
+    [PASSWORD_FIELD_TYPE]: PropTypes.string,
+    [REQUEST_FIELD_TYPE]: PropTypes.string,
   }).isRequired,
   isRequest: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,

@@ -24,7 +24,7 @@ export const withForm = (Component, formType, formOperation) => () => {
     let isValid = true;
 
     Object.keys(values).forEach((field) => {
-      if (!FormFieldsValidator[field](values[field])) {
+      if (FormFieldsValidator[field] && !FormFieldsValidator[field](values[field])) {
         dispatch(formAtionsCreator(formType, FORM_SET_ERROR, {
           field,
           message: FormFieldErrors[field],
