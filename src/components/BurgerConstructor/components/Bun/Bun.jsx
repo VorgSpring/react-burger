@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BunEmpty } from './BunEmpty';
-import { getIngredientById } from '../../../../helpers/ingredients';
+import { getBunSelector } from '../../../../selectors/burger';
 import {
   ConstructorBunTypes,
   ConstructorBunAdditionalStyle,
@@ -12,9 +12,7 @@ import {
 import styles from './Bun.module.css';
 
 export const Bun = ({ type }) => {
-  const bun = useSelector((store) => (
-    getIngredientById(store.ingredients.items, store.burger.bun)
-  ));
+  const bun = useSelector(getBunSelector);
 
   if (!bun) {
     return (

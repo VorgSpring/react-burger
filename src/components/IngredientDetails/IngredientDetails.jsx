@@ -2,12 +2,13 @@ import React from 'react';
 import cn from 'classnames';
 import { useSelector } from 'react-redux';
 import { IngredientDictionary } from '../../constants/ingredients';
-import { getIngredientById } from '../../helpers/ingredients';
+import { getIngredientByIdSelector } from '../../selectors/ingredients';
 import styles from './IngredientDetails.module.css';
 
 export const IngredientDetails = () => {
+  // TODO переделать на механику роутера
   const item = useSelector(
-    (store) => getIngredientById(store.ingredients.items, store.currentIngredient),
+    (store) => getIngredientByIdSelector(store, store.currentIngredient),
   );
 
   const {

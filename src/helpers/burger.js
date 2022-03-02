@@ -9,7 +9,7 @@ export const getIngredientIdsInBurger = (burger) => JSON.stringify({
   ],
 });
 
-export const getSum = (burger, ingredients) => {
+export const getSummaryCost = (burger, ingredients) => {
   let ingredientsPrice = 0;
   let bunPrice = 0;
 

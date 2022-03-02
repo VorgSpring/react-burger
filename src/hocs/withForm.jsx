@@ -3,22 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formAtionsCreator } from '../helpers/forms/actionCreator';
 import { FormFieldsValidator } from '../helpers/forms/validator';
 import { FORM_SET_VALUE, FORM_SET_ERROR } from '../services/actions/type';
+import { formSelector } from '../selectors/forms';
 import { FormFieldErrors } from '../constants/errors';
-import { FormStoreNames } from '../constants/forms/store';
 
 export const withForm = (Component, formType, formOperation) => () => {
   const dispatch = useDispatch();
 
-  const storeName = FormStoreNames[formType];
   const {
     values,
     errors,
     isRequest,
-  } = useSelector(({ forms }) => ({
-    values: forms[storeName].values,
-    errors: forms[storeName].errors,
-    isRequest: forms[storeName].isRequest,
-  }));
+  } = useSelector((store) => formSelector(store, formType));
 
   const validateForm = () => {
     let isValid = true;

@@ -9,17 +9,15 @@ export const getIngredientById = (ingredients, ingredientId) => {
   return ingredients.find(({ id }) => id === ingredientId);
 };
 
-export const getCountIngredientinBurger = (type, ingredientId, burger) => {
-  switch (type) {
-    case ConstructorElementTypes.BUN:
-      return burger.bun === ingredientId ? 1 : 0;
+export const getCountIngredientInBurger = (burger, ingredient) => {
+  const { bun, ingredients } = burger;
+  const { type, id: ingredientId } = ingredient;
 
-    case ConstructorElementTypes.INGEDIENTS:
-      return burger.ingredients.filter(({ id }) => id === ingredientId).length;
-
-    default:
-      return null;
+  if (type === ConstructorElementTypes.BUN) {
+    return bun === ingredientId ? 1 : 0;
   }
+
+  return ingredients.filter(({ id }) => id === ingredientId).length;
 };
 
 export const getPreparedIngredients = (ingredients) => (

@@ -7,6 +7,7 @@ import DoneImage2x from './resource/done@2x.gif';
 import styles from './OrderDetails.module.css';
 
 export const OrderDetails = () => {
+  // TODO переделать на механику роутера
   const { currentOrder, error } = useSelector((store) => store.order);
 
   if (error) {

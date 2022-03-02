@@ -1,28 +1,25 @@
 import React from 'react';
+import cn from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { createOrder } from '../../../../services/operations/order';
-import { getSum } from '../../../../helpers/burger';
+import { orderCreatorSelector } from '../../../../selectors/order';
 import styles from './OrderCreator.module.css';
 
 export const OrderCreator = () => {
   const dispatch = useDispatch();
 
   const {
-    isEmptyOrder,
-    orderSum,
-    orderCreating,
-  } = useSelector((store) => ({
-    isEmptyOrder: !store.burger.bun || !store.burger.ingredients.length,
-    orderSum: getSum(store.burger, store.ingredients.items),
-    orderCreating: store.order.isCreating,
-  }));
+    isEmpty,
+    summaryCost,
+    isCreating,
+  } = useSelector(orderCreatorSelector);
 
   const handleCreateOrder = () => {
-    if (orderCreating) {
+    if (isCreating) {
       return;
     }
 
@@ -30,16 +27,16 @@ export const OrderCreator = () => {
   };
 
   return (
-    <div className={`${styles.root} ${orderCreating ? styles.creating : ''} pr-4`}>
-      {isEmptyOrder && (
-        <p className={`${styles.empty_oreder} text text_type_main-small text_color_inactive pr-4`}>
+    <div className={cn(styles.root, 'pr-4', { [styles.creating]: isCreating })}>
+      {isEmpty && (
+        <p className={cn(styles.empty_oreder, 'text text_type_main-small text_color_inactive pr-4')}>
           Добавте булку и ингредиенты, чтобы совершить заказ
         </p>
       )}
 
-      <div className={`${styles.price} mr-10`}>
+      <div className={cn(styles.price, 'mr-10')}>
         <span className="text text_type_digits-medium mr-2">
-          {orderSum}
+          {summaryCost}
         </span>
 
         <span className={styles.icon}>
@@ -47,7 +44,7 @@ export const OrderCreator = () => {
         </span>
       </div>
 
-      <Button onClick={handleCreateOrder} disabled={isEmptyOrder}>
+      <Button onClick={handleCreateOrder} disabled={isEmpty}>
         Оформить заказ
       </Button>
     </div>

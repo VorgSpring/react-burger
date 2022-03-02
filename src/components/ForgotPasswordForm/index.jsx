@@ -1,4 +1,4 @@
-import { withForm } from '../../hoc/withForm';
+import { withForm } from '../../hocs/withForm';
 import { ForgotPasswordForm } from './ForgotPasswordForm';
 import { requestForgotPassword } from '../../services/operations/forgotPassword';
 import { FormTypes } from '../../constants/forms/types';

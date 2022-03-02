@@ -4,14 +4,12 @@ import cn from 'classnames';
 import { useSelector } from 'react-redux';
 import Ingredient from '../Ingredient';
 import { IngredientsSkeleton } from './IngredientsSkeleton';
+import { getIngredientsAndLoadingSelector } from '../../../../selectors/ingredients';
 import { IngredientsTypes } from '../../../../constants/ingredients';
 import styles from './Ingredients.module.css';
 
 export const Ingredients = ({ type }) => {
-  const { ingredients, isLoading } = useSelector((store) => ({
-    ingredients: store.ingredients.items,
-    isLoading: store.ingredients.isLoading,
-  }));
+  const { ingredients, isLoading } = useSelector(getIngredientsAndLoadingSelector);
 
   if (isLoading || !ingredients) {
     return (
@@ -25,7 +23,6 @@ export const Ingredients = ({ type }) => {
         .filter((item) => item.type === type)
         .map((item) => (
           <Ingredient
-            // eslint-disable-next-line no-underscore-dangle
             key={item.id}
             item={item}
           />

@@ -27,10 +27,12 @@ export const BurgerConstructor = () => {
     }),
   });
 
+  // TODO переделать на механику роутера
   const { isShowModal } = useSelector((store) => ({
     isShowModal: store.order.currentOrder || store.order.error,
   }));
 
+  // TODO переделать на механику роутера
   const handleCloseModal = () => {
     dispatch(removeCurrentOrder());
   };
