@@ -16,13 +16,34 @@
   text-align: center;
 }
 
-.load button {
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
+.buttons_center {
+  justify-content: center;
+}
+
+.buttons_left {
+  justify-content: flex-start;
+}
+
+.buttons_right {
+  justify-content: flex-end;
+}
+
+button:first-child:disabled {
+  color: gray;
+}
+
+.load button:last-child {
   position: relative;
   overflow: hidden;
   pointer-events: none;
 }
 
-.load button::before {
+.load button:last-child::before {
   content: '';
   position: absolute;
   right: 0;

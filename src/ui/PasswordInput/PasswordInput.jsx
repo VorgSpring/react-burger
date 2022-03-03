@@ -19,7 +19,7 @@ export const PasswordInput = ({
 
   const handleIconClick = () => {
     setVisible(!isVisible);
-    setTimeout(inputRef.current.focus(), 0);
+    setTimeout(() => inputRef.current.focus(), 0);
   };
 
   const handleBlur = () => {

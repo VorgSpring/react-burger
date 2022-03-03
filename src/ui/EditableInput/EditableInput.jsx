@@ -23,7 +23,7 @@ export const EditableInput = ({
 
   const handleIconClick = () => {
     setEditable(!isEditable);
-    setTimeout(inputRef.current.focus, 0);
+    setTimeout(() => inputRef.current.focus(), 0);
   };
 
   const handleBlur = () => {
@@ -51,6 +51,8 @@ export const EditableInput = ({
 
 EditableInput.defaultProps = {
   size: 'default',
+  error: false,
+  errorText: '',
 };
 
 EditableInput.propTypes = {
@@ -58,8 +60,8 @@ EditableInput.propTypes = {
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  error: PropTypes.bool.isRequired,
-  errorText: PropTypes.string.isRequired,
+  error: PropTypes.bool,
+  errorText: PropTypes.string,
   size: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };

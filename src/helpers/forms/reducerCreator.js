@@ -1,5 +1,6 @@
 import {
   FORM_SET_VALUE,
+  FORM_SET_VALUES,
   FORM_SUBMIT_REQUEST,
   FORM_SUBMIT_SUCCESS,
   FORM_SET_ERROR,
@@ -35,6 +36,15 @@ export const reducerCreator = (formType) => (
             [action.payload.field]: action.payload.value,
           },
           errors: resetError(action.payload.field, state.errors),
+        };
+
+      case `${formType}_${FORM_SET_VALUES}`:
+        return {
+          ...state,
+          values: {
+            ...action.payload,
+          },
+          errors: {},
         };
 
       case `${formType}_${FORM_SUBMIT_REQUEST}`:
