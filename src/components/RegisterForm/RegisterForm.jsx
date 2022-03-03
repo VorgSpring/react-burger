@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Input,
-  PasswordInput,
-} from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import FormLayout from '../FormLayout';
+import PasswordInput from '../../ui/PasswordInput';
 import {
   NAME_FIELD_TYPE,
   EMAIL_FIELD_TYPE,
@@ -54,6 +52,7 @@ export const RegisterForm = ({
     <div className="mb-6">
       <PasswordInput
         name={PASSWORD_FIELD_TYPE}
+        placeholder="Пароль"
         value={values[PASSWORD_FIELD_TYPE]}
         disabled={isRequest}
         errorText={errors[PASSWORD_FIELD_TYPE]}

@@ -46,14 +46,16 @@ export const PasswordInput = ({
 
 PasswordInput.defaultProps = {
   size: 'default',
+  error: false,
+  errorText: '',
 };
 
 PasswordInput.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  error: PropTypes.bool.isRequired,
-  errorText: PropTypes.string.isRequired,
+  error: PropTypes.bool,
+  errorText: PropTypes.string,
   size: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };
