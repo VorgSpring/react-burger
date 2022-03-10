@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import FormLayout from '../FormLayout';
 import { ProfileFormSkeleton } from './ProfileFormSkeleton';
 import LoadError from '../LoadError';
-import EditableInput from '../../ui/EditableInput';
+import EditableInput from '../ui/EditableInput';
 import { profileFormSelector } from '../../selectors/forms';
 import { formAtionsCreator } from '../../helpers/forms/actionCreator';
 import { requestUser } from '../../services/operations/user';

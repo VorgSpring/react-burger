@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import FormLayout from '../FormLayout';
-import PasswordInput from '../../ui/PasswordInput';
+import PasswordInput from '../ui/PasswordInput';
 import {
   EMAIL_FIELD_TYPE,
   PASSWORD_FIELD_TYPE,
