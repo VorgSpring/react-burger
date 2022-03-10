@@ -17,3 +17,10 @@ export const OrderState = {
   isCreating: false,
   error: null,
 };
+
+export const UserState = {
+  isRequest: false,
+  email: null,
+  name: null,
+  error: null,
+};

@@ -3,13 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 600px;
   box-sizing: border-box;
   flex-grow: 0;
-  border-radius: var(--common-border-radius-s);
-  background: var(--background-element);
-}
-
-.root p {
   text-align: center;
 }

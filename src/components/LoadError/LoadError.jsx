@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styles from './LoadError.module.css';
 
-export const LoadError = ({ error }) => (
-  <section className={cn(styles.root, 'pr-5 pl-5')}>
-    <p className="text text_type_main-large mb-15">
-      Приносим свои извенения
-    </p>
+export const LoadError = ({ className, error, title }) => (
+  <section className={cn(className, styles.root)}>
+    <h2 className="text text_type_main-large mb-15">{title}</h2>
 
     <p className="text text_type_main-default pr-20 pl-20">
       Попробуте перезагрузить страницу или&nbsp;вернуться к нам познее
@@ -21,6 +19,13 @@ export const LoadError = ({ error }) => (
   </section>
 );
 
+LoadError.defaultProps = {
+  className: null,
+  title: 'Приносим свои извенения',
+};
+
 LoadError.propTypes = {
+  className: PropTypes.string,
+  title: PropTypes.string,
   error: PropTypes.string.isRequired,
 };

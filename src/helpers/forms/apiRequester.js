@@ -10,17 +10,30 @@ import {
 } from '../../services/actions/type';
 import { formAtionsCreator } from './actionCreator';
 
-export const formApiRequester = async (formType, dispatch, getState) => {
+const getIncludedFields = (fields, excludedFields) => Object.keys(fields)
+  .filter((field) => !excludedFields.includes(field))
+  .reduce((acc, field) => {
+    acc[field] = fields[field];
+    return acc;
+  }, {});
+
+export const formApiRequester = async (formType, dispatch, getState, options = {}) => {
+  const {
+    isCleanUpValues = true,
+    excludedFields = [],
+  } = options;
+
   dispatch(formAtionsCreator(formType, FORM_SUBMIT_REQUEST));
   let data = null;
 
   try {
     const { forms } = getState();
     const storeName = FormStoreNames[formType];
-    const body = forms[storeName];
+    const fields = forms[storeName].values;
+    const body = getIncludedFields(fields, excludedFields);
 
     data = await requestFormApi(formType, body);
-    dispatch(formAtionsCreator(formType, FORM_SUBMIT_SUCCESS));
+    dispatch(formAtionsCreator(formType, FORM_SUBMIT_SUCCESS, isCleanUpValues));
 
     return data;
   } catch ({ message }) {

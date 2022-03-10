@@ -17,7 +17,7 @@ const resetError = (field, errors) => {
   return errors;
 };
 
-const clearValues = (values) => (
+const cleanUpValues = (values) => (
   Object.keys(values)
     .reduce((acc, field) => {
       acc[field] = '';
@@ -57,8 +57,9 @@ export const reducerCreator = (formType) => (
       case `${formType}_${FORM_SUBMIT_SUCCESS}`:
         return {
           ...state,
-          values: clearValues(state.values),
+          values: action.payload ? cleanUpValues(state.values) : state.values,
           isRequest: false,
+          errors: {},
         };
 
       case `${formType}_${FORM_SET_ERROR}`:

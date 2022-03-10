@@ -17,6 +17,6 @@
   z-index: 1;
 }
 
-.root button::before :global {
+.root::before :global {
   animation: loading 1.3s infinite;
 }

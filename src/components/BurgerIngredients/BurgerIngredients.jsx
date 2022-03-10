@@ -9,7 +9,7 @@ import cn from 'classnames';
 
 import Tabs from './components/Tabs';
 import Ingredients from './components/Ingredients';
-import LoadError from './components/LoadError';
+import LoadError from '../LoadError';
 import { getIngredients } from '../../services/operations/ingredients';
 import { getErrorAndEmptySelector } from '../../selectors/ingredients';
 import {
@@ -83,7 +83,7 @@ export const BurgerIngredients = () => {
 
   if (error) {
     return (
-      <LoadError error={error} />
+      <LoadError className={cn(styles.load_error, 'pr-5 pl-5')} error={error} />
     );
   }
 

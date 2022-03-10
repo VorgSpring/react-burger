@@ -23,6 +23,6 @@ export const FormFieldsValidator = {
   },
 
   [CODE_FIELD_TYPE](code) {
-    return code.length < 10;
+    return code.length === 36;
   },
 };

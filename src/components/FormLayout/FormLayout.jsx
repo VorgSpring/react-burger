@@ -8,7 +8,7 @@ export const FormLayout = ({
   submitText,
   cancelText,
   error,
-  buttonPosition,
+  buttonsPosition,
   isRequest,
   isShowButtons,
   onSubmit,
@@ -33,7 +33,7 @@ export const FormLayout = ({
       {children}
 
       {isShowButtons && (
-        <div className={cn(styles.buttons, styles[`buttons_${buttonPosition}`])}>
+        <div className={cn(styles.buttons, styles[`buttons_${buttonsPosition}`])}>
           {cancelText && onCancel && (
             <Button
               type="secondary"
@@ -68,7 +68,7 @@ export const FormLayout = ({
 FormLayout.defaultProps = {
   cancelText: null,
   error: null,
-  buttonPosition: 'center',
+  buttonsPosition: 'center',
   isShowButtons: true,
   onCancel: null,
 };
@@ -77,7 +77,7 @@ FormLayout.propTypes = {
   submitText: PropTypes.string.isRequired,
   cancelText: PropTypes.string,
   error: PropTypes.string,
-  buttonPosition: PropTypes.oneOf(['left', 'center', 'right']),
+  buttonsPosition: PropTypes.oneOf(['left', 'center', 'right']),
   isRequest: PropTypes.bool.isRequired,
   isShowButtons: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
