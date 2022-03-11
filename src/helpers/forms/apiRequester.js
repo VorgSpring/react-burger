@@ -10,21 +10,22 @@ import {
 } from '../../services/actions/type';
 import { formAtionsCreator } from './actionCreator';
 
-const getIncludedFields = (fields, excludedFields) => Object.keys(fields)
-  .filter((field) => !excludedFields.includes(field))
-  .reduce((acc, field) => {
-    acc[field] = fields[field];
-    return acc;
-  }, {});
+const getIncludedFields = (fields, excludedFields) => (
+  Object.keys(fields)
+    .filter((field) => !excludedFields.includes(field))
+    .reduce((acc, field) => {
+      acc[field] = fields[field];
+      return acc;
+    }, {})
+);
 
 export const formApiRequester = async (formType, dispatch, getState, options = {}) => {
   const {
-    isCleanUpValues = true,
+    isAuthorization = false,
     excludedFields = [],
   } = options;
 
   dispatch(formAtionsCreator(formType, FORM_SUBMIT_REQUEST));
-  let data = null;
 
   try {
     const { forms } = getState();
@@ -32,8 +33,8 @@ export const formApiRequester = async (formType, dispatch, getState, options = {
     const fields = forms[storeName].values;
     const body = getIncludedFields(fields, excludedFields);
 
-    data = await requestFormApi(formType, body);
-    dispatch(formAtionsCreator(formType, FORM_SUBMIT_SUCCESS, isCleanUpValues));
+    const data = await requestFormApi(formType, body, isAuthorization);
+    dispatch(formAtionsCreator(formType, FORM_SUBMIT_SUCCESS));
 
     return data;
   } catch ({ message }) {
@@ -41,7 +42,7 @@ export const formApiRequester = async (formType, dispatch, getState, options = {
       field: REQUEST_FIELD_TYPE,
       message,
     }));
-  }
 
-  return data;
+    return { errorMessage: message };
+  }
 };

@@ -6,6 +6,7 @@ export const getUserApi = () => (
     method: 'GET',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
+      authorization: localStorage.accessToken,
     },
   })
     .then((responce) => responce.json())

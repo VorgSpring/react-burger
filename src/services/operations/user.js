@@ -5,22 +5,26 @@ import {
   getUserError,
 } from '../actions/user';
 import { getUserApi } from '../../api/user';
-import { setTokens } from '../../helpers/tokens';
+import { getTokenApi } from '../../api/token';
+import { ReasponceStatuses } from '../../constants/responce';
 
 export const requestUser = () => async (dispatch) => {
   dispatch(getUserRequest());
 
   try {
-    const {
-      user,
-      accessToken,
-      refreshToken,
-    } = await getUserApi();
+    const { user } = await getUserApi();
 
-    setTokens({ accessToken, refreshToken });
     dispatch(getUserSuccess());
     dispatch(setUser(user));
-  } catch ({ message }) {
-    dispatch(getUserError(message));
+  } catch ({ message: messageUserError }) {
+    if (messageUserError === ReasponceStatuses.FORBIDDEN) {
+      try {
+        await getTokenApi(dispatch(requestUser()));
+      } catch ({ message: messageTokenError }) {
+        dispatch(getUserError(messageTokenError));
+      }
+    } else {
+      dispatch(getUserError(messageUserError));
+    }
   }
 };

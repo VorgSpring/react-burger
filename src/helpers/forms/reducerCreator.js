@@ -57,7 +57,7 @@ export const reducerCreator = (formType) => (
       case `${formType}_${FORM_SUBMIT_SUCCESS}`:
         return {
           ...state,
-          values: action.payload ? cleanUpValues(state.values) : state.values,
+          values: cleanUpValues(state.values),
           isRequest: false,
           errors: {},
         };

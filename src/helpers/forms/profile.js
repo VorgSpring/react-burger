@@ -1,3 +1,9 @@
+import {
+  EMAIL_FIELD_TYPE,
+  NAME_FIELD_TYPE,
+  PASSWORD_FIELD_TYPE,
+} from '../../constants/forms/types';
+
 export const getExcludedFieldsForProfileForm = (userValues, formValues) => {
   if (userValues === null) {
     return [];
@@ -16,16 +22,16 @@ export const getExcludedFieldsForProfileForm = (userValues, formValues) => {
 
   const excludedFields = [];
 
-  if (emailForm !== emailUser) {
-    excludedFields.push(emailForm);
+  if (emailForm === emailUser) {
+    excludedFields.push(EMAIL_FIELD_TYPE);
   }
 
-  if (nameForm !== nameUser) {
-    excludedFields.push(nameForm);
+  if (nameForm === nameUser) {
+    excludedFields.push(NAME_FIELD_TYPE);
   }
 
-  if (newPassword !== '') {
-    excludedFields.push(newPassword);
+  if (newPassword === '') {
+    excludedFields.push(PASSWORD_FIELD_TYPE);
   }
 
   return excludedFields;

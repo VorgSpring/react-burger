@@ -1,6 +1,6 @@
 import { getUserValuesSelector } from '../../selectors/user';
 import { formAtionsCreator } from '../../helpers/forms/actionCreator';
-import { FormTypes } from '../../constants/forms/types';
+import { FormTypes, PASSWORD_FIELD_TYPE } from '../../constants/forms/types';
 import { SET_USER, FORM_SET_VALUES } from '../actions/type';
 
 export const userMiddleware = ({ dispatch, getState }) => (next) => (action) => {
@@ -13,6 +13,7 @@ export const userMiddleware = ({ dispatch, getState }) => (next) => (action) => 
     const initialFields = {
       email,
       name,
+      [PASSWORD_FIELD_TYPE]: '',
     };
 
     dispatch(

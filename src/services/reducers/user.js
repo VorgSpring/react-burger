@@ -1,6 +1,6 @@
 import {
   GET_USER_REQUEST,
-  GET_INGREDIENTS_SUCCESS,
+  GET_USER_SUCCESS,
   GET_USER_ERROR,
   SET_USER,
   REMOVE_USER,
@@ -16,7 +16,7 @@ export const userReducer = (state = UserState, action) => {
         error: null,
       };
 
-    case GET_INGREDIENTS_SUCCESS:
+    case GET_USER_SUCCESS:
       return {
         ...state,
         isRequest: false,
