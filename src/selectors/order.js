@@ -1,6 +1,11 @@
 import { createSelector } from 'reselect';
 import { getIngredientsSelector } from './ingredients';
-import { getBunIdSelector, getBurgerSelector, getBurgerngredientsSelector } from './burger';
+import { getUserSelector } from './user';
+import {
+  getBunIdSelector,
+  getBurgerSelector,
+  getBurgerngredientsSelector,
+} from './burger';
 import { getSummaryCost } from '../helpers/burger';
 
 export const isOrderCreatingSelector = (store) => store.order.isCreating;
@@ -22,4 +27,10 @@ export const orderCreatorSelector = createSelector(
   getOrederSummurySelector,
   isOrderCreatingSelector,
   (isEmpty, summaryCost, isCreating) => ({ isEmpty, summaryCost, isCreating }),
+);
+
+export const createOrderSelector = createSelector(
+  getBurgerSelector,
+  getUserSelector,
+  (burger, user) => ({ burger, user }),
 );
