@@ -8,7 +8,7 @@ import { RoutePaths } from '../../constants/routes';
 
 export function IsNotAuthorized({ children }) {
   const errorUser = useSelector(getErrorUserSelector);
-  const { refreshToken } = getRefreshToken();
+  const refreshToken = getRefreshToken();
 
   if (!refreshToken || errorUser) {
     return children;

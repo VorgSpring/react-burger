@@ -11,7 +11,7 @@ export function RequireAauthorize({ children }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const { user, errorUser } = useSelector(getUserStateSelector);
-  const { refreshToken } = getRefreshToken();
+  const refreshToken = getRefreshToken();
 
   useEffect(() => {
     if (!user && refreshToken) {

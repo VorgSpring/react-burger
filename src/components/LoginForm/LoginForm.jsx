@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
+import { useLocation, Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import FormLayout from '../FormLayout';
 import PasswordInput from '../ui/PasswordInput';
 import { formAtionsCreator } from '../../helpers/forms/actionCreator';
 import { getLastUserEmail } from '../../helpers/email';
+import { getUserSelector } from '../../selectors/user';
 import {
   EMAIL_FIELD_TYPE,
   PASSWORD_FIELD_TYPE,
@@ -13,6 +15,7 @@ import {
   FormTypes,
 } from '../../constants/forms/types';
 import { FORM_SET_VALUE } from '../../services/actions/type';
+import { RoutePaths } from '../../constants/routes';
 
 export const LoginForm = ({
   values,
@@ -22,6 +25,8 @@ export const LoginForm = ({
   onSubmit,
 }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const user = useSelector(getUserSelector);
 
   useEffect(() => {
     const lastUserEmail = getLastUserEmail();
@@ -35,6 +40,14 @@ export const LoginForm = ({
       );
     }
   }, []);
+
+  if (user) {
+    const from = location.state?.from?.pathname || RoutePaths.CONSTRUCTOR;
+
+    return (
+      <Navigate to={from} replace />
+    );
+  }
 
   return (
     <FormLayout
