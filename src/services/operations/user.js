@@ -6,6 +6,7 @@ import {
 } from '../actions/user';
 import { getUserApi } from '../../api/user';
 import { getTokenApi } from '../../api/token';
+import { removeTokens } from '../../helpers/tokens';
 import { ReasponceStatuses } from '../../constants/responce';
 
 export const requestUser = () => async (dispatch) => {
@@ -25,9 +26,11 @@ export const requestUser = () => async (dispatch) => {
 
         await getTokenApi(callback);
       } catch ({ message: messageTokenError }) {
+        removeTokens();
         dispatch(getUserError(messageTokenError));
       }
     } else {
+      removeTokens();
       dispatch(getUserError(messageUserError));
     }
   }

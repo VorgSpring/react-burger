@@ -5,6 +5,7 @@ import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import FormLayout from '../FormLayout';
 import PasswordInput from '../ui/PasswordInput';
 import { formAtionsCreator } from '../../helpers/forms/actionCreator';
+import { getLastUserEmail } from '../../helpers/email';
 import {
   EMAIL_FIELD_TYPE,
   PASSWORD_FIELD_TYPE,
@@ -23,7 +24,7 @@ export const LoginForm = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const { lastUserEmail } = localStorage;
+    const lastUserEmail = getLastUserEmail();
 
     if (lastUserEmail) {
       dispatch(

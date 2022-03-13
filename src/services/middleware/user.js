@@ -1,5 +1,6 @@
 import { getUserValuesSelector } from '../../selectors/user';
 import { formAtionsCreator } from '../../helpers/forms/actionCreator';
+import { setLastUserEmail } from '../../helpers/email';
 import { FormTypes, PASSWORD_FIELD_TYPE } from '../../constants/forms/types';
 import { SET_USER, FORM_SET_VALUES } from '../actions/type';
 
@@ -21,7 +22,7 @@ export const userMiddleware = ({ dispatch, getState }) => (next) => (action) => 
     );
 
     // записываем почту последнего пользователя
-    localStorage.lastUserEmail = email;
+    setLastUserEmail(email);
   }
 
   return result;

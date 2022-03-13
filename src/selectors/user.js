@@ -15,3 +15,12 @@ export const getUserSelector = createSelector(
     return { email, name };
   },
 );
+
+export const getUserStateSelector = createSelector(
+  getUserSelector,
+  isRequestUserSelector,
+  getErrorUserSelector,
+  (user, isRequestUser, errorUser) => ({
+    user, isRequestUser, errorUser,
+  }),
+);

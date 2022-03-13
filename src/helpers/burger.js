@@ -25,3 +25,20 @@ export const getSummaryCost = (burger, ingredients) => {
 
   return ingredientsPrice + bunPrice;
 };
+
+export const setBurgerStorage = (burger) => {
+  localStorage.setItem(
+    'burger',
+    JSON.stringify(burger),
+  );
+};
+
+export const getBurgerStorage = () => {
+  const burger = localStorage.getItem('burger');
+
+  if (burger) {
+    return JSON.parse(burger);
+  }
+
+  return null;
+};

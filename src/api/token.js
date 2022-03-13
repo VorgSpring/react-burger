@@ -1,5 +1,5 @@
 import { checkResponce } from '../helpers/api';
-import { setTokens } from '../helpers/tokens';
+import { getRefreshToken, setTokens } from '../helpers/tokens';
 import { TOKEN_API_URL } from '../constants/api';
 
 export const getTokenApi = (callback) => (
@@ -9,7 +9,7 @@ export const getTokenApi = (callback) => (
       'Content-Type': 'application/json;charset=utf-8',
     },
     body: JSON.stringify({
-      token: localStorage.refreshToken,
+      token: getRefreshToken(),
     }),
   })
     .then((responce) => responce.json())

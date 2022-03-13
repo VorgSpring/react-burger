@@ -1,5 +1,6 @@
 import { checkResponce } from '../helpers/api';
 import { FormApiUrls, FormApiMethods } from '../constants/forms/api';
+import { getAccessToken } from '../helpers/tokens';
 
 export const requestFormApi = (formType, body, isAuthorization) => {
   const headers = {
@@ -7,7 +8,7 @@ export const requestFormApi = (formType, body, isAuthorization) => {
   };
 
   if (isAuthorization) {
-    headers.authorization = localStorage.accessToken;
+    headers.authorization = getAccessToken();
   }
 
   return fetch(FormApiUrls[formType], {

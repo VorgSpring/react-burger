@@ -1,4 +1,5 @@
 import { getBurgerSelector } from '../../selectors/burger';
+import { setBurgerStorage } from '../../helpers/burger';
 import {
   ADD_INGREDIENT_IN_BURGER,
   MOVE_INGREDIENT_IN_BURGER,
@@ -17,9 +18,8 @@ export const ingredintsMiddleware = ({ getState }) => (next) => (action) => {
   if (isBurgerAction) {
     // записываем конфигурацию бургера,
     // чтобы не терялся при перезагрузке страницы
-    localStorage.burger = JSON.stringify(
-      getBurgerSelector(getState()),
-    );
+    const burger = getBurgerSelector(getState());
+    setBurgerStorage(burger);
   }
 
   return result;
