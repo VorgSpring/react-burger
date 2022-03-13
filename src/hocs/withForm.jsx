@@ -39,12 +39,10 @@ export const withForm = (Component, formType, formOperation) => () => {
     }));
   };
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-
+  const submitHandler = (callback) => {
     const isFormValid = validateForm();
     if (isFormValid) {
-      dispatch(formOperation());
+      dispatch(formOperation(callback));
     }
   };
 

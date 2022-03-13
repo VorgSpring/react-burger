@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate, Navigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import FormLayout from '../FormLayout';
@@ -8,6 +9,7 @@ import {
   CODE_FIELD_TYPE,
   REQUEST_FIELD_TYPE,
 } from '../../constants/forms/types';
+import { RoutePaths } from '../../constants/routes';
 
 export const ResetPasswordForm = ({
   values,
@@ -15,39 +17,63 @@ export const ResetPasswordForm = ({
   isRequest,
   onChange,
   onSubmit,
-}) => (
-  <FormLayout
-    submitText="Сохранить"
-    isRequest={isRequest}
-    error={errors[REQUEST_FIELD_TYPE]}
-    onSubmit={onSubmit}
-  >
-    <div className="mb-6">
-      <PasswordInput
-        name={PASSWORD_FIELD_TYPE}
-        placeholder="Введите новый пароль"
-        value={values[PASSWORD_FIELD_TYPE]}
-        disabled={isRequest}
-        errorText={errors[PASSWORD_FIELD_TYPE]}
-        error={!!errors[PASSWORD_FIELD_TYPE]}
-        onChange={onChange}
-      />
-    </div>
+}) => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    <div className="mb-6">
-      <Input
-        type="text"
-        name={CODE_FIELD_TYPE}
-        placeholder="Введите код из письма"
-        value={values[CODE_FIELD_TYPE]}
-        errorText={errors[CODE_FIELD_TYPE]}
-        error={!!errors[CODE_FIELD_TYPE]}
-        disabled={isRequest}
-        onChange={onChange}
-      />
-    </div>
-  </FormLayout>
-);
+  const redirectToConstructor = () => {
+    navigate(
+      RoutePaths.LOGIN,
+      {
+        state: { isForgot: false },
+      },
+    );
+  };
+
+  const handleSubmit = () => {
+    onSubmit(redirectToConstructor);
+  };
+
+  if (!location.state?.isForgot) {
+    return (
+      <Navigate to={RoutePaths.CONSTRUCTOR} />
+    );
+  }
+
+  return (
+    <FormLayout
+      submitText="Сохранить"
+      isRequest={isRequest}
+      error={errors[REQUEST_FIELD_TYPE]}
+      onSubmit={handleSubmit}
+    >
+      <div className="mb-6">
+        <PasswordInput
+          name={PASSWORD_FIELD_TYPE}
+          placeholder="Введите новый пароль"
+          value={values[PASSWORD_FIELD_TYPE]}
+          disabled={isRequest}
+          errorText={errors[PASSWORD_FIELD_TYPE]}
+          error={!!errors[PASSWORD_FIELD_TYPE]}
+          onChange={onChange}
+        />
+      </div>
+
+      <div className="mb-6">
+        <Input
+          type="text"
+          name={CODE_FIELD_TYPE}
+          placeholder="Введите код из письма"
+          value={values[CODE_FIELD_TYPE]}
+          errorText={errors[CODE_FIELD_TYPE]}
+          error={!!errors[CODE_FIELD_TYPE]}
+          disabled={isRequest}
+          onChange={onChange}
+        />
+      </div>
+    </FormLayout>
+  );
+};
 
 ResetPasswordForm.propTypes = {
   values: PropTypes.shape({
