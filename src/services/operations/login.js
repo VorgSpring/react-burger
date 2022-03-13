@@ -8,7 +8,12 @@ export const requestLogin = () => async (dispatch, getState) => {
     user,
     accessToken,
     refreshToken,
+    errorMessage,
   } = await formApiRequester(FormTypes.LOGIN, dispatch, getState);
+
+  if (errorMessage) {
+    return;
+  }
 
   setTokens({ accessToken, refreshToken });
   dispatch(setUser(user));

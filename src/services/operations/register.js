@@ -8,7 +8,12 @@ export const requestRegister = () => async (dispatch, getState) => {
     user,
     accessToken,
     refreshToken,
+    errorMessage,
   } = await formApiRequester(FormTypes.REGISTER, dispatch, getState);
+
+  if (errorMessage) {
+    return;
+  }
 
   setTokens({ accessToken, refreshToken });
   dispatch(setUser(user));

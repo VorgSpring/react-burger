@@ -2,6 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import { Route, Routes, NavLink } from 'react-router-dom';
 import ProfileForm from '../../components/ProfileForm';
+import Plug from '../../components/Plug';
 import { ProfileNavigationData } from '../../constants/page';
 import { NestedProfilePaths } from '../../constants/routes';
 import styles from './ProfilePage.module.css';
@@ -13,6 +14,7 @@ export const ProfilePage = () => (
         <NavLink
           key={path}
           to={path}
+          end
           className={({ isActive }) => cn(styles.link, 'text text_type_main-medium pb-4 pt-4', {
             text_color_primary: isActive,
             [styles.link_inactive]: !isActive,
@@ -30,6 +32,7 @@ export const ProfilePage = () => (
 
     <Routes>
       <Route path={NestedProfilePaths.PROFILE} element={<ProfileForm />} />
+      <Route path={NestedProfilePaths.ORDERS} element={<Plug />} />
     </Routes>
   </section>
 );

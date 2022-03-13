@@ -19,13 +19,16 @@ export const changeProfile = () => async (dispatch, getState) => {
 
   const { errorMessage, user } = await formApiRequester(FormTypes.PROFILE, dispatch, getState, {
     isAuthorization: true,
-    isCleanUpValues: false,
     excludedFields,
   });
 
   if (errorMessage && errorMessage === ReasponceStatuses.FORBIDDEN) {
     try {
-      await getTokenApi(dispatch(changeProfile()));
+      const callback = () => {
+        dispatch(changeProfile());
+      };
+
+      await getTokenApi(callback);
     } catch ({ message }) {
       dispatch(formAtionsCreator(FormTypes.PROFILE, FORM_SET_ERROR, {
         field: REQUEST_FIELD_TYPE,

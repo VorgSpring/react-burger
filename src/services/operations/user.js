@@ -19,7 +19,11 @@ export const requestUser = () => async (dispatch) => {
   } catch ({ message: messageUserError }) {
     if (messageUserError === ReasponceStatuses.FORBIDDEN) {
       try {
-        await getTokenApi(dispatch(requestUser()));
+        const callback = () => {
+          dispatch(requestUser());
+        };
+
+        await getTokenApi(callback);
       } catch ({ message: messageTokenError }) {
         dispatch(getUserError(messageTokenError));
       }

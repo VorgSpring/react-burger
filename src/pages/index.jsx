@@ -8,6 +8,7 @@ import ForgotPasswordPage from './ForgotPasswordPage';
 import ResetPasswordPage from './ResetPasswordPage';
 import ProfilePage from './ProfilePage';
 import IngredientPage from './IngredientPage';
+import Plug from '../components/Plug';
 import { RoutePaths } from '../constants/routes';
 
 export default () => (
@@ -18,8 +19,9 @@ export default () => (
       <Route path={RoutePaths.REGISTER} element={<RegisterPage />} />
       <Route path={RoutePaths.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />
       <Route path={RoutePaths.RESET_PASSWORD} element={<ResetPasswordPage />} />
-      <Route path={RoutePaths.PROFILE} element={<ProfilePage />} />
+      <Route path={RoutePaths.ROOT_PROFILE} element={<ProfilePage />} />
       <Route path={RoutePaths.INGREDIENT} element={<IngredientPage />} />
+      <Route path={RoutePaths.FEED} element={<Plug />} />
     </Routes>
   </MainLayout>
 );

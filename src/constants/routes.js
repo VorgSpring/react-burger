@@ -4,6 +4,7 @@ export const RoutePaths = {
   REGISTER: '/register',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password/*',
+  ROOT_PROFILE: '/profile/*',
   PROFILE: '/profile',
   INGREDIENT: '/ingredients/:id',
   ORDERS: '/profile/orders',
