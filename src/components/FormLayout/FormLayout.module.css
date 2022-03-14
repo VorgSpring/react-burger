@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.load button::before :global {
+  animation: loading 1.3s infinite;
+}
+
 .root :global(.input__container) {
   width: auto;
 }
@@ -53,8 +57,4 @@ button:first-child:disabled {
   background: linear-gradient(90deg, transparent, rgba(138, 138, 155, 0.6), transparent);
   transform: translateX(-100%);
   z-index: 1;
-}
-
-.load button::before :global {
-  animation: loading 1.3s infinite;
 }

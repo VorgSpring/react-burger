@@ -5,14 +5,14 @@
   align-items: center;
 }
 
-.root button:disabled {
-  background: #6b6b74;
-  pointer-events: none;
-}
-
 .creating button {
   position: relative;
   overflow: hidden;
+  pointer-events: none;
+}
+
+.root button:disabled {
+  background: #6b6b74;
   pointer-events: none;
 }
 
