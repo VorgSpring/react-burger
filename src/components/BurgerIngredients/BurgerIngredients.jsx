@@ -59,11 +59,6 @@ export const BurgerIngredients = () => {
     getRef(value).current.scrollIntoView();
   };
 
-  // TODO переделать на механику роутера
-  // const handleCloseIngredientModal = () => {
-  //   dispatch(removeCurrentIngredient());
-  // };
-
   const handleScroll = () => {
     const parentTop = listRef.current.getBoundingClientRect().top;
 
@@ -110,15 +105,6 @@ export const BurgerIngredients = () => {
           </li>
         ))}
       </ul>
-
-      {/*
-        TODO переделать на механику роутера
-        {currentIngredient && (
-          <Modal onClose={handleCloseIngredientModal}>
-            <IngredientDetails />
-          </Modal>
-        )}
-      */}
     </section>
   );
 };

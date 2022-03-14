@@ -26,3 +26,12 @@ export const getErrorAndEmptySelector = createSelector(
     error,
   }),
 );
+
+export const ingredientDetailsSelector = createSelector(
+  getIngredientByIdSelector,
+  isLoadingSelector,
+  getErrorSelector,
+  (ingredient, isLoading, error) => ({
+    ingredient, isLoading, error,
+  }),
+);

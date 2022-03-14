@@ -1,8 +1,11 @@
 import { getConstructorElementType } from './constructor';
 import { ConstructorElementTypes } from '../constants/constructor';
+import { RoutePaths } from '../constants/routes';
+
+export const getIngredientPath = (id) => `${RoutePaths.INGREDIENTS}/${id}`;
 
 export const getIngredientById = (ingredients, ingredientId) => {
-  if (!ingredientId) {
+  if (!ingredientId || !ingredients) {
     return null;
   }
 

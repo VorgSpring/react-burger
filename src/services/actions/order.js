@@ -1,5 +1,6 @@
 import {
   CREATE_ORDER_REQUEST,
+  CREATE_ORDER_CANCEL,
   CREATE_ORDER_SUCCESS,
   CREATE_ORDER_ERROR,
   SET_CURRENT_ORDER,
@@ -8,6 +9,10 @@ import {
 
 export const createOrderRequest = () => ({
   type: CREATE_ORDER_REQUEST,
+});
+
+export const createOrderCancel = () => ({
+  type: CREATE_ORDER_CANCEL,
 });
 
 export const createOrderSuccess = (orderNumber) => ({

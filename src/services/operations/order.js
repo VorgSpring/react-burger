@@ -1,5 +1,6 @@
 import {
   createOrderRequest,
+  createOrderCancel,
   createOrderSuccess,
   createOrderError,
   setCurrentOrder,
@@ -15,7 +16,12 @@ export const createOrder = () => async (dispatch, getState) => {
 
   try {
     if (!user) {
-      await dispatch(requestUser());
+      const { errorMessage } = await dispatch(requestUser());
+
+      if (errorMessage) {
+        dispatch(createOrderCancel());
+        return;
+      }
     }
 
     const { order } = await createOrderApi(burger);

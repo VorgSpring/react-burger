@@ -17,6 +17,8 @@ export const requestUser = () => async (dispatch) => {
 
     dispatch(getUserSuccess());
     dispatch(setUser(user));
+
+    return user;
   } catch ({ message: messageUserError }) {
     if (messageUserError === ReasponceStatuses.FORBIDDEN) {
       try {
@@ -24,14 +26,17 @@ export const requestUser = () => async (dispatch) => {
           dispatch(requestUser());
         };
 
-        await getTokenApi(callback);
+        const { user } = await getTokenApi(callback);
+        return user;
       } catch ({ message: messageTokenError }) {
         removeTokens();
         dispatch(getUserError(messageTokenError));
+        return { errorMessage: messageTokenError };
       }
     } else {
       removeTokens();
       dispatch(getUserError(messageUserError));
+      return { errorMessage: messageUserError };
     }
   }
 };

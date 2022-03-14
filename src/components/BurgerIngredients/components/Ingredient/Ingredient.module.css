@@ -8,6 +8,10 @@
   margin-top: 0;
 }
 
+.link {
+  text-decoration: none;
+}
+
 .drag {
   border-radius: var(--common-border-radius-s);
   background: var(--background-element);

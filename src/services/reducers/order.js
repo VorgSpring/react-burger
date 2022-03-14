@@ -1,5 +1,6 @@
 import {
   CREATE_ORDER_REQUEST,
+  CREATE_ORDER_CANCEL,
   CREATE_ORDER_SUCCESS,
   CREATE_ORDER_ERROR,
   SET_CURRENT_ORDER,
@@ -13,6 +14,12 @@ export const orderReducer = (state = OrderState, action) => {
       return {
         ...state,
         isCreating: true,
+      };
+
+    case CREATE_ORDER_CANCEL:
+      return {
+        ...state,
+        isCreating: false,
       };
 
     case CREATE_ORDER_SUCCESS:
