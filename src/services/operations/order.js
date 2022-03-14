@@ -5,7 +5,8 @@ import {
   createOrderError,
   setCurrentOrder,
 } from '../actions/order';
-import { requestUser } from './user';
+import { removeBurger } from '../actions/burger';
+import { getUserRequest } from './user';
 import { createOrderApi } from '../../api/order';
 import { createOrderSelector } from '../../selectors/order';
 
@@ -16,7 +17,7 @@ export const createOrder = () => async (dispatch, getState) => {
 
   try {
     if (!user) {
-      const { errorMessage } = await dispatch(requestUser());
+      const { errorMessage } = await dispatch(getUserRequest());
 
       if (errorMessage) {
         dispatch(createOrderCancel());
@@ -29,6 +30,7 @@ export const createOrder = () => async (dispatch, getState) => {
 
     dispatch(createOrderSuccess(number));
     dispatch(setCurrentOrder(number));
+    dispatch(removeBurger());
   } catch ({ message }) {
     dispatch(createOrderError(message));
   }

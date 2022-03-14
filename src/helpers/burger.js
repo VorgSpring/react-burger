@@ -33,6 +33,10 @@ export const setBurgerStorage = (burger) => {
   );
 };
 
+export const removeBurgerStorage = () => {
+  localStorage.removeItem('burger');
+};
+
 export const getBurgerStorage = () => {
   const burger = localStorage.getItem('burger');
 

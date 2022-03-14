@@ -7,7 +7,7 @@ import LoadError from '../LoadError';
 import EditableInput from '../ui/EditableInput';
 import { profileFormSelector } from '../../selectors/forms';
 import { formAtionsCreator } from '../../helpers/forms/actionCreator';
-import { requestUser } from '../../services/operations/user';
+import { getUserRequest } from '../../services/operations/user';
 import {
   NAME_FIELD_TYPE,
   EMAIL_FIELD_TYPE,
@@ -35,7 +35,7 @@ export const ProfileForm = ({
 
   useEffect(() => {
     if (!user) {
-      dispatch(requestUser());
+      dispatch(getUserRequest());
     }
   }, []);
 

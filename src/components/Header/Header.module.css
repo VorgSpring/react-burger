@@ -36,4 +36,5 @@
 
 .navigation_logo {
   transform: translateX(-28%);
+  text-decoration: none;
 }

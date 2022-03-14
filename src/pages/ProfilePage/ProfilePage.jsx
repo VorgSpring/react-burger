@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { Route, Routes, NavLink } from 'react-router-dom';
 import ProfileForm from '../../components/ProfileForm';
 import Plug from '../../components/Plug';
+import Logout from '../../components/Logout';
 import { ProfileNavigationData } from '../../constants/page';
 import { NestedProfilePaths } from '../../constants/routes';
 import styles from './ProfilePage.module.css';
@@ -33,6 +34,7 @@ export const ProfilePage = () => (
     <Routes>
       <Route path={NestedProfilePaths.PROFILE} element={<ProfileForm />} />
       <Route path={NestedProfilePaths.ORDERS} element={<Plug />} />
+      <Route path={NestedProfilePaths.LOGOUT} element={<Logout />} />
     </Routes>
   </section>
 );

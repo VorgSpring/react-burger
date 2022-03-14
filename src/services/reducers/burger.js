@@ -1,5 +1,6 @@
 import {
   SET_BURGER,
+  REMOVE_BURGER,
   ADD_INGREDIENT_IN_BURGER,
   MOVE_INGREDIENT_IN_BURGER,
   REMOVE_INGREDIENT_IN_BURGER,
@@ -12,6 +13,9 @@ export const burgerReducer = (state = BurgerState, action) => {
   switch (action.type) {
     case SET_BURGER:
       return action.payload;
+
+    case REMOVE_BURGER:
+      return BurgerState;
 
     case ADD_INGREDIENT_IN_BURGER:
       return {

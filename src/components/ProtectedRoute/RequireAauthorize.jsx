@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useLocation, Navigate } from 'react-router-dom';
-import { requestUser } from '../../services/operations/user';
+import { getUserRequest } from '../../services/operations/user';
 import { getUserStateSelector } from '../../selectors/user';
 import { getRefreshToken } from '../../helpers/tokens';
 import { RoutePaths } from '../../constants/routes';
@@ -15,7 +15,7 @@ export function RequireAauthorize({ children }) {
 
   useEffect(() => {
     if (!user && refreshToken) {
-      dispatch(requestUser());
+      dispatch(getUserRequest());
     }
   }, []);
 

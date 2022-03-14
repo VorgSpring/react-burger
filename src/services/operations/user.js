@@ -1,21 +1,22 @@
 import {
-  getUserRequest,
-  getUserSuccess,
+  userRequest,
+  userRequestSuccess,
+  userRequestError,
   setUser,
-  getUserError,
+  removeUser,
 } from '../actions/user';
-import { getUserApi } from '../../api/user';
+import { getUserApi, logoutUserApi } from '../../api/user';
 import { getTokenApi } from '../../api/token';
 import { removeTokens } from '../../helpers/tokens';
 import { ReasponceStatuses } from '../../constants/responce';
 
-export const requestUser = () => async (dispatch) => {
-  dispatch(getUserRequest());
+export const getUserRequest = () => async (dispatch) => {
+  dispatch(userRequest());
 
   try {
     const { user } = await getUserApi();
 
-    dispatch(getUserSuccess());
+    dispatch(userRequestSuccess());
     dispatch(setUser(user));
 
     return user;
@@ -23,20 +24,35 @@ export const requestUser = () => async (dispatch) => {
     if (messageUserError === ReasponceStatuses.FORBIDDEN) {
       try {
         const callback = () => {
-          dispatch(requestUser());
+          dispatch(getUserRequest());
         };
 
         const { user } = await getTokenApi(callback);
         return user;
       } catch ({ message: messageTokenError }) {
         removeTokens();
-        dispatch(getUserError(messageTokenError));
+        dispatch(userRequestError(messageTokenError));
         return { errorMessage: messageTokenError };
       }
     } else {
       removeTokens();
-      dispatch(getUserError(messageUserError));
+      dispatch(userRequestError(messageUserError));
       return { errorMessage: messageUserError };
     }
+  }
+};
+
+export const logoutUserRequest = (callback) => async (dispatch) => {
+  dispatch(userRequest());
+
+  try {
+    await logoutUserApi();
+
+    dispatch(userRequestSuccess());
+    dispatch(removeUser());
+    removeTokens();
+    callback();
+  } catch ({ message }) {
+    dispatch(userRequestError(message));
   }
 };

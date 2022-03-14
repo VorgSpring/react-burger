@@ -1,21 +1,21 @@
 import {
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
-  GET_USER_ERROR,
+  USER_REQUEST,
+  USER_REQUEST_SUCCESS,
+  USER_REQUEST_ERROR,
   SET_USER,
   REMOVE_USER,
 } from './type';
 
-export const getUserRequest = () => ({
-  type: GET_USER_REQUEST,
+export const userRequest = () => ({
+  type: USER_REQUEST,
 });
 
-export const getUserSuccess = () => ({
-  type: GET_USER_SUCCESS,
+export const userRequestSuccess = () => ({
+  type: USER_REQUEST_SUCCESS,
 });
 
-export const getUserError = (error) => ({
-  type: GET_USER_ERROR,
+export const userRequestError = (error) => ({
+  type: USER_REQUEST_ERROR,
   payload: error,
 });
 

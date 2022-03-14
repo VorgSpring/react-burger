@@ -1,5 +1,6 @@
 import {
   SET_BURGER,
+  REMOVE_BURGER,
   ADD_INGREDIENT_IN_BURGER,
   MOVE_INGREDIENT_IN_BURGER,
   REMOVE_INGREDIENT_IN_BURGER,
@@ -8,6 +9,10 @@ import {
 export const setBurger = (burger) => ({
   type: SET_BURGER,
   payload: burger,
+});
+
+export const removeBurger = () => ({
+  type: REMOVE_BURGER,
 });
 
 export const addIngredientInBurger = (type, id, key) => ({

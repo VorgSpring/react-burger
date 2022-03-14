@@ -1,6 +1,6 @@
 import { compose, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { ingredintsMiddleware } from './middleware/ingredints';
+import { burgerMiddleware } from './middleware/burger';
 import { userMiddleware } from './middleware/user';
 import { rootReducer } from './reducers';
 
@@ -9,7 +9,7 @@ const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_E
   : compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(thunk, ingredintsMiddleware, userMiddleware),
+  applyMiddleware(thunk, burgerMiddleware, userMiddleware),
 );
 
 export const store = createStore(rootReducer, enhancer);

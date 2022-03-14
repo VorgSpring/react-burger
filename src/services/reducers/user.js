@@ -1,7 +1,7 @@
 import {
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
-  GET_USER_ERROR,
+  USER_REQUEST,
+  USER_REQUEST_SUCCESS,
+  USER_REQUEST_ERROR,
   SET_USER,
   REMOVE_USER,
 } from '../actions/type';
@@ -9,20 +9,20 @@ import { UserState } from './initialState';
 
 export const userReducer = (state = UserState, action) => {
   switch (action.type) {
-    case GET_USER_REQUEST:
+    case USER_REQUEST:
       return {
         ...state,
         isRequest: true,
         error: null,
       };
 
-    case GET_USER_SUCCESS:
+    case USER_REQUEST_SUCCESS:
       return {
         ...state,
         isRequest: false,
       };
 
-    case GET_USER_ERROR:
+    case USER_REQUEST_ERROR:
       return {
         ...state,
         isRequest: false,

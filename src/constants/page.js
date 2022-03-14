@@ -63,7 +63,7 @@ export const ProfileNavigationData = [
   },
 
   {
-    path: RoutePaths.EXIT,
+    path: RoutePaths.LOGOUT,
     title: 'Выход',
   },
 ];

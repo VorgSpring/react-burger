@@ -16,6 +16,5 @@ export const requestFormApi = (formType, body, isAuthorization) => {
     headers,
     body: JSON.stringify(body),
   })
-    .then((responce) => responce.json())
     .then(checkResponce);
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Routes,
   Route,
+  Navigate,
   useLocation,
   useNavigate,
 } from 'react-router-dom';
@@ -76,6 +77,11 @@ export default () => {
               <ProfilePage />
             </ProtectedRoute.RequireAauthorize>
           )}
+        />
+
+        <Route
+          path={RoutePaths.ANY}
+          element={<Navigate to={RoutePaths.CONSTRUCTOR} replace />}
         />
       </Routes>
 

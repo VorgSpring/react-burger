@@ -10,7 +10,7 @@ export const RoutePaths = {
   INGREDIENT: '/ingredients/:id',
   ORDERS: '/profile/orders',
   ORDER: '/profile/orders/:id',
-  EXIT: '/profile/exit',
+  LOGOUT: '/profile/logout',
   FEED: '/feed',
   FEED_ITEM: '/feed/:id',
   ANY: '*',
@@ -20,5 +20,5 @@ export const NestedProfilePaths = {
   PROFILE: '/',
   ORDERS: '/orders',
   ORDER: '/orders/:id',
-  EXIT: '/exit',
+  LOGOUT: '/logout',
 };

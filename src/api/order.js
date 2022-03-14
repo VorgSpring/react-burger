@@ -14,6 +14,5 @@ export const createOrderApi = (burger) => {
     },
     body: ingredientIds,
   })
-    .then((responce) => responce.json())
     .then(checkResponce);
 };

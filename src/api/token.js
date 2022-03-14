@@ -12,7 +12,6 @@ export const getTokenApi = (callback) => (
       token: getRefreshToken(),
     }),
   })
-    .then((responce) => responce.json())
     .then(checkResponce)
     .then(({ accessToken, refreshToken }) => {
       setTokens({ accessToken, refreshToken });

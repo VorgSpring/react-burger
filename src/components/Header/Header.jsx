@@ -1,5 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
+import { Link } from 'react-router-dom';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import { HeaderNavLink } from './HeaderNavLink';
 import {
@@ -7,6 +8,7 @@ import {
   HeaderRightNavigationData,
 } from '../../constants/header';
 import styles from './Header.module.css';
+import { RoutePaths } from '../../constants/routes';
 
 export const Header = () => (
   <header className={cn(styles.root, 'pt-4 pb-3')}>
@@ -22,9 +24,12 @@ export const Header = () => (
         ))}
       </ul>
 
-      <div className={cn(styles.navigation_logo, 'mt-1')}>
+      <Link
+        to={RoutePaths.CONSTRUCTOR}
+        className={cn(styles.navigation_logo, 'mt-1')}
+      >
         <Logo />
-      </div>
+      </Link>
 
       <ul className={styles.navigation_list}>
         {HeaderRightNavigationData.map(({ title, path, Icon }) => (
