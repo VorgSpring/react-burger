@@ -21,14 +21,15 @@ export const getUserRequest = () => async (dispatch) => {
 
     return user;
   } catch ({ message: messageUserError }) {
+    dispatch(removeUser());
+
     if (messageUserError === ReasponceStatuses.FORBIDDEN) {
       try {
         const callback = () => {
           dispatch(getUserRequest());
         };
 
-        const { user } = await getTokenApi(callback);
-        return user;
+        return await getTokenApi(callback);
       } catch ({ message: messageTokenError }) {
         removeTokens();
         dispatch(userRequestError(messageTokenError));

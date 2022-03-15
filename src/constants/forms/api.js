@@ -1,11 +1,12 @@
 import { FormTypes } from './types';
+import { BASE_API_URL } from '../api';
 
 export const FormApiUrls = {
-  [FormTypes.LOGIN]: 'https://norma.nomoreparties.space/api/auth/login',
-  [FormTypes.REGISTER]: 'https://norma.nomoreparties.space/api/auth/register',
-  [FormTypes.FORGOT_PASSWORD]: 'https://norma.nomoreparties.space/api/password-reset',
-  [FormTypes.RESET_PASSWORD]: 'https://norma.nomoreparties.space/api/password-reset/reset',
-  [FormTypes.PROFILE]: 'https://norma.nomoreparties.space/api/auth/user',
+  [FormTypes.LOGIN]: `${BASE_API_URL}/auth/login`,
+  [FormTypes.REGISTER]: `${BASE_API_URL}/auth/register`,
+  [FormTypes.FORGOT_PASSWORD]: `${BASE_API_URL}/password-reset`,
+  [FormTypes.RESET_PASSWORD]: `${BASE_API_URL}/password-reset/reset`,
+  [FormTypes.PROFILE]: `${BASE_API_URL}/auth/user`,
 };
 
 export const FormApiMethods = {

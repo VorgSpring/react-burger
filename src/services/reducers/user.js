@@ -34,14 +34,11 @@ export const userReducer = (state = UserState, action) => {
         ...state,
         email: action.payload.email,
         name: action.payload.name,
+        error: null,
       };
 
     case REMOVE_USER:
-      return {
-        ...state,
-        email: null,
-        name: null,
-      };
+      return UserState;
 
     default:
       return state;
