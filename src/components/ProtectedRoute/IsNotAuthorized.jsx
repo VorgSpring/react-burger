@@ -10,7 +10,7 @@ export function IsNotAuthorized({ children }) {
   const errorUser = useSelector(getErrorUserSelector);
   const refreshToken = getRefreshToken();
 
-  if (!refreshToken || errorUser) {
+  if (errorUser || !refreshToken) {
     return children;
   }
 
