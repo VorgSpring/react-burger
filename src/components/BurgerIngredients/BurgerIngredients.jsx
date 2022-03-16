@@ -1,12 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import IngredientDetails from '../IngredientDetails';
-import Modal from '../Modal';
+import cn from 'classnames';
+
+// TODO переделать на механику роутера
+// import IngredientDetails from '../IngredientDetails';
+// import Modal from '../Modal';
+// import { removeCurrentIngredient } from '../../services/actions/currentIngredient';
+
 import Tabs from './components/Tabs';
 import Ingredients from './components/Ingredients';
-import LoadError from './components/LoadError';
+import LoadError from '../LoadError';
 import { getIngredients } from '../../services/operations/ingredients';
-import { removeCurrentIngredient } from '../../services/actions/currentIngredient';
+import { getErrorAndEmptySelector } from '../../selectors/ingredients';
 import {
   IngredientsTypes,
   INGREDIENT_BUN_TYPE,
@@ -18,27 +23,20 @@ import styles from './BurgerIngredients.module.css';
 export const BurgerIngredients = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, []);
-
   const [currentTab, setCurrentTab] = useState(INGREDIENT_BUN_TYPE);
 
-  const { error, currentIngredient } = useSelector((store) => ({
-    error: store.ingredients.error,
-    currentIngredient: store.currentIngredient,
-  }));
+  const { error, isEmpty } = useSelector(getErrorAndEmptySelector);
+
+  useEffect(() => {
+    if (isEmpty) {
+      dispatch(getIngredients());
+    }
+  }, []);
 
   const listRef = useRef(null);
   const bunRef = useRef(null);
   const mainRef = useRef(null);
   const sauceRef = useRef(null);
-
-  if (error) {
-    return (
-      <LoadError error={error} />
-    );
-  }
 
   const getRef = (ref) => {
     switch (ref) {
@@ -61,10 +59,6 @@ export const BurgerIngredients = () => {
     getRef(value).current.scrollIntoView();
   };
 
-  const handleCloseIngredientModal = () => {
-    dispatch(removeCurrentIngredient());
-  };
-
   const handleScroll = () => {
     const parentTop = listRef.current.getBoundingClientRect().top;
 
@@ -82,6 +76,12 @@ export const BurgerIngredients = () => {
     }
   };
 
+  if (error) {
+    return (
+      <LoadError className={cn(styles.load_error, 'pr-5 pl-5')} error={error} />
+    );
+  }
+
   return (
     <section className={styles.root}>
       <Tabs currentTab={currentTab} onChoiceTab={handleChoiceTab} />
@@ -94,7 +94,7 @@ export const BurgerIngredients = () => {
         {Object.keys(IngredientsTypes).map((type) => (
           <li
             key={`${type}ingredients`}
-            className={`${styles.ingredients_type} mb-6`}
+            className={cn(styles.ingredients_type, 'mb-6')}
             ref={getRef(type)}
           >
             <h3 className="text text_type_main-medium mb-6">
@@ -105,12 +105,6 @@ export const BurgerIngredients = () => {
           </li>
         ))}
       </ul>
-
-      {currentIngredient && (
-        <Modal onClose={handleCloseIngredientModal}>
-          <IngredientDetails />
-        </Modal>
-      )}
     </section>
   );
 };

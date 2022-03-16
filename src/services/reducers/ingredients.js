@@ -3,9 +3,9 @@ import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_ERROR,
 } from '../actions/type';
-import { ingredientsState } from './initialState';
+import { IngredientsState } from './initialState';
 
-export const ingredientsReducer = (state = ingredientsState, action) => {
+export const ingredientsReducer = (state = IngredientsState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST:
       return {

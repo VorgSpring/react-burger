@@ -1,0 +1,26 @@
+.root {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 120px;
+  margin-bottom: auto;
+}
+
+.tabs {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  text-decoration: none;
+  transition: color 0.3s ease-in;
+}
+
+.link_inactive:hover {
+  color: #fff;
+}
+
+.description {
+  opacity: 0.4;
+}

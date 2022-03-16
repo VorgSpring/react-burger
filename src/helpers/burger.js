@@ -9,7 +9,7 @@ export const getIngredientIdsInBurger = (burger) => JSON.stringify({
   ],
 });
 
-export const getSum = (burger, ingredients) => {
+export const getSummaryCost = (burger, ingredients) => {
   let ingredientsPrice = 0;
   let bunPrice = 0;
 
@@ -24,4 +24,25 @@ export const getSum = (burger, ingredients) => {
   }
 
   return ingredientsPrice + bunPrice;
+};
+
+export const setBurgerStorage = (burger) => {
+  localStorage.setItem(
+    'burger',
+    JSON.stringify(burger),
+  );
+};
+
+export const removeBurgerStorage = () => {
+  localStorage.removeItem('burger');
+};
+
+export const getBurgerStorage = () => {
+  const burger = localStorage.getItem('burger');
+
+  if (burger) {
+    return JSON.parse(burger);
+  }
+
+  return null;
 };

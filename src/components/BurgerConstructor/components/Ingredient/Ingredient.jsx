@@ -6,7 +6,7 @@ import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getIngredientById } from '../../../../helpers/ingredients';
+import { getIngredientByIdSelector } from '../../../../selectors/ingredients';
 import {
   moveIngredientInBurger,
   removeIngredientInBurger,
@@ -19,7 +19,7 @@ export const Ingredient = ({ id, index }) => {
   const ref = useRef(null);
 
   const ingredient = useSelector(
-    (store) => getIngredientById(store.ingredients.items, id),
+    (store) => getIngredientByIdSelector(store, id),
   );
 
   const [{ opacity }, drag] = useDrag(() => ({

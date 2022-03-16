@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import { v4 as uuid } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
@@ -26,20 +27,22 @@ export const BurgerConstructor = () => {
     }),
   });
 
+  // TODO переделать на механику роутера
   const { isShowModal } = useSelector((store) => ({
     isShowModal: store.order.currentOrder || store.order.error,
   }));
 
+  // TODO переделать на механику роутера
   const handleCloseModal = () => {
     dispatch(removeCurrentOrder());
   };
 
   return (
-    <section className={`${styles.root} pl-4`}>
+    <section className={cn(styles.root, 'pl-4')}>
       <div
-        className={
-          `${styles.constructor} ${isHover ? styles.constructor_hover : ''} mb-10`
-        }
+        className={cn(styles.constructor, 'mb-10', {
+          [styles.constructor_hover]: isHover,
+        })}
         ref={dropTarget}
       >
         <Bun type={ConstructorBunTypes.TOP} />

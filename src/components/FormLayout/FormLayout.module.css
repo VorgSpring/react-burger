@@ -1,0 +1,60 @@
+.root {
+  width: 480px;
+  text-align: center;
+}
+
+.load button::before :global {
+  animation: loading 1.3s infinite;
+}
+
+.root :global(.input__container) {
+  width: auto;
+}
+
+.root :global(.input) {
+  width: 100%;
+}
+
+.error {
+  color: #e52b1a;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
+.buttons_center {
+  justify-content: center;
+}
+
+.buttons_left {
+  justify-content: flex-start;
+}
+
+.buttons_right {
+  justify-content: flex-end;
+}
+
+button:first-child:disabled {
+  color: gray;
+}
+
+.load button:last-child {
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.load button:last-child::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(138, 138, 155, 0.6), transparent);
+  transform: translateX(-100%);
+  z-index: 1;
+}

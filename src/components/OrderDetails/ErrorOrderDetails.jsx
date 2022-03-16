@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import styles from './OrderDetails.module.css';
 
 export const ErrorOrderDetails = ({ error }) => (
-  <section className={`${styles.root} pt-30 pb-30`}>
+  <section className={cn(styles.root, 'pt-30 pb-30')}>
     <p className="text text_type_main-medium mb-15">
       Приносим свои извенения
     </p>

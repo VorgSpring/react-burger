@@ -2,10 +2,11 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { IngredientsEmpty } from './IngredientsEmpty';
 import Ingredient from '../Ingredient';
+import { getBurgerngredientsSelector } from '../../../../selectors/burger';
 import styles from './Ingredients.module.css';
 
 export const Ingredients = () => {
-  const ingredients = useSelector((store) => store.burger.ingredients);
+  const ingredients = useSelector(getBurgerngredientsSelector);
 
   if (!ingredients.length) {
     return (

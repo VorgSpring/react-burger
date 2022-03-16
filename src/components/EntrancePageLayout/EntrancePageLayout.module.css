@@ -1,0 +1,19 @@
+.title {
+  text-align: center;
+}
+
+.form {
+  margin: 0 auto;
+}
+
+.links {
+  text-align: center;
+}
+
+.links p:last-child {
+  margin-bottom: 0;
+}
+
+.link {
+  text-decoration: none;
+}

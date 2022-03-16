@@ -1,0 +1,40 @@
+.root {
+  background-color: #1c1c21;
+}
+
+.navigation {
+  width: 1270px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navigation_list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+}
+
+.navigation_list li:last-child {
+  margin-right: 0;
+}
+
+.navigation_link {
+  display: flex;
+  transition: color 0.3s ease-in;
+  text-decoration: none;
+}
+
+.navigation_link span {
+  transition: color 0.3s ease-in;
+}
+
+.navigation_link_inactive:hover span {
+  color: #fff;
+}
+
+.navigation_logo {
+  transform: translateX(-28%);
+  text-decoration: none;
+}

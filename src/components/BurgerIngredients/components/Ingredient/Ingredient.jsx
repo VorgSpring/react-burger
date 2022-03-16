@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
+import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 import { useDrag } from 'react-dnd';
 import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { setCurrentIngredient } from '../../../../services/actions/currentIngredient';
-import { getCountIngredientinBurger } from '../../../../helpers/ingredients';
+import { getCountIngredientInBurgerSelector } from '../../../../selectors/burger';
 import { ConstructorElementTypes } from '../../../../constants/constructor';
 import { DndTypes } from '../../../../constants/dndTypes';
+import { getIngredientPath } from '../../../../helpers/ingredients';
 import styles from './Ingredient.module.css';
 
 export const Ingredient = ({ item }) => {
+  const location = useLocation();
+
   const {
     id,
     constructorType,
@@ -21,10 +25,8 @@ export const Ingredient = ({ item }) => {
     price,
   } = item;
 
-  const dispatch = useDispatch();
-
   const count = useSelector(
-    (store) => getCountIngredientinBurger(constructorType, id, store.burger),
+    (store) => getCountIngredientInBurgerSelector(store, id),
   );
 
   const [{ isDrag }, dragRef, preview] = useDrag({
@@ -38,38 +40,41 @@ export const Ingredient = ({ item }) => {
     }),
   });
 
-  const handleClick = () => {
-    dispatch(setCurrentIngredient(id));
-  };
-
   return (
     <li
       ref={dragRef}
-      className={`${styles.root} ${isDrag ? styles.drag : ''} mt-2 pb-4 pt-9`}
-      onClick={handleClick}
+      className={cn(styles.root, 'mt-2 pb-4 pt-9', {
+        [styles.drag]: isDrag,
+      })}
     >
-      {!!count && (
-        <Counter count={count} size="default" />
-      )}
+      <Link
+        to={getIngredientPath(id)}
+        state={{ backgroundLocation: location }}
+        className={styles.link}
+      >
+        {!!count && (
+          <Counter count={count} size="default" />
+        )}
 
-      <img
-        ref={preview}
-        className={`${styles.image} mb-2`}
-        src={image}
-        alt={name}
-      />
+        <img
+          ref={preview}
+          className={cn(styles.image, 'mb-2')}
+          src={image}
+          alt={name}
+        />
 
-      <div className={`${styles.price} mb-1`}>
-        <span className="text text_type_digits-default mr-1">
-          {price}
-        </span>
+        <div className={cn(styles.price, 'mb-1')}>
+          <span className="text text_type_digits-default text_color_primary mr-1">
+            {price}
+          </span>
 
-        <CurrencyIcon type="primary" />
-      </div>
+          <CurrencyIcon type="primary" />
+        </div>
 
-      <h4 className={`${styles.name} text text_type_main-default pr-2 pl-2`}>
-        {name}
-      </h4>
+        <h4 className={cn(styles.name, 'text text_type_main-default text_color_primary pr-2 pl-2')}>
+          {name}
+        </h4>
+      </Link>
     </li>
   );
 };

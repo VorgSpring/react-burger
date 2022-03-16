@@ -29,3 +29,13 @@ code {
 ::-webkit-scrollbar-thumb {
   background: #8585ad;
 }
+
+@keyframes loading {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}

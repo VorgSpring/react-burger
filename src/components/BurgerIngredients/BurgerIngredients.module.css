@@ -16,3 +16,9 @@
 .ingredients_type:last-child {
   margin-bottom: 0;
 }
+
+.load_error {
+  width: 600px;
+  border-radius: var(--common-border-radius-s);
+  background: var(--background-element);
+}
