@@ -4,6 +4,8 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
     "babel-eslint": "^10.1.0",
     "editorconfig-checker": "^4.0.2",
     "eslint": "^7.32.0",
@@ -24,9 +26,9 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/uuid": "^8.3.4",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.12.0",
     "classnames": "^2.3.1",
-    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dnd": "^14.0.5",
     "react-dnd-html5-backend": "^14.1.0",
@@ -45,7 +47,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "eslint": "eslint --ext .jsx --ext .js src/",
+    "eslint": "eslint --ext .tsx --ext .ts src/",
     "editorconfig": "editorconfig-checker --exclude '.git|node_modules|.DS_Store|build|public'",
     "stylelint": "stylelint 'src/**/*.css'",
     "lint": "npm run eslint & npm run stylelint & npm run editorconfig"

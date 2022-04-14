@@ -1,34 +1,31 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true
-  },
-  "extends": [
-    "plugin:react/recommended",
-    "airbnb"
-  ],
-  "rules": {
-    "import/prefer-default-export": "off",
-    "no-unused-prop-types": "off",
-    "no-underscore-dangle": "off",
-    "jsx-a11y/no-noninteractive-element-interactions": "off",
-    "jsx-a11y/click-events-have-key-events": "off",
-    "jsx-a11y/no-static-element-interactions": "off"
-  },
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "@typescript-eslint",
+    "react-hooks"
   ],
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "@typescript-eslint/ban-ts-comment": [
+      "error",
+      {"ts-ignore": "allow-with-description"}
+    ]
+  },
   "settings": {
     "react": {
-      "version": "17"
+      "pragma": "React",
+      "version": "detect"
     }
   }
 }
