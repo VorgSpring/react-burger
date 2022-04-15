@@ -33,7 +33,3 @@ export type TStore = {
   forms: TFormStates;
   user: TUserState;
 };
-
-const d = "'ddd' | 'dasdas'"
-
-type ddd = typeof d;
