@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { formAtionsCreator } from '../helpers/forms/action';
 import { FormFieldsValidator } from '../helpers/forms/validator';
@@ -11,7 +11,7 @@ import { TFormProps } from '../types/form';
 
 export const withForm = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Component: ComponentType<TFormProps>, formType: FormTypes, formOperation: any,
+  Component: React.FC<TFormProps>, formType: FormTypes, formOperation: any,
 ) => () => {
   const dispatch = useDispatch();
 
