@@ -14,13 +14,19 @@ import { TStore } from '../types/store';
 import { TFormValues, TFormErrors } from '../types/form';
 
 type TGetFormValueSelector = (store: TStore, type: FormTypes) => TFormValues;
-export const getFormValueSelector: TGetFormValueSelector = (store, type) => store.forms[FormStoreNames[type]].values;
+export const getFormValueSelector: TGetFormValueSelector = (store, type) => (
+  store.forms[FormStoreNames[type]].values
+);
 
 type TGetFormErrorsSelector = (store: TStore, type: FormTypes) => TFormErrors;
-export const getFormErrorsSelector: TGetFormErrorsSelector = (store, type) => store.forms[FormStoreNames[type]].errors;
+export const getFormErrorsSelector: TGetFormErrorsSelector = (store, type) => (
+  store.forms[FormStoreNames[type]].errors
+);
 
 type TIsRequestFormSelector = (store: TStore, type: FormTypes) => boolean;
-export const isRequestFormSelector: TIsRequestFormSelector = (store, type) => store.forms[FormStoreNames[type]].isRequest;
+export const isRequestFormSelector: TIsRequestFormSelector = (store, type) => (
+  store.forms[FormStoreNames[type]].isRequest
+);
 
 type TGetProfileFormValueSelector = (store: TStore) => TFormValues;
 export const getProfileFormValueSelector: TGetProfileFormValueSelector = (store) => (

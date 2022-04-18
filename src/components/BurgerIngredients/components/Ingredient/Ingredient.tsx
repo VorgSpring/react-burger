@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
@@ -9,7 +8,6 @@ import {
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getCountIngredientInBurgerSelector } from '../../../../selectors/burger';
-import { ConstructorElementTypes } from '../../../../constants/constructor';
 import { DndTypes } from '../../../../constants/dndTypes';
 import { getIngredientPath } from '../../../../helpers/ingredients';
 import { TIngregient } from '../../../../types/ingredient';
@@ -83,16 +81,4 @@ export const Ingredient = ({ item }: Props) => {
       </Link>
     </li>
   );
-};
-
-Ingredient.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    constructorType: PropTypes.oneOf(
-      Object.values(ConstructorElementTypes),
-    ).isRequired,
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-  }).isRequired,
 };

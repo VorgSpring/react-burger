@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
-import {TLink} from '../../types/page';
+import { TLink } from '../../types/page';
 import styles from './EntrancePageLayout.module.css';
 
 export const EntrancePageLink = ({ description, route, text }: TLink) => (

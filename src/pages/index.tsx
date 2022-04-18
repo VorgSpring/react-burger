@@ -24,7 +24,7 @@ type LocationState = {
   state: {
     backgroundLocation: Location;
   }
-}
+};
 
 export default () => {
   const location = useLocation();

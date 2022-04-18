@@ -1,8 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
-import { RoutePaths } from '../../constants/routes';
 import { TNavigation } from '../../types/page';
 import styles from './Header.module.css';
 
@@ -35,11 +33,3 @@ export const HeaderNavLink = ({ title, path, Icon }: Props) => (
     </NavLink>
   </li>
 );
-
-HeaderNavLink.propTypes = {
-  title: PropTypes.string.isRequired,
-  path: PropTypes.oneOf(
-    Object.values(RoutePaths),
-  ).isRequired,
-  Icon: PropTypes.func.isRequired,
-};

@@ -13,13 +13,13 @@ export const Logout = () => {
   const navigate = useNavigate();
   const error = useSelector(getErrorUserSelector);
 
-  const redirectToConstructor = () => {
-    navigate(RoutePaths.CONSTRUCTOR, { replace: true });
-  };
-
   useEffect(() => {
+    const redirectToConstructor = () => {
+      navigate(RoutePaths.CONSTRUCTOR, { replace: true });
+    };
+
     dispatch(logoutUserRequest(redirectToConstructor));
-  }, []);
+  }, [dispatch, navigate]);
 
   if (error) {
     return (

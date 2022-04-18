@@ -6,7 +6,7 @@ import styles from './EntrancePageLayout.module.css';
 
 type Props = TPage & {
   children: React.ReactNode;
-}
+};
 
 export const EntrancePageLayout = ({ title, links, children }: Props) => (
   <>

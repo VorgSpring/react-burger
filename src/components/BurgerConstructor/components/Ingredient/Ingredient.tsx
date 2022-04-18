@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 import {
@@ -44,7 +43,7 @@ export const Ingredient = ({ id, index }: Props) => {
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(item: {id: string, index: number}, monitor) {
+    hover(item: { id: string, index: number }, monitor) {
       if (!ref.current) {
         return;
       }
@@ -124,9 +123,4 @@ export const Ingredient = ({ id, index }: Props) => {
       />
     </li>
   );
-};
-
-Ingredient.propTypes = {
-  index: PropTypes.number.isRequired,
-  id: PropTypes.string.isRequired,
 };

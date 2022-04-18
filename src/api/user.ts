@@ -8,12 +8,10 @@ export const getUserApi = () => (
     method: 'GET',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      'authorization': getAccessToken(),
+      authorization: getAccessToken(),
     },
   })
-    .then((responce) => {
-      return checkResponce<{ user: TUser }>(responce);
-    })
+    .then((responce) => checkResponce<{ user: TUser }>(responce))
 );
 
 export const logoutUserApi = () => (

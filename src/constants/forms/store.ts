@@ -1,4 +1,4 @@
-export enum FormStoreNames  {
+export enum FormStoreNames {
   LOGIN = 'login',
   REGISTER = 'register',
   FORGOT_PASSWORD = 'forgotPassword',

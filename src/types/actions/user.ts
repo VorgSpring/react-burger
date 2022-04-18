@@ -1,4 +1,4 @@
-import { TUser } from '../../types/user';
+import { TUser } from '../user';
 import { UserActionTypes } from '../../services/actions/type';
 
 export type TUserRequest = {
@@ -24,7 +24,7 @@ export type TRemoveUser = {
 };
 
 export type TUserActionTypes = TUserRequest
-  | TUserSuccess
-  | TUserError
-  | TSetUser
-  | TRemoveUser;
+| TUserSuccess
+| TUserError
+| TSetUser
+| TRemoveUser;

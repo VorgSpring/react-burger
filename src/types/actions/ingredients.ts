@@ -1,4 +1,4 @@
-import { TIngregient } from '../../types/ingredient';
+import { TIngregient } from '../ingredient';
 import { IngredientActionTypes } from '../../services/actions/type';
 
 export type TIngredientsRequest = {
@@ -16,6 +16,5 @@ export type TIngredientsError = {
 };
 
 export type TIngredientActionTypes = TIngredientsRequest
-  | TIngredientsSuccess
-  | TIngredientsError;
-
+| TIngredientsSuccess
+| TIngredientsError;

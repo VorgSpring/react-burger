@@ -20,7 +20,9 @@ export const IngredientDetails = () => {
     ingredient,
     isLoading,
     error,
-  } = useSelector<TStore, {ingredient: TIngregient | null, isLoading: boolean, error: string | null}>(
+  } = useSelector<TStore, {
+    ingredient: TIngregient | null, isLoading: boolean, error: string | null,
+  }>(
     (store) => ingredientDetailsSelector(store, id),
   );
 
@@ -28,7 +30,7 @@ export const IngredientDetails = () => {
     if (ingredient === null) {
       dispatch(getIngredients());
     }
-  }, []);
+  }, [dispatch, ingredient]);
 
   if (isLoading || ingredient === null) {
     return (

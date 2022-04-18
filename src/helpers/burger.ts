@@ -12,7 +12,7 @@ export const getIngredientIdsInBurger = (burger: TBurger): string => JSON.string
 export const getSummaryCost = (burger: TBurger, ingredients: TIngregient[] | null) => {
   const ingredientsPrice = burger.ingredients
     .map(({ id }) => {
-      const ingredient = getIngredientById(ingredients, id)
+      const ingredient = getIngredientById(ingredients, id);
       return ingredient?.price ?? 0;
     })
     .reduce((acc, price) => acc + price, 0);

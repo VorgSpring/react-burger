@@ -9,8 +9,10 @@ import { FormFieldTypes, FormTypes } from '../constants/forms/types';
 import { TStore } from '../types/store';
 import { TFormProps } from '../types/form';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const withForm = (Component: ComponentType<TFormProps>, formType: FormTypes, formOperation: any) => () => {
+export const withForm = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Component: ComponentType<TFormProps>, formType: FormTypes, formOperation: any,
+) => () => {
   const dispatch = useDispatch();
 
   const {

@@ -24,7 +24,7 @@ export const BurgerIngredients = () => {
     if (isEmpty) {
       dispatch(getIngredients());
     }
-  }, []);
+  }, [dispatch, isEmpty]);
 
   const listRef = useRef<HTMLUListElement | null>(null);
   const bunRef = useRef<HTMLLIElement | null>(null);

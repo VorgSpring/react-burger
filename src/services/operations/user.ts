@@ -21,8 +21,8 @@ export const getUserRequest = () => async (dispatch) => {
     dispatch(setUser(user));
 
     return user;
-  } catch (e) {
-    const { message: messageUserError } = e as { message: string };
+  } catch (errorUser) {
+    const { message: messageUserError } = errorUser as { message: string };
 
     dispatch(removeUser());
 
@@ -33,8 +33,8 @@ export const getUserRequest = () => async (dispatch) => {
         };
 
         return await getTokenApi(callback);
-      } catch (e) {
-        const { message: messageTokenError } = e as { message: string };
+      } catch (errorToken) {
+        const { message: messageTokenError } = errorToken as { message: string };
 
         removeTokens();
         dispatch(userRequestError(messageTokenError));

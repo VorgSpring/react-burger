@@ -1,5 +1,5 @@
 import { ConstructorElementTypes } from '../../constants/constructor';
-import { TBurger } from '../../types/burger';
+import { TBurger } from '../burger';
 import { BurgerActionTypes } from '../../services/actions/type';
 
 export type TSetBurger = {
@@ -37,7 +37,7 @@ export type TRemoveIngredientInBurger = {
 };
 
 export type TBurgerActionTypes = TSetBurger
-  | TRemoveBurger
-  | TAddIngredientInBurger
-  | TMoveIngredientInBurger
-  | TRemoveIngredientInBurger;
+| TRemoveBurger
+| TAddIngredientInBurger
+| TMoveIngredientInBurger
+| TRemoveIngredientInBurger;

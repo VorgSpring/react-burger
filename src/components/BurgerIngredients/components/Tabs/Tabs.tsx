@@ -7,7 +7,7 @@ import styles from './Tabs.module.css';
 type Props = {
   currentTab: IngredientsTypes;
   onChoiceTab: (value: string) => void
-}
+};
 
 export const Tabs = ({ currentTab, onChoiceTab }: Props) => (
   <div className={cn(styles.root, 'mb-10')}>

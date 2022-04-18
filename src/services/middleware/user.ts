@@ -17,7 +17,7 @@ export const userMiddleware = ({ dispatch, getState }) => (next) => (action) => 
         email: email || '',
         name: name || '',
         [FormFieldTypes.PASSWORD_FIELD_TYPE]: '',
-      }
+      },
     };
 
     dispatch(

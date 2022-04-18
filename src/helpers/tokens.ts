@@ -1,5 +1,5 @@
-import { Tokens } from "../constants/tokens";
-import { TTokens } from "../types/tokens";
+import { Tokens } from '../constants/tokens';
+import { TTokens } from '../types/tokens';
 
 export const setTokens = ({ accessToken, refreshToken }: TTokens) => {
   localStorage.setItem(Tokens.ACCESS, accessToken);
@@ -7,7 +7,7 @@ export const setTokens = ({ accessToken, refreshToken }: TTokens) => {
 };
 
 export const getRefreshToken = () => localStorage.getItem(Tokens.REFRESH) ?? '';
-export const getAccessToken = () => localStorage.getItem(Tokens.ACCESS)?? '';
+export const getAccessToken = () => localStorage.getItem(Tokens.ACCESS) ?? '';
 
 export const getTokens = (): TTokens => {
   const refreshToken = getRefreshToken();

@@ -6,7 +6,9 @@ type TGetExcludedFieldsForProfileForm = (
   userValues: TUser | null,
   formValues: TFormValues,
 ) => FormFieldTypes[] | [];
-export const getExcludedFieldsForProfileForm: TGetExcludedFieldsForProfileForm = (userValues, formValues) => {
+export const getExcludedFieldsForProfileForm: TGetExcludedFieldsForProfileForm = (
+  userValues, formValues,
+) => {
   if (userValues === null) {
     return [];
   }

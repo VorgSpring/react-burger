@@ -18,17 +18,23 @@ export const removeBurger = (): TRemoveBurger => ({
   type: BurgerActionTypes.REMOVE_BURGER,
 });
 
-export const addIngredientInBurger = (type: ConstructorElementTypes, id: string, key: string): TAddIngredientInBurger => ({
+export const addIngredientInBurger = (
+  type: ConstructorElementTypes, id: string, key: string,
+): TAddIngredientInBurger => ({
   type: BurgerActionTypes.ADD_INGREDIENT_IN_BURGER,
   payload: { type, id, key },
 });
 
-export const moveIngredientInBurger = (currentIndex: number, moveIndex: number): TMoveIngredientInBurger => ({
+export const moveIngredientInBurger = (
+  currentIndex: number, moveIndex: number,
+): TMoveIngredientInBurger => ({
   type: BurgerActionTypes.MOVE_INGREDIENT_IN_BURGER,
   payload: { currentIndex, moveIndex },
 });
 
-export const removeIngredientInBurger = (type: ConstructorElementTypes, index: number): TRemoveIngredientInBurger => ({
+export const removeIngredientInBurger = (
+  type: ConstructorElementTypes, index: number,
+): TRemoveIngredientInBurger => ({
   type: BurgerActionTypes.REMOVE_INGREDIENT_IN_BURGER,
   payload: { type, index },
 });

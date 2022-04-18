@@ -3,6 +3,8 @@ import { FormApiUrls, FormApiMethods } from '../constants/forms/api';
 import { FormTypes } from '../constants/forms/types';
 import { getAccessToken } from '../helpers/tokens';
 
+// В следующем спринте реализуется типизации хранилища.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TRequestFormApi = (formType: FormTypes, body: any, isAuthorization: boolean) => Promise<any>;
 
 export const requestFormApi: TRequestFormApi = (formType, body, isAuthorization) => {

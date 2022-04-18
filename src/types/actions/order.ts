@@ -28,8 +28,8 @@ export type TRemoveCurrentOrder = {
 };
 
 export type TOrderActionTypes = TCreateOrderRequest
-  | TCreateOrderCancel
-  | TCreateOrderSuccess
-  | TCreateOrderError
-  | TSetCurrentOrder
-  | TRemoveCurrentOrder;
+| TCreateOrderCancel
+| TCreateOrderSuccess
+| TCreateOrderError
+| TSetCurrentOrder
+| TRemoveCurrentOrder;

@@ -16,8 +16,10 @@ export const ErrorOrderDetails = ({ error = null }: Props) => (
       Попробуте создать заказ познее
     </p>
 
-    {error && <p className="text text_type_main-default text_color_inactive">
-      {error}
-    </p>}
+    {error && (
+      <p className="text text_type_main-default text_color_inactive">
+        {error}
+      </p>
+    )}
   </section>
 );

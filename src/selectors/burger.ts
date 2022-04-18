@@ -8,7 +8,9 @@ type TGetBurgerSelector = (store: TStore) => TBurger;
 export const getBurgerSelector: TGetBurgerSelector = (store) => store.burger;
 
 type TGetBurgerngredientsSelector = (store: TStore) => TBurgerIngredients;
-export const getBurgerngredientsSelector: TGetBurgerngredientsSelector = (store) => store.burger.ingredients;
+export const getBurgerngredientsSelector: TGetBurgerngredientsSelector = (store) => (
+  store.burger.ingredients
+);
 
 type TGetBunIdSelector = (store: TStore) => TBurgerBun;
 export const getBunIdSelector: TGetBunIdSelector = (store) => store.burger.bun;

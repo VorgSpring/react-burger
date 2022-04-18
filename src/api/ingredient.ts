@@ -4,7 +4,5 @@ import { TBackIngregient } from '../types/ingredient';
 
 export const loadIngredients = () => (
   fetch(GET_INGREDIENT_API_URL)
-    .then((responce) => {
-      return checkResponce<{ data:  TBackIngregient[]}>(responce);
-    })
+    .then((responce) => checkResponce<{ data: TBackIngregient[] }>(responce))
 );

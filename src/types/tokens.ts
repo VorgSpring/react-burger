@@ -1,4 +1,4 @@
-import { Tokens } from "../constants/tokens";
+import { Tokens } from '../constants/tokens';
 
 export type TAccessToken = string;
 export type TRefreshToken = string;

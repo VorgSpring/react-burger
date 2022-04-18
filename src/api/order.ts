@@ -16,7 +16,5 @@ export const createOrderApi = (burger: TBurger) => {
     },
     body: ingredientIds,
   })
-    .then((responce) => {
-      return checkResponce<{ order: TOrder }>(responce);
-    });
+    .then((responce) => checkResponce<{ order: TOrder }>(responce));
 };

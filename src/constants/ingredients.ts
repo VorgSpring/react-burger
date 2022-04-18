@@ -15,7 +15,7 @@ export enum IngredientsTypeNames {
 export enum IngredientsTypesData {
   INGREDIENT_BUN_TYPE = 'Булки',
   INGREDIENT_MAIN_TYPE = 'Основы',
-  INGREDIENT_SAUCE_TYPE ='Соусы',
+  INGREDIENT_SAUCE_TYPE = 'Соусы',
 }
 
 export const IngredientStructure: TIngredientStructure = {

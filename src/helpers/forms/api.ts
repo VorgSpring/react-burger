@@ -5,7 +5,9 @@ import { FormActionTypes } from '../../services/actions/type';
 import { formAtionsCreator } from './action';
 import { TFormValues } from '../../types/form';
 
-const getIncludedFields = (fields: TFormValues, excludedFields: Array<keyof TFormValues>): TFormValues => (
+const getIncludedFields = (
+  fields: TFormValues, excludedFields: Array<keyof TFormValues>,
+): TFormValues => (
   Object.keys(fields)
     .filter((field) => !excludedFields.includes(field as keyof TFormValues))
     .reduce((acc, field) => {
@@ -14,16 +16,21 @@ const getIncludedFields = (fields: TFormValues, excludedFields: Array<keyof TFor
     }, {} as TFormValues)
 );
 
-// @ts-ignore: В следующем спринте реализуется типизации хранилища.
-export const formApiRequester = async (formType, dispatch, getState,
+export const formApiRequester = async (
+  // @ts-ignore: В следующем спринте реализуется типизации хранилища.
+  formType,
+  // @ts-ignore: В следующем спринте реализуется типизации хранилища.
+  dispatch,
+  // @ts-ignore: В следующем спринте реализуется типизации хранилища.
+  getState,
   options = {
     isAuthorization: false,
-    excludedFields: []
-  }
+    excludedFields: [],
+  },
 ) => {
   const {
     isAuthorization,
-    excludedFields
+    excludedFields,
   } = options;
 
   dispatch(formAtionsCreator(formType, FormActionTypes.FORM_SUBMIT_REQUEST));

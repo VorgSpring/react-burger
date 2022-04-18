@@ -31,4 +31,4 @@ export type TBackIngregient = {
   proteins: string;
   fat: string;
   carbohydrates: string;
-}
+};

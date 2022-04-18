@@ -13,9 +13,7 @@ export const getTokenApi = (callback: () => void) => (
       token: getRefreshToken(),
     }),
   })
-    .then((responce) => {
-      return checkResponce<TTokens>(responce);
-    })
+    .then((responce) => checkResponce<TTokens>(responce))
     .then(({ accessToken, refreshToken }) => {
       setTokens({ accessToken, refreshToken });
     })

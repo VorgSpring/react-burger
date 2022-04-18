@@ -7,7 +7,9 @@ import { TBackIngregient, TIngregient } from '../types/ingredient';
 type TGetIngredientPath = (id: string) => string;
 export const getIngredientPath: TGetIngredientPath = (id) => `${RoutePaths.INGREDIENTS}/${id}`;
 
-type TGetIngredientById = (ingredients: TIngregient[] | null, ingredientId: string | null) => TIngregient | null;
+type TGetIngredientById = (
+  ingredients: TIngregient[] | null, ingredientId: string | null,
+) => TIngregient | null;
 export const getIngredientById: TGetIngredientById = (ingredients, ingredientId) => {
   if (!ingredientId || !ingredients) {
     return null;
@@ -18,7 +20,9 @@ export const getIngredientById: TGetIngredientById = (ingredients, ingredientId)
   return ingredient || null;
 };
 
-type TGetCountIngredientInBurger = (burger: TBurger, ingredient: TIngregient | null) => number | null;
+type TGetCountIngredientInBurger = (
+  burger: TBurger, ingredient: TIngregient | null,
+) => number | null;
 export const getCountIngredientInBurger: TGetCountIngredientInBurger = (burger, ingredient) => {
   if (ingredient === null) {
     return null;

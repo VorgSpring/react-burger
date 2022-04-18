@@ -1,6 +1,6 @@
 import { FormActionTypes } from '../../services/actions/type';
 import { InitialStates } from '../../constants/forms/states';
-import { FormFieldTypes, FormTypes } from '../../constants/forms/types';
+import { FormFieldTypes } from '../../constants/forms/types';
 import { TFormErrors, TFormState, TFormValues } from '../../types/form';
 import { TFormAtionsCreator } from './action';
 import { FormStoreNames } from '../../constants/forms/store';
