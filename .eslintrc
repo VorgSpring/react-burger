@@ -1,11 +1,20 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
+  "plugins": [
+    "@typescript-eslint",
+    "react-hooks",
+    "react"
+  ],
   "extends": [
     "plugin:react/recommended",
-    "airbnb"
+    "plugin:@typescript-eslint/recommended",
+    "airbnb",
+    "airbnb-typescript"
   ],
   "rules": {
     "import/prefer-default-export": "off",
@@ -13,22 +22,23 @@
     "no-underscore-dangle": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/click-events-have-key-events": "off",
-    "jsx-a11y/no-static-element-interactions": "off"
+    "jsx-a11y/no-static-element-interactions": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off",
+    "react/require-default-props": "off",
+    "react/display-name": "off",
+    "@typescript-eslint/ban-ts-comment": [
+      "error",
+      {"ts-ignore": "allow-with-description"}
+    ],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/default-param-last": "off"
   },
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 2018,
-    "sourceType": "module"
-  },
-  "plugins": [
-    "react"
-  ],
   "settings": {
     "react": {
-      "version": "17"
+      "pragma": "React",
+      "version": "detect"
     }
   }
 }
