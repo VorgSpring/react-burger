@@ -1,5 +1,5 @@
 import { FormStoreNames } from '../constants/forms/store';
-import { TFormState } from './form';
+import { TFormState } from './forms/state';
 import { TIngregient } from './ingredient';
 import { TBurger } from './burger';
 import { TUser } from './user';

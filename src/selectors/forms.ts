@@ -11,7 +11,7 @@ import {
 import { FormStoreNames } from '../constants/forms/store';
 import { FormTypes } from '../constants/forms/types';
 import { TStore } from '../types/store';
-import { TFormValues, TFormErrors } from '../types/form';
+import { TFormValues, TFormErrors } from '../types/forms/state';
 
 type TGetFormValueSelector = (store: TStore, type: FormTypes) => TFormValues;
 export const getFormValueSelector: TGetFormValueSelector = (store, type) => (

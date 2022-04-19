@@ -4,7 +4,7 @@ import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import FormLayout from '../FormLayout';
 import { FormFieldTypes } from '../../constants/forms/types';
 import { RoutePaths } from '../../constants/routes';
-import { TFormProps } from '../../types/form';
+import { TFormProps } from '../../types/forms/props';
 
 export const ForgotPasswordForm = ({
   values,

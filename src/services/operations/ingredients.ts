@@ -7,9 +7,9 @@ import { setBurger } from '../actions/burger';
 import { getPreparedIngredients } from '../../helpers/ingredients';
 import { getBurgerStorage } from '../../helpers/burger';
 import { loadIngredients } from '../../api/ingredient';
+import { TAppThunk } from '../../types/operation';
 
-// @ts-ignore: В следующем спринте реализуется типизации хранилища.
-export const getIngredients = () => async (dispatch) => {
+export const getIngredients: TAppThunk = () => async (dispatch) => {
   dispatch(getIngredientsRequest());
 
   try {

@@ -13,7 +13,7 @@ import {
 } from '../../constants/forms/types';
 import { FormActionTypes } from '../../services/actions/type';
 import { RoutePaths } from '../../constants/routes';
-import { TFormProps } from '../../types/form';
+import { TFormProps } from '../../types/forms/props';
 
 export const LoginForm = ({
   values,

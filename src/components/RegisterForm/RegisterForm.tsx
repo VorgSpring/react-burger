@@ -7,7 +7,7 @@ import PasswordInput from '../ui/PasswordInput';
 import { getUserSelector } from '../../selectors/user';
 import { FormFieldTypes } from '../../constants/forms/types';
 import { RoutePaths } from '../../constants/routes';
-import { TFormProps } from '../../types/form';
+import { TFormProps } from '../../types/forms/props';
 
 export const RegisterForm = ({
   values,

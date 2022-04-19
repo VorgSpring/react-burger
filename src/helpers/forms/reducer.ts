@@ -1,8 +1,8 @@
 import { FormActionTypes } from '../../services/actions/type';
 import { InitialStates } from '../../constants/forms/states';
 import { FormFieldTypes } from '../../constants/forms/types';
-import { TFormErrors, TFormState, TFormValues } from '../../types/form';
-import { TFormAtionsCreator } from './action';
+import { TFormErrors, TFormState, TFormValues } from '../../types/forms/state';
+import { TFormAtionsCreator } from '../../types/forms/actions';
 import { FormStoreNames } from '../../constants/forms/store';
 
 const resetError = (errors: TFormErrors, field?: FormFieldTypes): TFormErrors => {

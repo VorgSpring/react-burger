@@ -5,14 +5,15 @@ import { ProfileFormSkeleton } from './ProfileFormSkeleton';
 import LoadError from '../LoadError';
 import EditableInput from '../ui/EditableInput';
 import { profileFormSelector } from '../../selectors/forms';
-import { formAtionsCreator, TFormAtionsPayloads } from '../../helpers/forms/action';
+import { formAtionsCreator } from '../../helpers/forms/action';
 import { getUserRequest } from '../../services/operations/user';
 import {
   FormFieldTypes,
   FormTypes,
 } from '../../constants/forms/types';
 import { FormActionTypes } from '../../services/actions/type';
-import { TFormProps } from '../../types/form';
+import { TFormProps } from '../../types/forms/props';
+import { TFormAtionsPayloads } from '../../types/forms/actions';
 import styles from './ProfileForm.module.css';
 
 export const ProfileForm = ({

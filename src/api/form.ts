@@ -2,12 +2,13 @@ import { checkResponce } from '../helpers/api';
 import { FormApiUrls, FormApiMethods } from '../constants/forms/api';
 import { FormTypes } from '../constants/forms/types';
 import { getAccessToken } from '../helpers/tokens';
+import { TFormValues } from '../types/forms/state';
 
-// В следующем спринте реализуется типизации хранилища.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type TRequestFormApi = (formType: FormTypes, body: any, isAuthorization: boolean) => Promise<any>;
-
-export const requestFormApi: TRequestFormApi = (formType, body, isAuthorization) => {
+export const requestFormApi = <TResponce>(
+  formType: FormTypes,
+  body: TFormValues,
+  isAuthorization: boolean,
+): Promise<TResponce> => {
   const headers: HeadersInit = {
     'Content-Type': 'application/json;charset=utf-8',
   };
@@ -21,5 +22,5 @@ export const requestFormApi: TRequestFormApi = (formType, body, isAuthorization)
     headers,
     body: JSON.stringify(body),
   })
-    .then(checkResponce);
+    .then((responce) => checkResponce<TResponce>(responce));
 };

@@ -1,11 +1,14 @@
+import { Middleware } from 'redux';
 import { getUserValuesSelector } from '../../selectors/user';
 import { formAtionsCreator } from '../../helpers/forms/action';
 import { setLastUserEmail } from '../../helpers/email';
 import { FormTypes, FormFieldTypes } from '../../constants/forms/types';
 import { UserActionTypes, FormActionTypes } from '../actions/type';
+import { TStore } from '../../types/store';
+import { TAppDispatch } from '../../types/operation';
 
-// @ts-ignore: В следующем спринте реализуется типизации хранилища.
-export const userMiddleware = ({ dispatch, getState }) => (next) => (action) => {
+export const userMiddleware:
+Middleware<TAppDispatch, TStore> = ({ dispatch, getState }) => (next) => (action) => {
   const result = next(action);
 
   if (action.type === UserActionTypes.SET_USER) {

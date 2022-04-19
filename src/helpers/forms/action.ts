@@ -1,18 +1,7 @@
-import { FormFieldTypes, FormTypes } from '../../constants/forms/types';
+import { FormTypes } from '../../constants/forms/types';
 import { FormActionTypes } from '../../services/actions/type';
-import { TFormValues } from '../../types/form';
+import { TFormAtionsPayloads, TFormAtionsCreator } from '../../types/forms/actions';
 
-export type TFormAtionsPayloads = {
-  field?: FormFieldTypes;
-  value?: string;
-  message?: string;
-  values?: TFormValues
-};
-
-export type TFormAtionsCreator = {
-  type: string;
-  payload?: TFormAtionsPayloads;
-};
 export const formAtionsCreator = (
   type: FormTypes, action: FormActionTypes, payload?: TFormAtionsPayloads,
 ): TFormAtionsCreator => ({

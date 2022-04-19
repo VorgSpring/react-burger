@@ -5,7 +5,7 @@ import FormLayout from '../FormLayout';
 import PasswordInput from '../ui/PasswordInput';
 import { FormFieldTypes } from '../../constants/forms/types';
 import { RoutePaths } from '../../constants/routes';
-import { TFormProps } from '../../types/form';
+import { TFormProps } from '../../types/forms/props';
 
 export const ResetPasswordForm = ({
   values,

@@ -1,18 +1,4 @@
-import { FormFieldTypes } from '../constants/forms/types';
-
-export type TFormValues = {
-  [K in FormFieldTypes]?: string;
-};
-
-export type TFormErrors = {
-  [K in FormFieldTypes]?: string;
-};
-
-export type TFormState = {
-  values: TFormValues;
-  isRequest: boolean;
-  errors: TFormErrors;
-};
+import { TFormState } from './state';
 
 export type TFormProps = TFormState & {
   onChange: ({ target }: React.ChangeEvent<HTMLInputElement>) => void;

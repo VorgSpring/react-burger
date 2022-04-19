@@ -7,7 +7,7 @@ import { formSelector } from '../selectors/forms';
 import { FormFieldErrors } from '../constants/forms/errors';
 import { FormFieldTypes, FormTypes } from '../constants/forms/types';
 import { TStore } from '../types/store';
-import { TFormProps } from '../types/form';
+import { TFormProps } from '../types/forms/props';
 
 export const withForm = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

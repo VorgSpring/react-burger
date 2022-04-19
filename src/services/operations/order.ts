@@ -9,32 +9,35 @@ import { removeBurger } from '../actions/burger';
 import { getUserRequest } from './user';
 import { createOrderApi } from '../../api/order';
 import { createOrderSelector } from '../../selectors/order';
+import { TAppThunk } from '../../types/operation';
 
-// @ts-ignore: В следующем спринте реализуется типизации хранилища.
-export const createOrder = () => async (dispatch, getState) => {
-  dispatch(createOrderRequest());
+export const createOrder: TAppThunk = () => (
+  async (dispatch, getState) => {
+    dispatch(createOrderRequest());
 
-  const { burger, user } = createOrderSelector(getState());
+    const { burger, user } = createOrderSelector(getState());
 
-  try {
-    if (!user) {
-      const { errorMessage } = await dispatch(getUserRequest());
+    try {
+      if (!user) {
+        const data = await dispatch(getUserRequest());
+        const { errorMessage } = data as { errorMessage: string };
 
-      if (errorMessage) {
-        dispatch(createOrderCancel());
-        return;
+        if (errorMessage) {
+          dispatch(createOrderCancel());
+          return;
+        }
       }
+
+      const { order } = await createOrderApi(burger);
+      const { number } = order;
+
+      dispatch(createOrderSuccess(number));
+      dispatch(setCurrentOrder(number));
+      dispatch(removeBurger());
+    } catch (e) {
+      const { message } = e as { message: string };
+
+      dispatch(createOrderError(message));
     }
-
-    const { order } = await createOrderApi(burger);
-    const { number } = order;
-
-    dispatch(createOrderSuccess(number));
-    dispatch(setCurrentOrder(number));
-    dispatch(removeBurger());
-  } catch (e) {
-    const { message } = e as { message: string };
-
-    dispatch(createOrderError(message));
   }
-};
+);
