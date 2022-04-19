@@ -3,7 +3,7 @@ import { getIngredientIdsInBurger } from '../helpers/burger';
 import { getAccessToken } from '../helpers/tokens';
 import { CREATE_ORDER_API_URL } from '../constants/api';
 import { TBurger } from '../types/burger';
-import { TOrder } from '../types/order';
+import { TOrderResponce } from '../types/order';
 
 export const createOrderApi = (burger: TBurger) => {
   const ingredientIds = getIngredientIdsInBurger(burger);
@@ -16,5 +16,5 @@ export const createOrderApi = (burger: TBurger) => {
     },
     body: ingredientIds,
   })
-    .then((responce) => checkResponce<{ order: TOrder }>(responce));
+    .then((responce) => checkResponce<TOrderResponce>(responce));
 };
