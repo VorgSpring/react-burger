@@ -92,7 +92,7 @@ export const ordersMiddleware = (
         dispatch(ordersAtionsCreator(
           wsType,
           WebSocketTypes.WS_GET_MESSAGE,
-          { orders: getPreparedOrdersData(orders, type === OrdersTypes.MY), total, totalToday },
+          { orders: getPreparedOrdersData(orders, wsType === OrdersTypes.MY), total, totalToday },
         ));
       };
 
