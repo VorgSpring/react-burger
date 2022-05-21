@@ -1,4 +1,4 @@
-import { Middleware } from 'redux';
+import type { Middleware } from 'redux';
 import { getUserValuesSelector } from '../../selectors/user';
 import { formAtionsCreator } from '../../helpers/forms/action';
 import { setLastUserEmail } from '../../helpers/email';

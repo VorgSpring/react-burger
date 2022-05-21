@@ -3,6 +3,8 @@ import { TFormState } from './forms/state';
 import { TIngregient } from './ingredient';
 import { TBurger } from './burger';
 import { TUser } from './user';
+import { OrderStoreNames } from '../constants/orders/store';
+import { TOrdersState } from './order';
 
 export type TIngredientsState = {
   items: TIngregient[] | null;
@@ -32,4 +34,6 @@ export type TStore = {
   order: TOrderState;
   forms: TFormStates;
   user: TUserState;
+  [OrderStoreNames.ALL]: TOrdersState;
+  [OrderStoreNames.MY]: TOrdersState;
 };

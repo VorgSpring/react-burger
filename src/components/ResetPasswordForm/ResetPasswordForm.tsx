@@ -27,7 +27,7 @@ export const ResetPasswordForm = ({
   };
 
   const handleSubmit = () => {
-    onSubmit(redirectToConstructor);
+    onSubmit({ callback: redirectToConstructor });
   };
 
   // @ts-ignore: Ошибка библиотеки

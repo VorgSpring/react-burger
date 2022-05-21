@@ -20,3 +20,9 @@ export const removeTokens = () => {
   localStorage.removeItem(Tokens.ACCESS);
   localStorage.removeItem(Tokens.REFRESH);
 };
+
+export const getPreparedAccessToken = () => {
+  const token = getAccessToken();
+
+  return token.split('Bearer ')[1];
+};

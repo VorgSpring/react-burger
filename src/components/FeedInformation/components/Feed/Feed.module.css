@@ -1,0 +1,18 @@
+.root {
+  flex-grow: 1;
+}
+
+.root:last-child {
+  margin-right: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 160px;
+}
+
+.container span:nth-child(5n) {
+  margin-bottom: 0;
+}

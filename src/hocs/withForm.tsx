@@ -21,7 +21,7 @@ export const withForm = (
     isRequest,
   } = useSelector((store: TStore) => formSelector(store, formType));
 
-  const validateForm = () => {
+  const validateForm = (excludedFields?: FormFieldTypes[]) => {
     let isValid = true;
 
     Object.keys(values).forEach((field) => {
@@ -29,6 +29,10 @@ export const withForm = (
       const validatorField = field as keyof typeof FormFieldsValidator;
 
       const value = values[formField] || '';
+
+      if (excludedFields && excludedFields.find((excludedField) => excludedField === formField)) {
+        return;
+      }
 
       if (FormFieldsValidator[validatorField] && !FormFieldsValidator[validatorField](value)) {
         dispatch(formAtionsCreator(formType, FormActionTypes.FORM_SET_ERROR, {
@@ -50,8 +54,15 @@ export const withForm = (
     }));
   };
 
-  const submitHandler = (callback: () => void): void => {
-    const isFormValid = validateForm();
+  const submitHandler = (
+    options?: {
+      callback?: () => void,
+      excludedFields?: FormFieldTypes[],
+    },
+  ): void => {
+    const { callback, excludedFields } = options || {};
+    const isFormValid = validateForm(excludedFields);
+
     if (isFormValid) {
       dispatch(formOperation(callback));
     }

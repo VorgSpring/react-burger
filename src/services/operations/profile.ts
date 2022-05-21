@@ -2,7 +2,7 @@ import { formApiRequester } from '../../helpers/forms/api';
 import { formAtionsCreator } from '../../helpers/forms/action';
 import { getTokenApi } from '../../api/token';
 import { getExcludedFieldsForProfileFormSelector } from '../../selectors/forms';
-import { ReasponceStatuses } from '../../constants/responce';
+import { ResponceStatuses } from '../../constants/responce';
 import { FormActionTypes } from '../actions/type';
 import {
   FormFieldTypes,
@@ -11,6 +11,7 @@ import {
 import { TAppThunk } from '../../types/operation';
 import { TProfileResponce } from '../../types/forms/profile';
 import { TFormAtionsPayloads } from '../../types/forms/actions';
+import { setUser } from '../actions/user';
 
 export const changeProfile: TAppThunk = () => (
   async (dispatch, getState) => {
@@ -27,7 +28,7 @@ export const changeProfile: TAppThunk = () => (
       },
     );
 
-    if (errorMessage && errorMessage === ReasponceStatuses.FORBIDDEN) {
+    if (errorMessage && errorMessage === ResponceStatuses.FORBIDDEN) {
       try {
         const callback = () => {
           dispatch(changeProfile());
@@ -44,11 +45,14 @@ export const changeProfile: TAppThunk = () => (
       }
     } else {
       const payload = {
-        ...user,
-        [FormFieldTypes.PASSWORD_FIELD_TYPE]: '',
+        values: {
+          ...user,
+          [FormFieldTypes.PASSWORD_FIELD_TYPE]: '',
+        },
       } as TFormAtionsPayloads;
 
       dispatch(formAtionsCreator(FormTypes.PROFILE, FormActionTypes.FORM_SET_VALUES, payload));
+      dispatch(setUser(user));
     }
   }
 );

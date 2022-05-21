@@ -1,0 +1,7 @@
+.root {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  margin-left: 16px;
+}

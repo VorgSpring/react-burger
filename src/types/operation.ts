@@ -6,12 +6,14 @@ import { TIngredientActionTypes } from './actions/ingredients';
 import { TOrderActionTypes } from './actions/order';
 import { TUserActionTypes } from './actions/user';
 import { TFormAtionsCreator } from './forms/actions';
+import { TOrderAtionsCreator } from './order';
 
-type TApplicationActions = TBurgerActionTypes
+export type TApplicationActions = TBurgerActionTypes
 | TIngredientActionTypes
 | TOrderActionTypes
 | TUserActionTypes
-| TFormAtionsCreator;
+| TFormAtionsCreator
+| TOrderAtionsCreator;
 
 export type TGetState = () => TStore;
 

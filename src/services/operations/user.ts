@@ -8,7 +8,7 @@ import {
 import { getUserApi, logoutUserApi } from '../../api/user';
 import { getTokenApi } from '../../api/token';
 import { removeTokens } from '../../helpers/tokens';
-import { ReasponceStatuses } from '../../constants/responce';
+import { ResponceStatuses } from '../../constants/responce';
 import { TAppThunk } from '../../types/operation';
 import { TUser } from '../../types/user';
 
@@ -28,7 +28,7 @@ export const getUserRequest: TAppThunk<Promise<void | TUser | { errorMessage: st
 
       dispatch(removeUser());
 
-      if (messageUserError === ReasponceStatuses.FORBIDDEN) {
+      if (messageUserError === ResponceStatuses.FORBIDDEN) {
         try {
           const callback = () => {
             dispatch(getUserRequest());

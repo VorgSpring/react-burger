@@ -5,7 +5,7 @@ export type TFormAtionsPayloads = {
   field?: FormFieldTypes;
   value?: string;
   message?: string;
-  values?: TFormValues
+  values?: TFormValues;
 };
 
 export type TFormAtionsCreator = {

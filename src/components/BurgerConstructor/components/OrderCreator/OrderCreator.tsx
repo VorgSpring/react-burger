@@ -2,15 +2,13 @@ import React from 'react';
 import cn from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  CurrencyIcon,
-  Button,
-} from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { createOrder } from '../../../../services/operations/order';
 import { orderCreatorSelector } from '../../../../selectors/order';
 import { getRefreshToken } from '../../../../helpers/tokens';
 import { RoutePaths } from '../../../../constants/routes';
 import styles from './OrderCreator.module.css';
+import Price from '../../../Price';
 
 export const OrderCreator = () => {
   const dispatch = useDispatch();
@@ -43,15 +41,7 @@ export const OrderCreator = () => {
         </p>
       )}
 
-      <div className={cn(styles.price, 'mr-10')}>
-        <span className="text text_type_digits-medium mr-2">
-          {summaryCost}
-        </span>
-
-        <span className={styles.icon}>
-          <CurrencyIcon type="primary" />
-        </span>
-      </div>
+      <Price value={summaryCost} size="medium" className="mr-10" />
 
       {/* @ts-ignore: Ошибка библиотеки */}
       <Button onClick={handleCreateOrder} disabled={isEmpty}>

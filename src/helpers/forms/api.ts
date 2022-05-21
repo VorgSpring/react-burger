@@ -21,18 +21,16 @@ export const formApiRequester = async <T>(
   formType: FormTypes,
   dispatch: TAppDispatch,
   getState: TGetState,
-  options: {
-    isAuthorization: boolean,
-    excludedFields: Array<keyof TFormValues>,
-  } = {
-    isAuthorization: false,
-    excludedFields: [],
+  options?: {
+    isAuthorization?: boolean,
+    excludedFields?: Array<keyof TFormValues>,
+    isClean?: boolean,
   },
 ): Promise<T> => {
   const {
     isAuthorization = false,
     excludedFields = [],
-  } = options;
+  } = options || {};
 
   dispatch(formAtionsCreator(formType, FormActionTypes.FORM_SUBMIT_REQUEST));
 

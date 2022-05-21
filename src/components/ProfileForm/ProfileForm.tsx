@@ -29,6 +29,7 @@ export const ProfileForm = ({
     isShowButtons,
     isRequestUser,
     errorUser,
+    excludedFields,
   } = useSelector(profileFormSelector);
 
   useEffect(() => {
@@ -46,6 +47,10 @@ export const ProfileForm = ({
     dispatch(
       formAtionsCreator(FormTypes.PROFILE, FormActionTypes.FORM_SET_VALUES, initialFields),
     );
+  };
+
+  const handleSubmit = () => {
+    onSubmit({ excludedFields });
   };
 
   if (isRequestUser) {
@@ -71,7 +76,8 @@ export const ProfileForm = ({
       buttonsPosition="right"
       isRequest={isRequest}
       error={errors[FormFieldTypes.REQUEST_FIELD_TYPE]}
-      onSubmit={onSubmit}
+      className="mt-20"
+      onSubmit={handleSubmit}
       isShowButtons={isShowButtons}
       onCancel={handleCancel}
     >

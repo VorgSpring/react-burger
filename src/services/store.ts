@@ -2,6 +2,7 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { burgerMiddleware } from './middleware/burger';
 import { userMiddleware } from './middleware/user';
+import { ordersMiddlewares } from './middleware/orders';
 import { rootReducer } from './reducers';
 
 declare global {
@@ -15,7 +16,12 @@ const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_E
   : compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(thunk, burgerMiddleware, userMiddleware),
+  applyMiddleware(
+    thunk,
+    burgerMiddleware,
+    userMiddleware,
+    ...ordersMiddlewares,
+  ),
 );
 
 export const store = createStore(rootReducer, enhancer);

@@ -57,7 +57,8 @@ export const profileFormSelector = createSelector(
   isShowProfileButtonsSelector,
   isRequestUserSelector,
   getErrorUserSelector,
-  (user, isShowButtons, isRequestUser, errorUser) => ({
-    user, isShowButtons, isRequestUser, errorUser,
+  getExcludedFieldsForProfileFormSelector,
+  (user, isShowButtons, isRequestUser, errorUser, excludedFields) => ({
+    user, isShowButtons, isRequestUser, errorUser, excludedFields,
   }),
 );

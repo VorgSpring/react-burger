@@ -1,0 +1,18 @@
+.root {
+  width: 640px;
+  margin: 0 auto;
+}
+
+.number {
+  text-align: center;
+}
+
+.align_left {
+  text-align: left;
+}
+
+.information {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

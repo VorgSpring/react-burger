@@ -1,0 +1,8 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+}
+
+.skeleton {
+  flex-grow: 1;
+}

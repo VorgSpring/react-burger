@@ -2,9 +2,9 @@ import React from 'react';
 import {
   Routes,
   Route,
-  Navigate,
   useLocation,
   useNavigate,
+  Navigate,
 } from 'react-router-dom';
 import MainLayout from '../components/MainLayout';
 import MainPage from './MainPage';
@@ -16,9 +16,14 @@ import ProfilePage from './ProfilePage';
 import IngredientPage from './IngredientPage';
 import IngredientDetails from '../components/IngredientDetails';
 import Modal from '../components/Modal';
-import Plug from '../components/Plug';
 import ProtectedRoute from '../components/ProtectedRoute';
+import ProfileForm from '../components/ProfileForm';
+import Logout from '../components/Logout';
+import OrderHistory from '../components/OrderHistory';
+import { OrdersTypes } from '../constants/orders/types';
 import { RoutePaths } from '../constants/routes';
+import DetailedOrder from '../components/DetailedOrder';
+import FeedPage from './FeedPage';
 
 type LocationState = {
   state: {
@@ -39,12 +44,20 @@ export default () => {
   return (
     <MainLayout>
       <Routes location={state?.backgroundLocation || location}>
-        <Route path={RoutePaths.CONSTRUCTOR} element={<MainPage />} />
-        <Route path={RoutePaths.INGREDIENT} element={<IngredientPage />} />
-        <Route path={RoutePaths.FEED} element={<Plug />} />
+        <Route index element={<MainPage />} />
+
+        <Route path="ingredients">
+          <Route path=":id" element={<IngredientPage />} />
+        </Route>
+
+        <Route path="feed" element={<FeedPage />} />
+
+        <Route path="feed">
+          <Route path=":number" element={<DetailedOrder />} />
+        </Route>
 
         <Route
-          path={RoutePaths.LOGIN}
+          path="login"
           element={(
             <ProtectedRoute.IsNotAuthorized>
               <LoginPage />
@@ -52,7 +65,7 @@ export default () => {
           )}
         />
         <Route
-          path={RoutePaths.REGISTER}
+          path="register"
           element={(
             <ProtectedRoute.IsNotAuthorized>
               <RegisterPage />
@@ -60,7 +73,7 @@ export default () => {
           )}
         />
         <Route
-          path={RoutePaths.FORGOT_PASSWORD}
+          path="forgot-password"
           element={(
             <ProtectedRoute.IsNotAuthorized>
               <ForgotPasswordPage />
@@ -68,7 +81,7 @@ export default () => {
           )}
         />
         <Route
-          path={RoutePaths.RESET_PASSWORD}
+          path="reset-password"
           element={(
             <ProtectedRoute.IsNotAuthorized>
               <ResetPasswordPage />
@@ -77,13 +90,21 @@ export default () => {
         />
 
         <Route
-          path={RoutePaths.ROOT_PROFILE}
+          path="profile"
           element={(
             <ProtectedRoute.RequireAauthorize>
               <ProfilePage />
             </ProtectedRoute.RequireAauthorize>
           )}
-        />
+        >
+          <Route index element={<ProfileForm />} />
+          <Route path="logout" element={<Logout />} />
+          <Route path="orders" element={<OrderHistory type={OrdersTypes.MY} />} />
+        </Route>
+
+        <Route path="profile/orders">
+          <Route path=":number" element={<DetailedOrder />} />
+        </Route>
 
         <Route
           path={RoutePaths.ANY}
@@ -93,14 +114,38 @@ export default () => {
 
       {state?.backgroundLocation && (
         <Routes>
-          <Route
-            path={RoutePaths.INGREDIENT}
-            element={(
-              <Modal onClose={goPreviosPage}>
-                <IngredientDetails />
-              </Modal>
-            )}
-          />
+          <Route path="ingredients">
+            <Route
+              path=":id"
+              element={(
+                <Modal onClose={goPreviosPage}>
+                  <IngredientDetails />
+                </Modal>
+              )}
+            />
+          </Route>
+
+          <Route path="profile/orders">
+            <Route
+              path=":number"
+              element={(
+                <Modal onClose={goPreviosPage}>
+                  <DetailedOrder />
+                </Modal>
+              )}
+            />
+          </Route>
+
+          <Route path="feed">
+            <Route
+              path=":number"
+              element={(
+                <Modal onClose={goPreviosPage}>
+                  <DetailedOrder />
+                </Modal>
+              )}
+            />
+          </Route>
         </Routes>
       )}
     </MainLayout>

@@ -1,4 +1,4 @@
-import { Middleware } from 'redux';
+import type { Middleware } from 'redux';
 import { getBurgerSelector } from '../../selectors/burger';
 import { removeBurgerStorage, setBurgerStorage } from '../../helpers/burger';
 import { BurgerActionTypes } from '../actions/type';

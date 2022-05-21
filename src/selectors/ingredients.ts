@@ -1,5 +1,8 @@
 import { createSelector } from 'reselect';
-import { getIngredientById } from '../helpers/ingredients';
+import {
+  getIngredientById,
+  getIngredientPriceByIds,
+} from '../helpers/ingredients';
 import { TStore } from '../types/store';
 import { TIngregient } from '../types/ingredient';
 
@@ -14,6 +17,9 @@ export const getErrorSelector: TGetErrorSelector = (store) => store.ingredients.
 
 type TGetIngredientsIdSelector = (_: TStore, id: string | undefined) => string | null;
 export const getIngredientIdSelector: TGetIngredientsIdSelector = (_, id) => id || null;
+
+type TGetIngredientsIdsSelector = (_: TStore, ids?: string[]) => string[] | null;
+export const getIngredientIdsSelector: TGetIngredientsIdsSelector = (_, ids) => ids || null;
 
 export const getIngredientByIdSelector = createSelector(
   getIngredientsSelector,
@@ -43,4 +49,18 @@ export const ingredientDetailsSelector = createSelector(
   (ingredient, isLoading, error) => ({
     ingredient, isLoading, error,
   }),
+);
+
+export const getIngredientPriceByIdsSelector = createSelector(
+  getIngredientIdsSelector,
+  getIngredientsSelector,
+  isLoadingSelector,
+  getErrorSelector,
+  (ids, ingredients, isLoading, error) => (
+    {
+      price: getIngredientPriceByIds(ids, ingredients),
+      isLoading,
+      error,
+    }
+  ),
 );

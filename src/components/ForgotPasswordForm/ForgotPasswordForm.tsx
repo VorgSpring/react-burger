@@ -25,7 +25,7 @@ export const ForgotPasswordForm = ({
   };
 
   const handleSubmit = () => {
-    onSubmit(redirectToResetPassword);
+    onSubmit({ callback: redirectToResetPassword });
   };
 
   return (

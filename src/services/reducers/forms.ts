@@ -5,9 +5,10 @@ import { FormStoreNames } from '../../constants/forms/store';
 
 export const formsReducer = combineReducers(
   Object.keys(FormTypes).reduce((acc, type) => {
-    const storeName = FormStoreNames[type as keyof typeof FormStoreNames];
+    const formType = type as keyof typeof FormStoreNames;
+    const storeName = FormStoreNames[formType];
 
-    acc[storeName] = reducerCreator(storeName);
+    acc[storeName] = reducerCreator(formType);
     return acc;
   }, {} as {
     [K in FormStoreNames]: TFormReducer;

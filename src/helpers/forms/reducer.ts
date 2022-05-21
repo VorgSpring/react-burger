@@ -28,8 +28,11 @@ const cleanUpValues = (values: TFormValues): TFormValues => (
 );
 
 export type TFormReducer = (state: TFormState, action: TFormAtionsCreator) => TFormState;
-export const reducerCreator = (formType: FormStoreNames) => (
-  (state: TFormState = InitialStates[formType], action: TFormAtionsCreator): TFormState => {
+export const reducerCreator = (formType: keyof typeof FormStoreNames): TFormReducer => (
+  (
+    state = InitialStates[FormStoreNames[formType]],
+    action,
+  ) => {
     const field = action.payload?.field;
     const values = action.payload?.values;
     const value = action.payload?.value;
@@ -37,7 +40,7 @@ export const reducerCreator = (formType: FormStoreNames) => (
 
     switch (action.type) {
       case `${formType}_${FormActionTypes.FORM_SET_VALUE}`:
-        if (!field || !value) {
+        if (!field) {
           return state;
         }
 
@@ -45,7 +48,7 @@ export const reducerCreator = (formType: FormStoreNames) => (
           ...state,
           values: {
             ...state.values,
-            [field]: value,
+            [field]: value || '',
           },
           errors: resetError(state.errors, field),
         };
