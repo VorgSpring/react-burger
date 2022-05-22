@@ -41,7 +41,7 @@ export const LoginForm = ({
 
   if (user) {
     // @ts-ignore: Ошибка библиотеки
-    const from = state?.from?.pathname || RoutePaths.CONSTRUCTOR;
+    const from = state?.from?.pathname || RoutePaths.MAIN;
 
     return (
       <Navigate to={from} replace />

@@ -15,7 +15,7 @@ export const Logout = () => {
 
   useEffect(() => {
     const redirectToConstructor = () => {
-      navigate(RoutePaths.CONSTRUCTOR, { replace: true });
+      navigate(RoutePaths.MAIN, { replace: true });
     };
 
     dispatch(logoutUserRequest(redirectToConstructor));

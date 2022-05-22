@@ -9,7 +9,7 @@ import { TNavigation } from '../types/page';
 export const HeaderLeftNavigationData: TNavigation[] = [
   {
     title: 'Конструктор',
-    path: RoutePaths.CONSTRUCTOR,
+    path: RoutePaths.MAIN,
     Icon: BurgerIcon,
   },
   {

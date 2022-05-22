@@ -25,7 +25,7 @@ export const Header = () => (
       </ul>
 
       <Link
-        to={RoutePaths.CONSTRUCTOR}
+        to={RoutePaths.MAIN}
         className={cn(styles.navigation_logo, 'mt-1')}
       >
         <Logo />

@@ -1,12 +1,13 @@
 import React from 'react';
 import cn from 'classnames';
 import { useSelector } from 'react-redux';
-import styles from './Ingredient.module.css';
 import { TStore } from '../../../../types/store';
 import { getIngredientByIdSelector, isLoadingSelector } from '../../../../selectors/ingredients';
 import { TIngregient } from '../../../../types/ingredient';
 import Skeleton from '../../../Skeleton';
 import Price from '../../../Price';
+import { IngredientsTypeNames } from '../../../../constants/ingredients';
+import styles from './Ingredient.module.css';
 
 type Props = {
   id: string;
@@ -27,7 +28,14 @@ export const Ingredient = ({ id, count }: Props) => {
     return null;
   }
 
-  const { name, image, price } = ingredient;
+  const {
+    name,
+    image,
+    price,
+    type,
+  } = ingredient;
+
+  const finalCount = type === IngredientsTypeNames.INGREDIENT_BUN_TYPE ? 2 : count;
 
   return (
     <div className={cn(styles.root, 'mb-4')}>
@@ -41,7 +49,7 @@ export const Ingredient = ({ id, count }: Props) => {
 
       <div className={styles.price}>
         {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-        <span className="text text_type_digits-default">{count}&nbsp;x&nbsp;</span>
+        <span className="text text_type_digits-default">{finalCount}&nbsp;x&nbsp;</span>
         <Price value={price} />
       </div>
     </div>

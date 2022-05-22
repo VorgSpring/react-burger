@@ -20,7 +20,7 @@ export const RegisterForm = ({
 
   if (user) {
     return (
-      <Navigate to={RoutePaths.CONSTRUCTOR} replace />
+      <Navigate to={RoutePaths.MAIN} replace />
     );
   }
 

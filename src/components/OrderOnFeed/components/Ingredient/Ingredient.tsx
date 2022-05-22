@@ -1,10 +1,11 @@
 import React from 'react';
 import cn from 'classnames';
 import { useSelector } from 'react-redux';
-import styles from './Ingredient.module.css';
 import { TStore } from '../../../../types/store';
 import { getIngredientByIdSelector } from '../../../../selectors/ingredients';
 import { TIngregient } from '../../../../types/ingredient';
+import { IngredientsTypeNames } from '../../../../constants/ingredients';
+import styles from './Ingredient.module.css';
 
 type Props = {
   id: string;
@@ -20,15 +21,17 @@ export const Ingredient = ({ id, count, className }: Props) => {
     return null;
   }
 
-  const { name, image } = ingredient;
+  const { name, image, type } = ingredient;
+
+  const finalCount = type === IngredientsTypeNames.INGREDIENT_BUN_TYPE ? 2 : count;
 
   return (
     <div className={cn(styles.root, className)} title={name}>
       <img src={image} alt={name} className={styles.image} />
 
-      {count > 1 && (
+      {finalCount > 1 && (
         // eslint-disable-next-line react/jsx-one-expression-per-line
-        <div className={styles.many}>+{count}</div>
+        <div className={styles.many}>+{finalCount}</div>
       )}
     </div>
   );

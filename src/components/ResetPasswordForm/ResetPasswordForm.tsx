@@ -33,7 +33,7 @@ export const ResetPasswordForm = ({
   // @ts-ignore: Ошибка библиотеки
   if (!location.state?.isForgot) {
     return (
-      <Navigate to={RoutePaths.CONSTRUCTOR} />
+      <Navigate to={RoutePaths.MAIN} />
     );
   }
 
