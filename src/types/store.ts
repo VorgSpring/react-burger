@@ -1,39 +1,25 @@
-import { FormStoreNames } from '../constants/forms/store';
-import { TFormState } from './forms/state';
-import { TIngregient } from './ingredient';
-import { TBurger } from './burger';
-import { TUser } from './user';
-import { OrderStoreNames } from '../constants/orders/store';
-import { TOrdersState } from './order';
+import { ThunkAction } from 'redux-thunk';
+import { Action, ActionCreator, Dispatch } from 'redux';
+import { rootReducer } from '../services/reducers';
+import { TBurgerActionTypes } from './actions/burger';
+import { TIngredientActionTypes } from './actions/ingredients';
+import { TOrderActionTypes } from './actions/order';
+import { TUserActionTypes } from './actions/user';
+import { TFormAtionsCreator } from './forms/actions';
+import { TOrderAtionsCreator } from './order';
 
-export type TIngredientsState = {
-  items: TIngregient[] | null;
-  isLoading: boolean;
-  error: string | null;
-};
+export type TApplicationActions = TBurgerActionTypes
+| TIngredientActionTypes
+| TOrderActionTypes
+| TUserActionTypes
+| TFormAtionsCreator
+| TOrderAtionsCreator;
 
-export type TOrderState = {
-  currentOrder: number | null;
-  orders: number[] | [],
-  isCreating: boolean;
-  error: string | null;
-};
+export type TRootState = ReturnType<typeof rootReducer>;
 
-export type TFormStates = {
-  [K in FormStoreNames]: TFormState;
-};
+export type TGetState = () => TRootState;
 
-export type TUserState = TUser & {
-  isRequest: boolean;
-  error: string | null;
-};
+export type TAppThunk<TReturn = void> =
+  ActionCreator<ThunkAction<TReturn, TRootState, Action, TApplicationActions>>;
 
-export type TStore = {
-  ingredients: TIngredientsState;
-  burger: TBurger;
-  order: TOrderState;
-  forms: TFormStates;
-  user: TUserState;
-  [OrderStoreNames.ALL]: TOrdersState;
-  [OrderStoreNames.MY]: TOrdersState;
-};
+export type TAppDispatch = Dispatch<TApplicationActions>;

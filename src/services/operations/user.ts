@@ -9,7 +9,7 @@ import { getUserApi, logoutUserApi } from '../../api/user';
 import { getTokenApi } from '../../api/token';
 import { removeTokens } from '../../helpers/tokens';
 import { ResponceStatuses } from '../../constants/responce';
-import { TAppThunk } from '../../types/operation';
+import { TAppThunk } from '../../types/store';
 import { TUser } from '../../types/user';
 
 export const getUserRequest: TAppThunk<Promise<void | TUser | { errorMessage: string }>> = () => (

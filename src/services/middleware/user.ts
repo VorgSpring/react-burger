@@ -4,11 +4,10 @@ import { formAtionsCreator } from '../../helpers/forms/action';
 import { setLastUserEmail } from '../../helpers/email';
 import { FormTypes, FormFieldTypes } from '../../constants/forms/types';
 import { UserActionTypes, FormActionTypes } from '../actions/type';
-import { TStore } from '../../types/store';
-import { TAppDispatch } from '../../types/operation';
+import { TAppDispatch, TRootState } from '../../types/store';
 
 export const userMiddleware:
-Middleware<TAppDispatch, TStore> = ({ dispatch, getState }) => (next) => (action) => {
+Middleware<TAppDispatch, TRootState> = ({ dispatch, getState }) => (next) => (action) => {
   const result = next(action);
 
   if (action.type === UserActionTypes.SET_USER) {

@@ -1,6 +1,6 @@
 import { FormTypes } from '../../constants/forms/types';
 import { formApiRequester } from '../../helpers/forms/api';
-import { TAppDispatch, TAppThunk, TGetState } from '../../types/operation';
+import { TAppDispatch, TAppThunk, TGetState } from '../../types/store';
 
 export const requestResetPassword: TAppThunk = (callback) => (
   async (dispatch: TAppDispatch, getState: TGetState) => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useSelector } from '../../../../hooks/typedHooks';
 import { BunEmpty } from './BunEmpty';
 import { getBunSelector } from '../../../../selectors/burger';
 import {

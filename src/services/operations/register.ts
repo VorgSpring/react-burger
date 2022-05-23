@@ -2,7 +2,7 @@ import { formApiRequester } from '../../helpers/forms/api';
 import { setUser } from '../actions/user';
 import { setTokens } from '../../helpers/tokens';
 import { FormTypes } from '../../constants/forms/types';
-import { TAppDispatch, TAppThunk, TGetState } from '../../types/operation';
+import { TAppDispatch, TAppThunk, TGetState } from '../../types/store';
 import { TRegisterResponce } from '../../types/forms/register';
 
 export const requestRegister: TAppThunk = () => (

@@ -1,12 +1,11 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../hooks/typedHooks';
 import { formAtionsCreator } from '../helpers/forms/action';
 import { FormFieldsValidator } from '../helpers/forms/validator';
 import { FormActionTypes } from '../services/actions/type';
 import { formSelector } from '../selectors/forms';
 import { FormFieldErrors } from '../constants/forms/errors';
 import { FormFieldTypes, FormTypes } from '../constants/forms/types';
-import { TStore } from '../types/store';
 import { TFormProps } from '../types/forms/props';
 
 export const withForm = (
@@ -19,7 +18,7 @@ export const withForm = (
     values,
     errors,
     isRequest,
-  } = useSelector((store: TStore) => formSelector(store, formType));
+  } = useSelector((store) => formSelector(store, formType));
 
   const validateForm = (excludedFields?: FormFieldTypes[]) => {
     let isValid = true;

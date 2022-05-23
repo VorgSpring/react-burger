@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import cn from 'classnames';
+import { useSelector } from '../../hooks/typedHooks';
 import Status from '../OrderStatus';
 import Price from '../Price';
 import { getOrderSelector } from '../../selectors/order';
-import { TStore } from '../../types/store';
 import { OrdersTypes } from '../../constants/orders/types';
 import styles from './DetailedOrder.module.css';
 import { getOrderApi } from '../../api/order';
@@ -30,7 +29,7 @@ export const DetailedOrder = () => {
   const { state: locationState } = location as LocationState;
   const wsType = locationState?.wsType;
 
-  const orderByStore = useSelector((store: TStore) => (
+  const orderByStore = useSelector((store) => (
     getOrderSelector(store, wsType, number)
   ));
 
@@ -50,7 +49,7 @@ export const DetailedOrder = () => {
   const { order, isLoading, error } = state;
 
   const { price } = useSelector(
-    (store: TStore) => getIngredientPriceByIdsSelector(store, order?.ingredients),
+    (store) => getIngredientPriceByIdsSelector(store, order?.ingredients),
   );
 
   useEffect(() => {
@@ -79,6 +78,13 @@ export const DetailedOrder = () => {
         });
     }
   }, [isNotFound, number, orderByStore]);
+
+  useEffect(() => {
+    setState((oldState) => ({
+      ...oldState,
+      order: orderByStore,
+    }));
+  }, [orderByStore]);
 
   if (isLoading || order === null) {
     return (

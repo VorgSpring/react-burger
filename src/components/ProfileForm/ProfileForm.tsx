@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/typedHooks';
 import FormLayout from '../FormLayout';
 import { ProfileFormSkeleton } from './ProfileFormSkeleton';
 import LoadError from '../LoadError';

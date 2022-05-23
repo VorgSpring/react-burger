@@ -2,7 +2,7 @@ import { FormTypes } from '../../constants/forms/types';
 import { setUser } from '../actions/user';
 import { setTokens } from '../../helpers/tokens';
 import { formApiRequester } from '../../helpers/forms/api';
-import { TAppThunk } from '../../types/operation';
+import { TAppThunk } from '../../types/store';
 import { TLoginResponce } from '../../types/forms/login';
 
 export const requestLogin: TAppThunk = () => async (dispatch, getState) => {

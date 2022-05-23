@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
+import { useDispatch, useSelector } from '../../hooks/typedHooks';
 import Tabs from './components/Tabs';
 import Ingredients from './components/Ingredients';
 import LoadError from '../LoadError';

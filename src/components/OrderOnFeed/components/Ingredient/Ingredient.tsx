@@ -1,9 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
-import { TStore } from '../../../../types/store';
+import { useSelector } from '../../../../hooks/typedHooks';
 import { getIngredientByIdSelector } from '../../../../selectors/ingredients';
-import { TIngregient } from '../../../../types/ingredient';
 import { IngredientsTypeNames } from '../../../../constants/ingredients';
 import styles from './Ingredient.module.css';
 
@@ -13,7 +11,7 @@ type Props = {
   className: string;
 };
 export const Ingredient = ({ id, count, className }: Props) => {
-  const ingredient = useSelector<TStore, TIngregient | null>(
+  const ingredient = useSelector(
     (store) => getIngredientByIdSelector(store, id),
   );
 

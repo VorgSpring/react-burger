@@ -4,7 +4,7 @@ import { FormStoreNames } from '../../constants/forms/store';
 import { FormActionTypes } from '../../services/actions/type';
 import { formAtionsCreator } from './action';
 import { TFormValues } from '../../types/forms/state';
-import { TAppDispatch, TGetState } from '../../types/operation';
+import { TAppDispatch, TGetState } from '../../types/store';
 
 const getIncludedFields = (
   fields: TFormValues, excludedFields: Array<keyof TFormValues>,

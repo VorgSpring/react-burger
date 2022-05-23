@@ -1,17 +1,16 @@
 import React from 'react';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { useDrag } from 'react-dnd';
 import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useSelector } from '../../../../hooks/typedHooks';
 import { getCountIngredientInBurgerSelector } from '../../../../selectors/burger';
 import { DndTypes } from '../../../../constants/dndTypes';
 import { getIngredientPath } from '../../../../helpers/ingredients';
 import { TIngregient } from '../../../../types/ingredient';
-import { TStore } from '../../../../types/store';
 import styles from './Ingredient.module.css';
 
 type Props = {
@@ -29,7 +28,7 @@ export const Ingredient = ({ item }: Props) => {
     price,
   } = item;
 
-  const count = useSelector<TStore, number | null>(
+  const count = useSelector(
     (store) => getCountIngredientInBurgerSelector(store, id),
   );
 

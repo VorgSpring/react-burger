@@ -1,7 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../../hooks/typedHooks';
 import { getIngredientPriceByIdsSelector } from '../../../../selectors/ingredients';
-import { TStore } from '../../../../types/store';
 import Price from '../../../Price';
 import Ingredients from '../Ingredients';
 import styles from './Information.module.css';
@@ -16,7 +15,7 @@ export const Information = ({ ingredientsIds }: Props) => {
     isLoading,
     error,
   } = useSelector(
-    (store: TStore) => getIngredientPriceByIdsSelector(store, ingredientsIds),
+    (store) => getIngredientPriceByIdsSelector(store, ingredientsIds),
   );
 
   if (error || price === null) {

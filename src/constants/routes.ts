@@ -12,7 +12,6 @@ export enum RoutePaths {
 }
 
 export enum RouteNames {
-  MAIN = '/',
   LOGIN = 'login',
   REGISTER = 'register',
   FORGOT_PASSWORD = 'forgot-password',

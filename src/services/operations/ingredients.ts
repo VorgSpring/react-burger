@@ -7,7 +7,7 @@ import { setBurger } from '../actions/burger';
 import { getPreparedIngredients } from '../../helpers/ingredients';
 import { getBurgerStorage } from '../../helpers/burger';
 import { loadIngredients } from '../../api/ingredient';
-import { TAppThunk } from '../../types/operation';
+import { TAppThunk } from '../../types/store';
 
 export const getIngredients: TAppThunk = () => async (dispatch) => {
   dispatch(getIngredientsRequest());

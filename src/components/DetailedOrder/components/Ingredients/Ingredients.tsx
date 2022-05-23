@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
+import { useDispatch, useSelector } from '../../../../hooks/typedHooks';
 import { preparedOrderIngredients } from '../../../../helpers/orders/util';
 import { getErrorAndEmptySelector } from '../../../../selectors/ingredients';
 import { getIngredients } from '../../../../services/operations/ingredients';

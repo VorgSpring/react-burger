@@ -3,9 +3,11 @@ import { InitialState } from '../../constants/orders/state';
 import { OrdersTypes } from '../../constants/orders/types';
 import { TOrderAtionsCreator, TOrdersState } from '../../types/order';
 
-export type TOrdersReducer = (state: TOrdersState, action: TOrderAtionsCreator) => TOrdersState;
-export const reducerCreator = (ordersType: keyof typeof OrdersTypes): TOrdersReducer => (
-  (state = InitialState, action) => {
+export const reducerCreator = (ordersType: keyof typeof OrdersTypes) => (
+  (
+    state = InitialState,
+    action: TOrderAtionsCreator,
+  ): TOrdersState => {
     const { type, payload } = action;
 
     const orders = payload?.orders || null;

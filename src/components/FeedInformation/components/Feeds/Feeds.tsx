@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../../hooks/typedHooks';
 import Feed from '../Feed';
 import { getOrderFeedSelector } from '../../../../selectors/order';
 import { OrderStatuses } from '../../../../constants/orders/status';

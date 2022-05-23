@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useSelector } from '../../hooks/typedHooks';
 import FormLayout from '../FormLayout';
 import PasswordInput from '../ui/PasswordInput';
 import { getUserSelector } from '../../selectors/user';

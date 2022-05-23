@@ -3,22 +3,22 @@ import {
   getIngredientById,
   getIngredientPriceByIds,
 } from '../helpers/ingredients';
-import { TStore } from '../types/store';
+import { TRootState } from '../types/store';
 import { TIngregient } from '../types/ingredient';
 
-type TGetIngredientsSelector = (store: TStore) => TIngregient[] | null;
+type TGetIngredientsSelector = (store: TRootState) => TIngregient[] | null;
 export const getIngredientsSelector: TGetIngredientsSelector = (store) => store.ingredients.items;
 
-type TIsLoadingSelector = (store: TStore) => boolean;
+type TIsLoadingSelector = (store: TRootState) => boolean;
 export const isLoadingSelector: TIsLoadingSelector = (store) => store.ingredients.isLoading;
 
-type TGetErrorSelector = (store: TStore) => string | null;
+type TGetErrorSelector = (store: TRootState) => string | null;
 export const getErrorSelector: TGetErrorSelector = (store) => store.ingredients.error;
 
-type TGetIngredientsIdSelector = (_: TStore, id: string | undefined) => string | null;
+type TGetIngredientsIdSelector = (_: TRootState, id: string | undefined) => string | null;
 export const getIngredientIdSelector: TGetIngredientsIdSelector = (_, id) => id || null;
 
-type TGetIngredientsIdsSelector = (_: TStore, ids?: string[]) => string[] | null;
+type TGetIngredientsIdsSelector = (_: TRootState, ids?: string[]) => string[] | null;
 export const getIngredientIdsSelector: TGetIngredientsIdsSelector = (_, ids) => ids || null;
 
 export const getIngredientByIdSelector = createSelector(

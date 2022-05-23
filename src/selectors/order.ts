@@ -7,22 +7,22 @@ import {
   getBurgerngredientsSelector,
 } from './burger';
 import { getSummaryCost } from '../helpers/burger';
-import { TStore } from '../types/store';
+import { TRootState } from '../types/store';
 import { OrdersTypes } from '../constants/orders/types';
 import { TOrders, TOrdersState } from '../types/order';
 import { OrderStoreNames } from '../constants/orders/store';
 import { getOrdersFeed } from '../helpers/orders/util';
 
-type TIsOrderCreatingSelector = (store: TStore) => boolean;
+type TIsOrderCreatingSelector = (store: TRootState) => boolean;
 export const isOrderCreatingSelector: TIsOrderCreatingSelector = (store) => store.order.isCreating;
 
-type TOrdersStoreSelector = (store: TStore, type: OrdersTypes) => TOrdersState;
+type TOrdersStoreSelector = (store: TRootState, type: OrdersTypes) => TOrdersState;
 export const getOrdersStoreSelector: TOrdersStoreSelector = (store, type) => {
   const orderStoreName = OrderStoreNames[type];
   return store[orderStoreName];
 };
 
-type TGetOrdersSelector = (store: TStore, type?: OrdersTypes) => TOrders[] | null;
+type TGetOrdersSelector = (store: TRootState, type?: OrdersTypes) => TOrders[] | null;
 export const getOrdersSelector: TGetOrdersSelector = (store, type) => {
   if (!type) {
     return null;
@@ -32,12 +32,13 @@ export const getOrdersSelector: TGetOrdersSelector = (store, type) => {
   return store[orderStoreName].orders;
 };
 
-type TGetAllOrdersSelector = (store: TStore, type?: OrdersTypes) => TOrders[] | null;
+type TGetAllOrdersSelector = (store: TRootState, type?: OrdersTypes) => TOrders[] | null;
 export const getAllOrdersSelector: TGetAllOrdersSelector = (store) => (
   store[OrderStoreNames.ALL].orders
 );
 
-type TOrderNumberSelector = (store: TStore, type?: OrdersTypes, number?: string) => number | null;
+type TOrderNumberSelector =
+  (store: TRootState, type?: OrdersTypes, number?: string) => number | null;
 export const getOrderNumberSelector: TOrderNumberSelector = (store, type, number) => {
   if (!number) {
     return null;

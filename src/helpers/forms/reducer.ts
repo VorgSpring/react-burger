@@ -27,12 +27,16 @@ const cleanUpValues = (values: TFormValues): TFormValues => (
     }, {} as TFormValues)
 );
 
-export type TFormReducer = (state: TFormState, action: TFormAtionsCreator) => TFormState;
-export const reducerCreator = (formType: keyof typeof FormStoreNames): TFormReducer => (
+export type TFormReducer = (state?: TFormState, action?: TFormAtionsCreator) => TFormState;
+export const reducerCreator = (formType: keyof typeof FormStoreNames) => (
   (
     state = InitialStates[FormStoreNames[formType]],
-    action,
-  ) => {
+    action: TFormAtionsCreator,
+  ): TFormState => {
+    if (!action) {
+      return state;
+    }
+
     const field = action.payload?.field;
     const values = action.payload?.values;
     const value = action.payload?.value;

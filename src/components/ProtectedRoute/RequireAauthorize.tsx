@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useLocation, Navigate } from 'react-router-dom';
+import { useSelector } from '../../hooks/typedHooks';
 import { getUserStateSelector } from '../../selectors/user';
 import { getRefreshToken } from '../../helpers/tokens';
 import { RoutePaths } from '../../constants/routes';

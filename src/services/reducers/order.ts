@@ -1,10 +1,12 @@
-import { TOrderState } from '../../types/store';
+import { TOrderState } from '../../types/state';
 import { TOrderActionTypes } from '../../types/actions/order';
 import { OrderActionTypes } from '../actions/type';
 import { OrderState } from './initialState';
 
-type TOrderReducer = (state: TOrderState, action: TOrderActionTypes) => TOrderState;
-export const orderReducer: TOrderReducer = (state = OrderState, action) => {
+export const orderReducer = (
+  state = OrderState,
+  action: TOrderActionTypes,
+): TOrderState => {
   switch (action.type) {
     case OrderActionTypes.CREATE_ORDER_REQUEST:
       return {

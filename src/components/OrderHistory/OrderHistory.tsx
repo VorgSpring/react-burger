@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/typedHooks';
 import { OrdersTypes } from '../../constants/orders/types';
 import { ordersAtionsCreator } from '../../helpers/orders/action';
 import { getOrderHistorySelector } from '../../selectors/order';
 import { WebSocketTypes } from '../../services/actions/type';
-import { TOrdersState } from '../../types/order';
-import { TStore } from '../../types/store';
 import LoadError from '../LoadError';
 import { OrderHistorySkeleton } from './OrderHistorySkeleton';
 import OrderOnFeed from '../OrderOnFeed';
@@ -28,7 +26,7 @@ export const OrderHistory = ({ type }: Props) => {
     isConnecting,
     error,
     isEmpty,
-  } = useSelector<TStore, TOrdersState & { isEmpty: boolean }>(
+  } = useSelector(
     (store) => getOrderHistorySelector(store, type),
   );
 

@@ -2,11 +2,10 @@ import type { Middleware } from 'redux';
 import { getBurgerSelector } from '../../selectors/burger';
 import { removeBurgerStorage, setBurgerStorage } from '../../helpers/burger';
 import { BurgerActionTypes } from '../actions/type';
-import { TStore } from '../../types/store';
-import { TAppDispatch } from '../../types/operation';
+import { TAppDispatch, TRootState } from '../../types/store';
 
 export const burgerMiddleware:
-Middleware<TAppDispatch, TStore> = ({ getState }) => (next) => (action) => {
+Middleware<TAppDispatch, TRootState> = ({ getState }) => (next) => (action) => {
   const result = next(action);
 
   const isBurgerAction = [

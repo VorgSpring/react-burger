@@ -4,14 +4,13 @@ import { OrdersTypes } from '../../constants/orders/types';
 import { WSResponceStatuses } from '../../constants/responce';
 import { WebSocketTypes } from '../../services/actions/type';
 import { updateUserToken } from '../../services/operations/orders';
-import { TAppDispatch } from '../../types/operation';
-import { TStore } from '../../types/store';
+import { TAppDispatch, TRootState } from '../../types/store';
 import { ordersAtionsCreator } from './action';
 import { getPreparedOrdersData, getWsUrl } from './util';
 
 export const ordersMiddleware = (
   wsType: OrdersTypes,
-): Middleware<TAppDispatch, TStore> => ((
+): Middleware<TAppDispatch, TRootState> => ((
   store,
 ) => {
   let socket: WebSocket | null = null;

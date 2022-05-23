@@ -1,9 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
-import { TStore } from '../../../../types/store';
+import { useSelector } from '../../../../hooks/typedHooks';
 import { getIngredientByIdSelector, isLoadingSelector } from '../../../../selectors/ingredients';
-import { TIngregient } from '../../../../types/ingredient';
 import Skeleton from '../../../Skeleton';
 import Price from '../../../Price';
 import { IngredientsTypeNames } from '../../../../constants/ingredients';
@@ -14,11 +12,11 @@ type Props = {
   count: number;
 };
 export const Ingredient = ({ id, count }: Props) => {
-  const ingredient = useSelector<TStore, TIngregient | null>(
+  const ingredient = useSelector(
     (store) => getIngredientByIdSelector(store, id),
   );
 
-  const isLoading = useSelector<TStore, boolean>(isLoadingSelector);
+  const isLoading = useSelector(isLoadingSelector);
 
   if (isLoading) {
     return <Skeleton height="64px" className="mb-4" />;

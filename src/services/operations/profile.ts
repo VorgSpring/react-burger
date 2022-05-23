@@ -8,7 +8,7 @@ import {
   FormFieldTypes,
   FormTypes,
 } from '../../constants/forms/types';
-import { TAppThunk } from '../../types/operation';
+import { TAppThunk } from '../../types/store';
 import { TProfileResponce } from '../../types/forms/profile';
 import { TFormAtionsPayloads } from '../../types/forms/actions';
 import { setUser } from '../actions/user';

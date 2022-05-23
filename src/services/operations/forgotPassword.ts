@@ -1,6 +1,6 @@
 import { FormTypes } from '../../constants/forms/types';
 import { formApiRequester } from '../../helpers/forms/api';
-import { TAppThunk } from '../../types/operation';
+import { TAppThunk } from '../../types/store';
 
 export const requestForgotPassword: TAppThunk = (callback: () => void) => (
   async (dispatch, getState) => {

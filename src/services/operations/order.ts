@@ -9,7 +9,7 @@ import { removeBurger } from '../actions/burger';
 import { getUserRequest } from './user';
 import { createOrderApi } from '../../api/order';
 import { createOrderSelector } from '../../selectors/order';
-import { TAppThunk } from '../../types/operation';
+import { TAppThunk } from '../../types/store';
 import { ResponceStatuses } from '../../constants/responce';
 import { FormFieldTypes, FormTypes } from '../../constants/forms/types';
 import { FormActionTypes } from '../actions/type';

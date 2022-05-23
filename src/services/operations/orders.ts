@@ -1,4 +1,4 @@
-import { TAppThunk } from '../../types/operation';
+import { TAppThunk } from '../../types/store';
 import { WebSocketTypes } from '../actions/type';
 import { getTokenApi } from '../../api/token';
 import { OrdersTypes } from '../../constants/orders/types';
