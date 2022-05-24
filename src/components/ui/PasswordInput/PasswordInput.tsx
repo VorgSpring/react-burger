@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import { TInputProps } from '../../../types/form';
+import { TInputProps } from '../../../types/forms/props';
 
 export const PasswordInput = ({
   name,

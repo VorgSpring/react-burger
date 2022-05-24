@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { useSelector } from '../../hooks/typedHooks';
 import { getErrorUserSelector } from '../../selectors/user';
 import { getRefreshToken } from '../../helpers/tokens';
 import { RoutePaths } from '../../constants/routes';
@@ -18,6 +18,6 @@ export const IsNotAuthorized = ({ children }: Props): JSX.Element => {
   }
 
   return (
-    <Navigate to={RoutePaths.CONSTRUCTOR} replace />
+    <Navigate to={RoutePaths.MAIN} replace />
   );
 };

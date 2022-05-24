@@ -1,24 +1,25 @@
 export enum RoutePaths {
-  CONSTRUCTOR = '/',
+  MAIN = '/',
   LOGIN = '/login',
   REGISTER = '/register',
   FORGOT_PASSWORD = '/forgot-password',
-  RESET_PASSWORD = '/reset-password/*',
-  ROOT_PROFILE = '/profile/*',
+  RESET_PASSWORD = '/reset-password',
   PROFILE = '/profile',
   INGREDIENTS = '/ingredients',
-  INGREDIENT = '/ingredients/:id',
   ORDERS = '/profile/orders',
-  ORDER = '/profile/orders/:id',
   LOGOUT = '/profile/logout',
   FEED = '/feed',
-  FEED_ITEM = '/feed/:id',
-  ANY = '*',
 }
 
-export enum NestedProfilePaths {
-  PROFILE = '/',
-  ORDERS = '/orders',
-  ORDER = '/orders/:id',
-  LOGOUT = '/logout',
+export enum RouteNames {
+  LOGIN = 'login',
+  REGISTER = 'register',
+  FORGOT_PASSWORD = 'forgot-password',
+  RESET_PASSWORD = 'reset-password',
+  PROFILE = 'profile',
+  INGREDIENTS = 'ingredients',
+  ORDERS = 'orders',
+  LOGOUT = 'logout',
+  FEED = 'feed',
+  ANY = '*',
 }

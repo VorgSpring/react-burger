@@ -5,8 +5,10 @@ import { arrayMove } from '../../helpers/array';
 import { TBurger } from '../../types/burger';
 import { TBurgerActionTypes } from '../../types/actions/burger';
 
-type TBurgerReducer = (state: TBurger, action: TBurgerActionTypes) => TBurger;
-export const burgerReducer: TBurgerReducer = (state = BurgerState, action) => {
+export const burgerReducer = (
+  state = BurgerState,
+  action: TBurgerActionTypes,
+): TBurger => {
   switch (action.type) {
     case BurgerActionTypes.SET_BURGER:
       return action.payload;

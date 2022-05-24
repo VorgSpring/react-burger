@@ -1,14 +1,12 @@
-import { TIngredientsState } from '../../types/store';
+import { TIngredientsState } from '../../types/state';
 import { TIngredientActionTypes } from '../../types/actions/ingredients';
 import { IngredientActionTypes } from '../actions/type';
 import { IngredientsState } from './initialState';
 
-type TIngredientsReducer = (
-  state: TIngredientsState,
-  action: TIngredientActionTypes
-) => TIngredientsState;
-
-export const ingredientsReducer: TIngredientsReducer = (state = IngredientsState, action) => {
+export const ingredientsReducer = (
+  state = IngredientsState,
+  action: TIngredientActionTypes,
+): TIngredientsState => {
   switch (action.type) {
     case IngredientActionTypes.GET_INGREDIENTS_REQUEST:
       return {

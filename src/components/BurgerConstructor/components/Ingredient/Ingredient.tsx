@@ -1,18 +1,16 @@
 import React, { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from '../../../../hooks/typedHooks';
 import { getIngredientByIdSelector } from '../../../../selectors/ingredients';
 import {
   moveIngredientInBurger,
   removeIngredientInBurger,
 } from '../../../../services/actions/burger';
 import { DndTypes } from '../../../../constants/dndTypes';
-import { TStore } from '../../../../types/store';
-import { TIngregient } from '../../../../types/ingredient';
 import styles from './Ingredient.module.css';
 
 type Props = {
@@ -24,7 +22,7 @@ export const Ingredient = ({ id, index }: Props) => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLLIElement | null>(null);
 
-  const ingredient = useSelector<TStore, TIngregient | null>(
+  const ingredient = useSelector(
     (store) => getIngredientByIdSelector(store, id),
   );
 

@@ -10,25 +10,25 @@ import {
 } from '../helpers/forms/profile';
 import { FormStoreNames } from '../constants/forms/store';
 import { FormTypes } from '../constants/forms/types';
-import { TStore } from '../types/store';
-import { TFormValues, TFormErrors } from '../types/form';
+import { TRootState } from '../types/store';
+import { TFormValues, TFormErrors } from '../types/forms/state';
 
-type TGetFormValueSelector = (store: TStore, type: FormTypes) => TFormValues;
+type TGetFormValueSelector = (store: TRootState, type: FormTypes) => TFormValues;
 export const getFormValueSelector: TGetFormValueSelector = (store, type) => (
   store.forms[FormStoreNames[type]].values
 );
 
-type TGetFormErrorsSelector = (store: TStore, type: FormTypes) => TFormErrors;
+type TGetFormErrorsSelector = (store: TRootState, type: FormTypes) => TFormErrors;
 export const getFormErrorsSelector: TGetFormErrorsSelector = (store, type) => (
   store.forms[FormStoreNames[type]].errors
 );
 
-type TIsRequestFormSelector = (store: TStore, type: FormTypes) => boolean;
+type TIsRequestFormSelector = (store: TRootState, type: FormTypes) => boolean;
 export const isRequestFormSelector: TIsRequestFormSelector = (store, type) => (
   store.forms[FormStoreNames[type]].isRequest
 );
 
-type TGetProfileFormValueSelector = (store: TStore) => TFormValues;
+type TGetProfileFormValueSelector = (store: TRootState) => TFormValues;
 export const getProfileFormValueSelector: TGetProfileFormValueSelector = (store) => (
   store.forms[FormStoreNames[FormTypes.PROFILE]].values
 );
@@ -57,7 +57,8 @@ export const profileFormSelector = createSelector(
   isShowProfileButtonsSelector,
   isRequestUserSelector,
   getErrorUserSelector,
-  (user, isShowButtons, isRequestUser, errorUser) => ({
-    user, isShowButtons, isRequestUser, errorUser,
+  getExcludedFieldsForProfileFormSelector,
+  (user, isShowButtons, isRequestUser, errorUser, excludedFields) => ({
+    user, isShowButtons, isRequestUser, errorUser, excludedFields,
   }),
 );

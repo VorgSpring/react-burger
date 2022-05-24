@@ -1,15 +1,14 @@
 import React from 'react';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../hooks/typedHooks';
 import { ErrorOrderDetails } from './ErrorOrderDetails';
 import DoneImage from './resource/done.gif';
 import DoneImage2x from './resource/done@2x.gif';
 import styles from './OrderDetails.module.css';
-import { TOrderState, TStore } from '../../types/store';
 
 export const OrderDetails = () => {
   // TODO переделать на механику роутера
-  const { currentOrder, error } = useSelector<TStore, TOrderState>((store) => store.order);
+  const { currentOrder, error } = useSelector((store) => store.order);
 
   if (error) {
     return (

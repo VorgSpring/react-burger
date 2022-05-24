@@ -1,8 +1,8 @@
 import { FormActionTypes } from '../../services/actions/type';
 import { InitialStates } from '../../constants/forms/states';
 import { FormFieldTypes } from '../../constants/forms/types';
-import { TFormErrors, TFormState, TFormValues } from '../../types/form';
-import { TFormAtionsCreator } from './action';
+import { TFormErrors, TFormState, TFormValues } from '../../types/forms/state';
+import { TFormAtionsCreator } from '../../types/forms/actions';
 import { FormStoreNames } from '../../constants/forms/store';
 
 const resetError = (errors: TFormErrors, field?: FormFieldTypes): TFormErrors => {
@@ -27,9 +27,16 @@ const cleanUpValues = (values: TFormValues): TFormValues => (
     }, {} as TFormValues)
 );
 
-export type TFormReducer = (state: TFormState, action: TFormAtionsCreator) => TFormState;
-export const reducerCreator = (formType: FormStoreNames) => (
-  (state: TFormState = InitialStates[formType], action: TFormAtionsCreator): TFormState => {
+export type TFormReducer = (state?: TFormState, action?: TFormAtionsCreator) => TFormState;
+export const reducerCreator = (formType: keyof typeof FormStoreNames) => (
+  (
+    state = InitialStates[FormStoreNames[formType]],
+    action: TFormAtionsCreator,
+  ): TFormState => {
+    if (!action) {
+      return state;
+    }
+
     const field = action.payload?.field;
     const values = action.payload?.values;
     const value = action.payload?.value;
@@ -37,7 +44,7 @@ export const reducerCreator = (formType: FormStoreNames) => (
 
     switch (action.type) {
       case `${formType}_${FormActionTypes.FORM_SET_VALUE}`:
-        if (!field || !value) {
+        if (!field) {
           return state;
         }
 
@@ -45,7 +52,7 @@ export const reducerCreator = (formType: FormStoreNames) => (
           ...state,
           values: {
             ...state.values,
-            [field]: value,
+            [field]: value || '',
           },
           errors: resetError(state.errors, field),
         };

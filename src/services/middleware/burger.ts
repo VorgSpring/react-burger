@@ -1,9 +1,11 @@
+import type { Middleware } from 'redux';
 import { getBurgerSelector } from '../../selectors/burger';
 import { removeBurgerStorage, setBurgerStorage } from '../../helpers/burger';
 import { BurgerActionTypes } from '../actions/type';
+import { TAppDispatch, TRootState } from '../../types/store';
 
-// @ts-ignore: В следующем спринте реализуется типизации хранилища.
-export const burgerMiddleware = ({ getState }) => (next) => (action) => {
+export const burgerMiddleware:
+Middleware<TAppDispatch, TRootState> = ({ getState }) => (next) => (action) => {
   const result = next(action);
 
   const isBurgerAction = [

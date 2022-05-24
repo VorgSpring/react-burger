@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/typedHooks';
 import FormLayout from '../FormLayout';
 import { ProfileFormSkeleton } from './ProfileFormSkeleton';
 import LoadError from '../LoadError';
 import EditableInput from '../ui/EditableInput';
 import { profileFormSelector } from '../../selectors/forms';
-import { formAtionsCreator, TFormAtionsPayloads } from '../../helpers/forms/action';
+import { formAtionsCreator } from '../../helpers/forms/action';
 import { getUserRequest } from '../../services/operations/user';
 import {
   FormFieldTypes,
   FormTypes,
 } from '../../constants/forms/types';
 import { FormActionTypes } from '../../services/actions/type';
-import { TFormProps } from '../../types/form';
+import { TFormProps } from '../../types/forms/props';
+import { TFormAtionsPayloads } from '../../types/forms/actions';
 import styles from './ProfileForm.module.css';
 
 export const ProfileForm = ({
@@ -28,6 +29,7 @@ export const ProfileForm = ({
     isShowButtons,
     isRequestUser,
     errorUser,
+    excludedFields,
   } = useSelector(profileFormSelector);
 
   useEffect(() => {
@@ -45,6 +47,10 @@ export const ProfileForm = ({
     dispatch(
       formAtionsCreator(FormTypes.PROFILE, FormActionTypes.FORM_SET_VALUES, initialFields),
     );
+  };
+
+  const handleSubmit = () => {
+    onSubmit({ excludedFields });
   };
 
   if (isRequestUser) {
@@ -70,7 +76,8 @@ export const ProfileForm = ({
       buttonsPosition="right"
       isRequest={isRequest}
       error={errors[FormFieldTypes.REQUEST_FIELD_TYPE]}
-      onSubmit={onSubmit}
+      className="mt-20"
+      onSubmit={handleSubmit}
       isShowButtons={isShowButtons}
       onCancel={handleCancel}
     >

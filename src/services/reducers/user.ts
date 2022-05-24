@@ -1,10 +1,12 @@
-import { TUserState } from '../../types/store';
+import { TUserState } from '../../types/state';
 import { UserActionTypes } from '../actions/type';
 import { TUserActionTypes } from '../../types/actions/user';
 import { UserState } from './initialState';
 
-type TUserReducer = (state: TUserState, action: TUserActionTypes) => TUserState;
-export const userReducer: TUserReducer = (state = UserState, action) => {
+export const userReducer = (
+  state = UserState,
+  action: TUserActionTypes,
+): TUserState => {
   switch (action.type) {
     case UserActionTypes.USER_REQUEST:
       return {

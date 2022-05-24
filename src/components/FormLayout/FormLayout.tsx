@@ -7,10 +7,13 @@ type Props = {
   submitText: string;
   cancelText?: string;
   error?: string;
+  className?: string;
   buttonsPosition?: 'left' | 'center' | 'right';
   isRequest: boolean;
   isShowButtons?: boolean;
-  onSubmit: (callback: () => void) => void;
+  onSubmit: (options: {
+    callback?: () => void,
+  }) => void;
   onCancel?: () => void;
   children: React.ReactNode;
 };
@@ -19,6 +22,7 @@ export const FormLayout = ({
   submitText,
   cancelText,
   error,
+  className,
   buttonsPosition = 'center',
   isRequest,
   isShowButtons = true,
@@ -35,7 +39,7 @@ export const FormLayout = ({
 
   return (
     <form
-      className={cn(styles.root, {
+      className={cn(styles.root, className, {
         [styles.load]: isRequest,
       })}
       onSubmit={handleSubmit}

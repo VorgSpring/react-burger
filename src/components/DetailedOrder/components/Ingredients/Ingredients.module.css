@@ -1,0 +1,4 @@
+.ingredients {
+  max-height: 312px;
+  overflow-y: auto;
+}

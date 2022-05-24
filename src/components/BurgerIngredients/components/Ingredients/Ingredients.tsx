@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../../hooks/typedHooks';
 import Ingredient from '../Ingredient';
 import { IngredientsSkeleton } from './IngredientsSkeleton';
 import { getIngredientsAndLoadingSelector } from '../../../../selectors/ingredients';

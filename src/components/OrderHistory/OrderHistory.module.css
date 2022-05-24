@@ -1,0 +1,25 @@
+.root {
+  max-width: 844px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex-grow: 1;
+  padding-right: 8px;
+  box-sizing: border-box;
+}
+
+.skeleton {
+  margin-bottom: 24px;
+  flex-shrink: 0;
+}
+
+.skeleton:last-child {
+  margin-bottom: 0;
+}
+
+.disconnect {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

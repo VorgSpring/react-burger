@@ -1,13 +1,15 @@
 import { FormTypes } from '../../constants/forms/types';
 import { formApiRequester } from '../../helpers/forms/api';
+import { TAppDispatch, TAppThunk, TGetState } from '../../types/store';
 
-// @ts-ignore: В следующем спринте реализуется типизации хранилища.
-export const requestResetPassword = (callback) => async (dispatch, getState) => {
-  const { errorMessage } = await formApiRequester(FormTypes.RESET_PASSWORD, dispatch, getState);
+export const requestResetPassword: TAppThunk = (callback) => (
+  async (dispatch: TAppDispatch, getState: TGetState) => {
+    const { errorMessage } = await formApiRequester(FormTypes.RESET_PASSWORD, dispatch, getState);
 
-  if (errorMessage) {
-    return;
+    if (errorMessage) {
+      return;
+    }
+
+    callback();
   }
-
-  callback();
-};
+);

@@ -1,9 +1,10 @@
 import { requestFormApi } from '../../api/form';
-import { FormFieldTypes } from '../../constants/forms/types';
+import { FormFieldTypes, FormTypes } from '../../constants/forms/types';
 import { FormStoreNames } from '../../constants/forms/store';
 import { FormActionTypes } from '../../services/actions/type';
 import { formAtionsCreator } from './action';
-import { TFormValues } from '../../types/form';
+import { TFormValues } from '../../types/forms/state';
+import { TAppDispatch, TGetState } from '../../types/store';
 
 const getIncludedFields = (
   fields: TFormValues, excludedFields: Array<keyof TFormValues>,
@@ -16,22 +17,20 @@ const getIncludedFields = (
     }, {} as TFormValues)
 );
 
-export const formApiRequester = async (
-  // @ts-ignore: В следующем спринте реализуется типизации хранилища.
-  formType,
-  // @ts-ignore: В следующем спринте реализуется типизации хранилища.
-  dispatch,
-  // @ts-ignore: В следующем спринте реализуется типизации хранилища.
-  getState,
-  options = {
-    isAuthorization: false,
-    excludedFields: [],
+export const formApiRequester = async <T>(
+  formType: FormTypes,
+  dispatch: TAppDispatch,
+  getState: TGetState,
+  options?: {
+    isAuthorization?: boolean,
+    excludedFields?: Array<keyof TFormValues>,
+    isClean?: boolean,
   },
-) => {
+): Promise<T> => {
   const {
-    isAuthorization,
-    excludedFields,
-  } = options;
+    isAuthorization = false,
+    excludedFields = [],
+  } = options || {};
 
   dispatch(formAtionsCreator(formType, FormActionTypes.FORM_SUBMIT_REQUEST));
 
@@ -41,10 +40,10 @@ export const formApiRequester = async (
     const fields = forms[storeName].values;
     const body = getIncludedFields(fields, excludedFields);
 
-    const data = await requestFormApi(formType, body, isAuthorization);
+    const data = await requestFormApi<T>(formType, body, isAuthorization);
     dispatch(formAtionsCreator(formType, FormActionTypes.FORM_SUBMIT_SUCCESS));
 
-    return data;
+    return data as unknown as T;
   } catch (e) {
     const { message } = e as { message: string };
 
@@ -53,6 +52,6 @@ export const formApiRequester = async (
       message,
     }));
 
-    return { errorMessage: message };
+    return { errorMessage: message } as unknown as T;
   }
 };

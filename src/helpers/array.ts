@@ -6,3 +6,5 @@ export const arrayMove = <T>(array: Array<T>, fromIndex: number, toIndex: number
 
   return arrayCopy;
 };
+
+export const getEmptyArray = (count: number) => Array.from(Array(count));

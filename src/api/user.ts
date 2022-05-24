@@ -1,7 +1,7 @@
 import { checkResponce } from '../helpers/api';
 import { LOGOUT_API_URL, USER_API_URL } from '../constants/api';
 import { getAccessToken, getRefreshToken } from '../helpers/tokens';
-import { TUser } from '../types/user';
+import { TUserResponce } from '../types/user';
 
 export const getUserApi = () => (
   fetch(USER_API_URL, {
@@ -11,7 +11,7 @@ export const getUserApi = () => (
       authorization: getAccessToken(),
     },
   })
-    .then((responce) => checkResponce<{ user: TUser }>(responce))
+    .then((responce) => checkResponce<TUserResponce>(responce))
 );
 
 export const logoutUserApi = () => (

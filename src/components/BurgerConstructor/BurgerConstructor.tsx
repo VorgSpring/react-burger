@@ -1,8 +1,8 @@
 import React from 'react';
 import cn from 'classnames';
 import { v4 as uuid } from 'uuid';
-import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
+import { useDispatch, useSelector } from '../../hooks/typedHooks';
 import Bun from './components/Bun';
 import Ingredients from './components/Ingredients';
 import OrderCreator from './components/OrderCreator';
@@ -13,7 +13,6 @@ import { addIngredientInBurger } from '../../services/actions/burger';
 import { ConstructorBunTypes, ConstructorElementTypes } from '../../constants/constructor';
 import { DndTypes } from '../../constants/dndTypes';
 import styles from './BurgerConstructor.module.css';
-import { TStore } from '../../types/store';
 
 export const BurgerConstructor = () => {
   const dispatch = useDispatch();
@@ -29,7 +28,7 @@ export const BurgerConstructor = () => {
   });
 
   // TODO переделать на механику роутера
-  const { isShowModal } = useSelector<TStore, { isShowModal: boolean }>((store) => ({
+  const { isShowModal } = useSelector((store) => ({
     isShowModal: Boolean(store.order.currentOrder || store.order.error),
   }));
 

@@ -1,5 +1,5 @@
 import { FormFieldTypes } from '../../constants/forms/types';
-import { TFormValues } from '../../types/form';
+import { TFormValues } from '../../types/forms/state';
 import { TUser } from '../../types/user';
 
 type TGetExcludedFieldsForProfileForm = (

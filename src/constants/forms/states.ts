@@ -1,5 +1,5 @@
 import { FormFieldTypes } from './types';
-import { TFormStates } from '../../types/store';
+import { TFormStates } from '../../types/state';
 import { FormStoreNames } from './store';
 
 const CommonState = {

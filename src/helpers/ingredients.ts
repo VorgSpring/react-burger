@@ -3,6 +3,7 @@ import { ConstructorElementTypes } from '../constants/constructor';
 import { RoutePaths } from '../constants/routes';
 import { TBurger } from '../types/burger';
 import { TBackIngregient, TIngregient } from '../types/ingredient';
+import { IngredientsTypeNames } from '../constants/ingredients';
 
 type TGetIngredientPath = (id: string) => string;
 export const getIngredientPath: TGetIngredientPath = (id) => `${RoutePaths.INGREDIENTS}/${id}`;
@@ -70,3 +71,27 @@ export const getPreparedIngredients: TGetPreparedIngredients = (ingredients) => 
     },
   }))
 );
+
+type TgetIngredientPriceByIds =
+  (ids: string[] | null, ingregients: TIngregient[] | null) => number | null;
+export const getIngredientPriceByIds: TgetIngredientPriceByIds = (ids, ingregients) => {
+  if (ingregients === null || ids === null) {
+    return null;
+  }
+
+  const ingregientsMap = ingregients.reduce((acc, ingregient) => {
+    const { id, price, type } = ingregient;
+    acc[id] = type === IngredientsTypeNames.INGREDIENT_BUN_TYPE ? price * 2 : price;
+    return acc;
+  }, {} as { [K in string]: number });
+
+  return ids.reduce((totalPrice, id) => {
+    const price = ingregientsMap[id];
+
+    if (price) {
+      return totalPrice + price;
+    }
+
+    return totalPrice;
+  }, 0);
+};

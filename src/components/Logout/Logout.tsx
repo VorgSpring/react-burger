@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RoutePaths } from '../../constants/routes';
+import { useDispatch } from '../../hooks/typedHooks';
 import { getErrorUserSelector } from '../../selectors/user';
 import { logoutUserRequest } from '../../services/operations/user';
 import Loader from '../Loader';
@@ -15,7 +16,7 @@ export const Logout = () => {
 
   useEffect(() => {
     const redirectToConstructor = () => {
-      navigate(RoutePaths.CONSTRUCTOR, { replace: true });
+      navigate(RoutePaths.MAIN, { replace: true });
     };
 
     dispatch(logoutUserRequest(redirectToConstructor));

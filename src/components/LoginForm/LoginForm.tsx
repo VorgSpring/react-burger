@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation, Navigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from '../../hooks/typedHooks';
 import FormLayout from '../FormLayout';
 import PasswordInput from '../ui/PasswordInput';
 import { formAtionsCreator } from '../../helpers/forms/action';
@@ -13,7 +13,7 @@ import {
 } from '../../constants/forms/types';
 import { FormActionTypes } from '../../services/actions/type';
 import { RoutePaths } from '../../constants/routes';
-import { TFormProps } from '../../types/form';
+import { TFormProps } from '../../types/forms/props';
 
 export const LoginForm = ({
   values,
@@ -41,7 +41,7 @@ export const LoginForm = ({
 
   if (user) {
     // @ts-ignore: Ошибка библиотеки
-    const from = state?.from?.pathname || RoutePaths.CONSTRUCTOR;
+    const from = state?.from?.pathname || RoutePaths.MAIN;
 
     return (
       <Navigate to={from} replace />

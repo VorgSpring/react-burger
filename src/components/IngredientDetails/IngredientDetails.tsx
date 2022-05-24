@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import cn from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../hooks/typedHooks';
 import LoadError from '../LoadError';
 import { IngredientDetailsSkeleton } from './IngredientDetailsSkeleton';
 import { IngredientDetailsEmpty } from './IngredientDetailsEmpty';
@@ -9,8 +9,6 @@ import { getIngredients } from '../../services/operations/ingredients';
 import { ingredientDetailsSelector } from '../../selectors/ingredients';
 import { IngredientStructure } from '../../constants/ingredients';
 import styles from './IngredientDetails.module.css';
-import { TStore } from '../../types/store';
-import { TIngregient } from '../../types/ingredient';
 
 export const IngredientDetails = () => {
   const dispatch = useDispatch();
@@ -20,9 +18,7 @@ export const IngredientDetails = () => {
     ingredient,
     isLoading,
     error,
-  } = useSelector<TStore, {
-    ingredient: TIngregient | null, isLoading: boolean, error: string | null,
-  }>(
+  } = useSelector(
     (store) => ingredientDetailsSelector(store, id),
   );
 

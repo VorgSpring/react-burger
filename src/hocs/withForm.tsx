@@ -1,13 +1,12 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../hooks/typedHooks';
 import { formAtionsCreator } from '../helpers/forms/action';
 import { FormFieldsValidator } from '../helpers/forms/validator';
 import { FormActionTypes } from '../services/actions/type';
 import { formSelector } from '../selectors/forms';
 import { FormFieldErrors } from '../constants/forms/errors';
 import { FormFieldTypes, FormTypes } from '../constants/forms/types';
-import { TStore } from '../types/store';
-import { TFormProps } from '../types/form';
+import { TFormProps } from '../types/forms/props';
 
 export const withForm = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,9 +18,9 @@ export const withForm = (
     values,
     errors,
     isRequest,
-  } = useSelector((store: TStore) => formSelector(store, formType));
+  } = useSelector((store) => formSelector(store, formType));
 
-  const validateForm = () => {
+  const validateForm = (excludedFields?: FormFieldTypes[]) => {
     let isValid = true;
 
     Object.keys(values).forEach((field) => {
@@ -29,6 +28,10 @@ export const withForm = (
       const validatorField = field as keyof typeof FormFieldsValidator;
 
       const value = values[formField] || '';
+
+      if (excludedFields && excludedFields.find((excludedField) => excludedField === formField)) {
+        return;
+      }
 
       if (FormFieldsValidator[validatorField] && !FormFieldsValidator[validatorField](value)) {
         dispatch(formAtionsCreator(formType, FormActionTypes.FORM_SET_ERROR, {
@@ -50,8 +53,15 @@ export const withForm = (
     }));
   };
 
-  const submitHandler = (callback: () => void): void => {
-    const isFormValid = validateForm();
+  const submitHandler = (
+    options?: {
+      callback?: () => void,
+      excludedFields?: FormFieldTypes[],
+    },
+  ): void => {
+    const { callback, excludedFields } = options || {};
+    const isFormValid = validateForm(excludedFields);
+
     if (isFormValid) {
       dispatch(formOperation(callback));
     }

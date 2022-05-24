@@ -32,3 +32,7 @@ export type TBackIngregient = {
   fat: string;
   carbohydrates: string;
 };
+
+export type TIngregientResponce = {
+  data: TBackIngregient[];
+};
