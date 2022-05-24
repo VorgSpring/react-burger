@@ -109,7 +109,7 @@ export const Router = () => {
 
         <Route
           path={RouteNames.ANY}
-          element={<Navigate to={RoutePaths.MAIN} replace />}
+          element={<Navigate to={RoutePaths[RouteNames.MAIN]} replace />}
         />
       </Routes>
 

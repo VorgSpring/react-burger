@@ -3,18 +3,18 @@ import {
   ListIcon,
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { RoutePaths } from './routes';
+import { RouteNames, RoutePaths } from './routes';
 import { TNavigation } from '../types/page';
 
 export const HeaderLeftNavigationData: TNavigation[] = [
   {
     title: 'Конструктор',
-    path: RoutePaths.MAIN,
+    path: RoutePaths[RouteNames.MAIN],
     Icon: BurgerIcon,
   },
   {
     title: 'Лента заказов',
-    path: RoutePaths.FEED,
+    path: RoutePaths[RouteNames.FEED],
     Icon: ListIcon,
   },
 ];
@@ -22,7 +22,7 @@ export const HeaderLeftNavigationData: TNavigation[] = [
 export const HeaderRightNavigationData: TNavigation[] = [
   {
     title: 'Личный кабинет',
-    path: RoutePaths.PROFILE,
+    path: RoutePaths[RouteNames.PROFILE],
     Icon: ProfileIcon,
   },
 ];

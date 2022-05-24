@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import FormLayout from '../FormLayout';
 import { FormFieldTypes } from '../../constants/forms/types';
-import { RoutePaths } from '../../constants/routes';
+import { RouteNames, RoutePaths } from '../../constants/routes';
 import { TFormProps } from '../../types/forms/props';
 
 export const ForgotPasswordForm = ({
@@ -17,7 +17,7 @@ export const ForgotPasswordForm = ({
 
   const redirectToResetPassword = () => {
     navigate(
-      RoutePaths.RESET_PASSWORD,
+      RoutePaths[RouteNames.RESET_PASSWORD],
       {
         state: { isForgot: true },
       },
