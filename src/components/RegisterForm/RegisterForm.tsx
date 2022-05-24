@@ -6,7 +6,7 @@ import FormLayout from '../FormLayout';
 import PasswordInput from '../ui/PasswordInput';
 import { getUserSelector } from '../../selectors/user';
 import { FormFieldTypes } from '../../constants/forms/types';
-import { RoutePaths } from '../../constants/routes';
+import { RouteNames, RoutePaths } from '../../constants/routes';
 import { TFormProps } from '../../types/forms/props';
 
 export const RegisterForm = ({
@@ -20,7 +20,7 @@ export const RegisterForm = ({
 
   if (user) {
     return (
-      <Navigate to={RoutePaths.MAIN} replace />
+      <Navigate to={RoutePaths[RouteNames.MAIN]} replace />
     );
   }
 

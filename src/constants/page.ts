@@ -1,51 +1,51 @@
-import { RoutePaths } from './routes';
+import { RouteNames, RoutePaths } from './routes';
 import { TNavigation, TPages } from '../types/page';
 
 export const EntrancePageData: TPages = {
-  [RoutePaths.LOGIN]: {
+  [RoutePaths[RouteNames.LOGIN]]: {
     title: 'Вход',
     links: [
       {
         description: 'Вы — новый пользователь?',
-        route: RoutePaths.REGISTER,
+        route: RoutePaths[RouteNames.REGISTER],
         text: 'Зарегистрироваться',
       },
       {
         description: 'Забыли пароль?',
-        route: RoutePaths.FORGOT_PASSWORD,
+        route: RoutePaths[RouteNames.FORGOT_PASSWORD],
         text: 'Восстановить пароль',
       },
     ],
   },
 
-  [RoutePaths.REGISTER]: {
+  [RoutePaths[RouteNames.REGISTER]]: {
     title: 'Регистрация',
     links: [
       {
         description: 'Уже зарегистрированы?',
-        route: RoutePaths.LOGIN,
+        route: RoutePaths[RouteNames.LOGIN],
         text: 'Войти',
       },
     ],
   },
 
-  [RoutePaths.FORGOT_PASSWORD]: {
+  [RoutePaths[RouteNames.FORGOT_PASSWORD]]: {
     title: 'Восстановление пароля',
     links: [
       {
         description: 'Вспомнили пароль?',
-        route: RoutePaths.LOGIN,
+        route: RoutePaths[RouteNames.LOGIN],
         text: 'Войти',
       },
     ],
   },
 
-  [RoutePaths.RESET_PASSWORD]: {
+  [RoutePaths[RouteNames.RESET_PASSWORD]]: {
     title: 'Восстановление пароля',
     links: [
       {
         description: 'Вспомнили пароль?',
-        route: RoutePaths.LOGIN,
+        route: RoutePaths[RouteNames.LOGIN],
         text: 'Войти',
       },
     ],
@@ -54,17 +54,17 @@ export const EntrancePageData: TPages = {
 
 export const ProfileNavigationData: TNavigation[] = [
   {
-    path: RoutePaths.PROFILE,
+    path: RoutePaths[RouteNames.PROFILE],
     title: 'Профиль',
   },
 
   {
-    path: RoutePaths.ORDERS,
+    path: RoutePaths[RouteNames.ORDERS],
     title: 'История заказов',
   },
 
   {
-    path: RoutePaths.LOGOUT,
+    path: RoutePaths[RouteNames.LOGOUT],
     title: 'Выход',
   },
 ];

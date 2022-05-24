@@ -1,12 +1,12 @@
 import { getConstructorElementType } from './constructor';
 import { ConstructorElementTypes } from '../constants/constructor';
-import { RoutePaths } from '../constants/routes';
+import { RouteNames, RoutePaths } from '../constants/routes';
 import { TBurger } from '../types/burger';
 import { TBackIngregient, TIngregient } from '../types/ingredient';
 import { IngredientsTypeNames } from '../constants/ingredients';
 
 type TGetIngredientPath = (id: string) => string;
-export const getIngredientPath: TGetIngredientPath = (id) => `${RoutePaths.INGREDIENTS}/${id}`;
+export const getIngredientPath: TGetIngredientPath = (id) => `${RoutePaths[RouteNames.INGREDIENTS]}/${id}`;
 
 type TGetIngredientById = (
   ingredients: TIngregient[] | null, ingredientId: string | null,

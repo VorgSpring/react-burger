@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from '../../../../hooks/typedHooks';
 import { createOrder } from '../../../../services/operations/order';
 import { orderCreatorSelector } from '../../../../selectors/order';
 import { getRefreshToken } from '../../../../helpers/tokens';
-import { RoutePaths } from '../../../../constants/routes';
+import { RouteNames, RoutePaths } from '../../../../constants/routes';
 import styles from './OrderCreator.module.css';
 import Price from '../../../Price';
 
@@ -27,7 +27,7 @@ export const OrderCreator = () => {
     }
 
     if (!refreshToken) {
-      navigate(RoutePaths.LOGIN);
+      navigate(RoutePaths[RouteNames.LOGIN]);
     }
 
     dispatch(createOrder());

@@ -4,7 +4,7 @@ import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import FormLayout from '../FormLayout';
 import PasswordInput from '../ui/PasswordInput';
 import { FormFieldTypes } from '../../constants/forms/types';
-import { RoutePaths } from '../../constants/routes';
+import { RouteNames, RoutePaths } from '../../constants/routes';
 import { TFormProps } from '../../types/forms/props';
 
 export const ResetPasswordForm = ({
@@ -19,7 +19,7 @@ export const ResetPasswordForm = ({
 
   const redirectToConstructor = () => {
     navigate(
-      RoutePaths.LOGIN,
+      RoutePaths[RouteNames.LOGIN],
       {
         state: { isForgot: false },
       },
@@ -33,7 +33,7 @@ export const ResetPasswordForm = ({
   // @ts-ignore: Ошибка библиотеки
   if (!location.state?.isForgot) {
     return (
-      <Navigate to={RoutePaths.MAIN} />
+      <Navigate to={RoutePaths[RouteNames.MAIN]} />
     );
   }
 

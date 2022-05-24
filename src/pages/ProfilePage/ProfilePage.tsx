@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import { NavLink, Outlet } from 'react-router-dom';
 import { ProfileNavigationData } from '../../constants/page';
-import { RoutePaths } from '../../constants/routes';
+import { RouteNames, RoutePaths } from '../../constants/routes';
 import styles from './ProfilePage.module.css';
 
 export const ProfilePage = () => (
@@ -12,7 +12,7 @@ export const ProfilePage = () => (
         <NavLink
           key={path}
           to={path}
-          end={path !== RoutePaths.ORDERS}
+          end={path !== RoutePaths[RouteNames.ORDERS]}
           className={({ isActive }) => cn(styles.link, 'text text_type_main-medium pb-4 pt-4', {
             text_color_primary: isActive,
             [styles.link_inactive]: !isActive,

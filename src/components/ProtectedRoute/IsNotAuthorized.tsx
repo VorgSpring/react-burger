@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { useSelector } from '../../hooks/typedHooks';
 import { getErrorUserSelector } from '../../selectors/user';
 import { getRefreshToken } from '../../helpers/tokens';
-import { RoutePaths } from '../../constants/routes';
+import { RouteNames, RoutePaths } from '../../constants/routes';
 
 type Props = {
   children: JSX.Element;
@@ -18,6 +18,6 @@ export const IsNotAuthorized = ({ children }: Props): JSX.Element => {
   }
 
   return (
-    <Navigate to={RoutePaths.MAIN} replace />
+    <Navigate to={RoutePaths[RouteNames.MAIN]} replace />
   );
 };

@@ -1,15 +1,14 @@
 import { TIconProps } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/utils';
-import { RoutePaths } from '../constants/routes';
 
 export type TNavigation = {
   title: string;
-  path: RoutePaths;
+  path: string;
   Icon?: ({ type }: TIconProps) => JSX.Element;
 };
 
 export type TLink = {
   description: string;
-  route: RoutePaths;
+  route: string;
   text: string;
 };
 
@@ -19,5 +18,5 @@ export type TPage = {
 };
 
 export type TPages = {
-  [K in RoutePaths]?: TPage
+  [K in string]: TPage
 };
