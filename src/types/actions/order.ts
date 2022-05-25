@@ -10,7 +10,6 @@ export type TCreateOrderCancel = {
 
 export type TCreateOrderSuccess = {
   type: OrderActionTypes.CREATE_ORDER_SUCCESS;
-  payload: number;
 };
 
 export type TCreateOrderError = {

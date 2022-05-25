@@ -55,7 +55,7 @@ export const LoginForm = ({
       error={errors[FormFieldTypes.REQUEST_FIELD_TYPE]}
       onSubmit={onSubmit}
     >
-      <div className="mb-6">
+      <div className="mb-6" data-test="login-form">
         <Input
           type="text"
           name={FormFieldTypes.EMAIL_FIELD_TYPE}

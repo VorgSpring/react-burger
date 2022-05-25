@@ -1,11 +1,11 @@
-import { BurgerActionTypes } from '../actions/type';
-import { ConstructorElementTypes } from '../../constants/constructor';
-import { BurgerState } from './initialState';
-import { arrayMove } from '../../helpers/array';
-import { TBurger } from '../../types/burger';
-import { TBurgerActionTypes } from '../../types/actions/burger';
+import { BurgerActionTypes } from '../../actions/type';
+import { ConstructorElementTypes } from '../../../constants/constructor';
+import { BurgerState } from '../initialState';
+import { arrayMove } from '../../../helpers/array';
+import { TBurger } from '../../../types/burger';
+import { TBurgerActionTypes } from '../../../types/actions/burger';
 
-export const burgerReducer = (
+export const reducer = (
   state = BurgerState,
   action: TBurgerActionTypes,
 ): TBurger => {

@@ -34,7 +34,7 @@ export const OrderCreator = () => {
   };
 
   return (
-    <div className={cn(styles.root, 'pr-4', { [styles.creating]: isCreating })}>
+    <div className={cn(styles.root, 'pr-4', { [styles.creating]: isCreating })} data-test="order-creater">
       {isEmpty && (
         <p className={cn(styles.empty_oreder, 'text text_type_main-small text_color_inactive pr-4')}>
           Добавте булку и ингредиенты, чтобы совершить заказ

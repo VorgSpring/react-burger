@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import { reducerCreator } from '../../helpers/forms/reducer';
-import { FormTypes } from '../../constants/forms/types';
-import { FormStoreNames } from '../../constants/forms/store';
+import { reducerCreator } from '../../../helpers/forms/reducer';
+import { FormTypes } from '../../../constants/forms/types';
+import { FormStoreNames } from '../../../constants/forms/store';
 
-export const formsReducer = combineReducers({
+export const reducer = combineReducers({
   [FormStoreNames.LOGIN]: reducerCreator(FormTypes.LOGIN),
   [FormStoreNames.REGISTER]: reducerCreator(FormTypes.REGISTER),
   [FormStoreNames.FORGOT_PASSWORD]: reducerCreator(FormTypes.FORGOT_PASSWORD),

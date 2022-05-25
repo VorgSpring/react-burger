@@ -46,6 +46,7 @@ export const Ingredient = ({ item }: Props) => {
   return (
     <li
       ref={dragRef}
+      data-test={`draggable-${constructorType}`}
       className={cn(styles.root, 'mt-2 pb-4 pt-9', {
         [styles.drag]: isDrag,
       })}

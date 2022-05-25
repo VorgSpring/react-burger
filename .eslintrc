@@ -6,6 +6,7 @@
     "project": "./tsconfig.json"
   },
   "plugins": [
+    "cypress",
     "@typescript-eslint",
     "react-hooks",
     "react"
@@ -14,7 +15,8 @@
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "airbnb",
-    "airbnb-typescript"
+    "airbnb-typescript",
+    "plugin:cypress/recommended"
   ],
   "rules": {
     "import/prefer-default-export": "off",

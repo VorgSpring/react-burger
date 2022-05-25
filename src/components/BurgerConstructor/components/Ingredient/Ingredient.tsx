@@ -108,6 +108,7 @@ export const Ingredient = ({ id, index }: Props) => {
       style={{ opacity }}
       data-handler-id={handlerId}
       onDrop={preventDefault}
+      data-test="dropped-ingredient"
     >
       <span className="mr-2">
         <DragIcon type="primary" />

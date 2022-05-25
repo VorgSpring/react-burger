@@ -1,9 +1,9 @@
-import { TOrderState } from '../../types/state';
-import { TOrderActionTypes } from '../../types/actions/order';
-import { OrderActionTypes } from '../actions/type';
-import { OrderState } from './initialState';
+import { TOrderState } from '../../../types/state';
+import { TOrderActionTypes } from '../../../types/actions/order';
+import { OrderActionTypes } from '../../actions/type';
+import { OrderState } from '../initialState';
 
-export const orderReducer = (
+export const reducer = (
   state = OrderState,
   action: TOrderActionTypes,
 ): TOrderState => {
@@ -24,7 +24,6 @@ export const orderReducer = (
       return {
         ...state,
         isCreating: false,
-        orders: [...state.orders, action.payload],
       };
 
     case OrderActionTypes.CREATE_ORDER_ERROR:
