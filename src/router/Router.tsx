@@ -43,102 +43,93 @@ export const Router = () => {
   return (
     <>
       <Routes location={state?.backgroundLocation || location}>
-        <Route index element={<MainPage />} />
+        <Route path={RoutePaths[RouteNames.MAIN]}>
+          <Route index element={<MainPage />} />
 
-        <Route path={RouteNames.FEED} element={<FeedPage />} />
+          <Route path={RouteNames.FEED} element={<FeedPage />} />
 
-        <Route
-          path={RouteNames.PROFILE}
-          element={(
-            <ProtectedRoute.RequireAauthorize>
-              <ProfilePage />
-            </ProtectedRoute.RequireAauthorize>
-          )}
-        >
-          <Route index element={<ProfileForm />} />
-          <Route path={RouteNames.LOGOUT} element={<Logout />} />
-          <Route path={RouteNames.ORDERS} element={<OrderHistory type={OrdersTypes.MY} />} />
-        </Route>
-
-        <Route
-          path={RouteNames.LOGIN}
-          element={(
-            <ProtectedRoute.IsNotAuthorized>
-              <LoginPage />
-            </ProtectedRoute.IsNotAuthorized>
-          )}
-        />
-        <Route
-          path={RouteNames.REGISTER}
-          element={(
-            <ProtectedRoute.IsNotAuthorized>
-              <RegisterPage />
-            </ProtectedRoute.IsNotAuthorized>
-          )}
-        />
-        <Route
-          path={RouteNames.FORGOT_PASSWORD}
-          element={(
-            <ProtectedRoute.IsNotAuthorized>
-              <ForgotPasswordPage />
-            </ProtectedRoute.IsNotAuthorized>
-          )}
-        />
-        <Route
-          path={RouteNames.RESET_PASSWORD}
-          element={(
-            <ProtectedRoute.IsNotAuthorized>
-              <ResetPasswordPage />
-            </ProtectedRoute.IsNotAuthorized>
-          )}
-        />
-
-        <Route path={RouteNames.INGREDIENTS}>
-          <Route path=":id" element={<IngredientPage />} />
-        </Route>
-
-        <Route path={RouteNames.FEED}>
-          <Route path=":number" element={<DetailedOrder />} />
-        </Route>
-
-        <Route path={RouteNames.PROFILE}>
-          <Route path={RouteNames.ORDERS}>
-            <Route path=":number" element={<DetailedOrder />} />
+          <Route
+            path={RouteNames.PROFILE}
+            element={(
+              <ProtectedRoute.RequireAauthorize>
+                <ProfilePage />
+              </ProtectedRoute.RequireAauthorize>
+            )}
+          >
+            <Route index element={<ProfileForm />} />
+            <Route path={RouteNames.LOGOUT} element={<Logout />} />
+            <Route path={RouteNames.ORDERS} element={<OrderHistory type={OrdersTypes.MY} />} />
           </Route>
-        </Route>
 
-        <Route
-          path={RouteNames.ANY}
-          element={<Navigate to={RoutePaths[RouteNames.MAIN]} replace />}
-        />
-      </Routes>
+          <Route
+            path={RouteNames.LOGIN}
+            element={(
+              <ProtectedRoute.IsNotAuthorized>
+                <LoginPage />
+              </ProtectedRoute.IsNotAuthorized>
+            )}
+          />
+          <Route
+            path={RouteNames.REGISTER}
+            element={(
+              <ProtectedRoute.IsNotAuthorized>
+                <RegisterPage />
+              </ProtectedRoute.IsNotAuthorized>
+            )}
+          />
+          <Route
+            path={RouteNames.FORGOT_PASSWORD}
+            element={(
+              <ProtectedRoute.IsNotAuthorized>
+                <ForgotPasswordPage />
+              </ProtectedRoute.IsNotAuthorized>
+            )}
+          />
+          <Route
+            path={RouteNames.RESET_PASSWORD}
+            element={(
+              <ProtectedRoute.IsNotAuthorized>
+                <ResetPasswordPage />
+              </ProtectedRoute.IsNotAuthorized>
+            )}
+          />
 
-      {state?.backgroundLocation && (
-        <Routes>
           <Route path={RouteNames.INGREDIENTS}>
-            <Route
-              path=":id"
-              element={(
-                <Modal onClose={goPreviosPage}>
-                  <IngredientDetails />
-                </Modal>
-              )}
-            />
+            <Route path=":id" element={<IngredientPage />} />
           </Route>
 
           <Route path={RouteNames.FEED}>
-            <Route
-              path=":number"
-              element={(
-                <Modal onClose={goPreviosPage}>
-                  <DetailedOrder />
-                </Modal>
-              )}
-            />
+            <Route path=":number" element={<DetailedOrder />} />
           </Route>
 
           <Route path={RouteNames.PROFILE}>
             <Route path={RouteNames.ORDERS}>
+              <Route path=":number" element={<DetailedOrder />} />
+            </Route>
+          </Route>
+
+          <Route
+            path={RouteNames.ANY}
+            element={<Navigate to={RoutePaths[RouteNames.MAIN]} replace />}
+          />
+        </Route>
+      </Routes>
+
+      {state?.backgroundLocation && (
+        <Routes>
+          <Route path={RoutePaths[RouteNames.MAIN]}>
+            <Route path={RouteNames.INGREDIENTS}>
+              <Route
+                path=":id"
+                element={(
+                  <Modal onClose={goPreviosPage}>
+                    <IngredientDetails />
+                  </Modal>
+                )}
+              />
+            </Route>
+
+            <Route path={RouteNames.FEED}>
               <Route
                 path=":number"
                 element={(
@@ -147,6 +138,19 @@ export const Router = () => {
                   </Modal>
                 )}
               />
+            </Route>
+
+            <Route path={RouteNames.PROFILE}>
+              <Route path={RouteNames.ORDERS}>
+                <Route
+                  path=":number"
+                  element={(
+                    <Modal onClose={goPreviosPage}>
+                      <DetailedOrder />
+                    </Modal>
+                  )}
+                />
+              </Route>
             </Route>
           </Route>
         </Routes>

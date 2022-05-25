@@ -16,7 +16,7 @@ export enum RouteNames {
 
 type TRoutePaths = { [K in RouteNames]: string };
 export const RoutePaths: TRoutePaths = {
-  [RouteNames.MAIN]: `${BASE_PATH}/`,
+  [RouteNames.MAIN]: `${BASE_PATH}`,
   [RouteNames.LOGIN]: `${BASE_PATH}/${RouteNames.LOGIN}`,
   [RouteNames.REGISTER]: `${BASE_PATH}/${RouteNames.REGISTER}`,
   [RouteNames.FORGOT_PASSWORD]: `${BASE_PATH}/${RouteNames.FORGOT_PASSWORD}`,
