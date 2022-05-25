@@ -26,7 +26,7 @@ export const Bun = ({ type }: Props) => {
   const { name, price, image } = bun;
 
   return (
-    <div className={`${styles.root} ${ConstructorBunAdditionalStyle[type]} pr-4`}>
+    <div className={`${styles.root} ${ConstructorBunAdditionalStyle[type]} pr-4`} data-test="dropped-bun">
       <ConstructorElement
         type={type}
         isLocked

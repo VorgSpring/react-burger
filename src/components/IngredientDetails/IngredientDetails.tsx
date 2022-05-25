@@ -55,7 +55,7 @@ export const IngredientDetails = () => {
   const ingredients = Object.keys(IngredientStructure) as Array<keyof typeof IngredientStructure>;
 
   return (
-    <section className="pt-10 pr-10 pl-10 pb-15">
+    <section className="pt-10 pr-10 pl-10 pb-15" data-test="ingredient-details">
       <h2 className={cn(styles.title, 'text text_type_main-large')}>
         Детали ингредиента
       </h2>

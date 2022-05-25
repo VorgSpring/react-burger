@@ -21,9 +21,11 @@ export const getUserRequest: TAppThunk<Promise<void | TUser | { errorMessage: st
 
       dispatch(userRequestSuccess());
       dispatch(setUser(user));
+      console.log(user);
 
       return user;
     } catch (errorUser) {
+      console.log(errorUser);
       const { message: messageUserError } = errorUser as { message: string };
 
       dispatch(removeUser());

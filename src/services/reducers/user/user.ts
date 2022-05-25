@@ -29,6 +29,7 @@ export const reducer = (
       };
 
     case UserActionTypes.SET_USER:
+      console.log(action);
       return {
         ...state,
         email: action.payload.email,

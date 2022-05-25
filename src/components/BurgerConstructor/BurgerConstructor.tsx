@@ -44,6 +44,7 @@ export const BurgerConstructor = () => {
           [styles.constructor_hover]: isHover,
         })}
         ref={dropTarget}
+        data-test="droppable"
       >
         <Bun type={ConstructorBunTypes.TOP} />
         <Ingredients />

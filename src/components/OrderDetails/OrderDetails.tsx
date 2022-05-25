@@ -17,7 +17,7 @@ export const OrderDetails = () => {
   }
 
   return (
-    <section className={cn(styles.root, 'pt-30 pb-30')}>
+    <section className={cn(styles.root, 'pt-30 pb-30')} data-test="order-details">
       <h2 className="text text_type_digits-large mb-8">
         {currentOrder}
       </h2>

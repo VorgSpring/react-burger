@@ -12,11 +12,11 @@
     "react"
   ],
   "extends": [
-    "plugin:cypress/recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "airbnb",
-    "airbnb-typescript"
+    "airbnb-typescript",
+    "plugin:cypress/recommended"
   ],
   "rules": {
     "import/prefer-default-export": "off",
