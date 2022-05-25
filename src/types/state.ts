@@ -11,7 +11,6 @@ export type TIngredientsState = {
 
 export type TOrderState = {
   currentOrder: number | null;
-  orders: number[] | [],
   isCreating: boolean;
   error: string | null;
 };

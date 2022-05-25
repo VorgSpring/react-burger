@@ -1,9 +1,9 @@
-import { TIngredientsState } from '../../types/state';
-import { TIngredientActionTypes } from '../../types/actions/ingredients';
-import { IngredientActionTypes } from '../actions/type';
-import { IngredientsState } from './initialState';
+import { TIngredientsState } from '../../../types/state';
+import { TIngredientActionTypes } from '../../../types/actions/ingredients';
+import { IngredientActionTypes } from '../../actions/type';
+import { IngredientsState } from '../initialState';
 
-export const ingredientsReducer = (
+export const reducer = (
   state = IngredientsState,
   action: TIngredientActionTypes,
 ): TIngredientsState => {

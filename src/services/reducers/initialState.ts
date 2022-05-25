@@ -16,7 +16,6 @@ export const CurrentIngredientState = null;
 
 export const OrderState: TOrderState = {
   currentOrder: null,
-  orders: [],
   isCreating: false,
   error: null,
 };

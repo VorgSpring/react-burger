@@ -16,9 +16,8 @@ export const createOrderCancel = (): TCreateOrderCancel => ({
   type: OrderActionTypes.CREATE_ORDER_CANCEL,
 });
 
-export const createOrderSuccess = (orderNumber: number): TCreateOrderSuccess => ({
+export const createOrderSuccess = (): TCreateOrderSuccess => ({
   type: OrderActionTypes.CREATE_ORDER_SUCCESS,
-  payload: orderNumber,
 });
 
 export const createOrderError = (error: string): TCreateOrderError => ({

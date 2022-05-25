@@ -1,9 +1,9 @@
-import { TUserState } from '../../types/state';
-import { UserActionTypes } from '../actions/type';
-import { TUserActionTypes } from '../../types/actions/user';
-import { UserState } from './initialState';
+import { TUserState } from '../../../types/state';
+import { UserActionTypes } from '../../actions/type';
+import { TUserActionTypes } from '../../../types/actions/user';
+import { UserState } from '../initialState';
 
-export const userReducer = (
+export const reducer = (
   state = UserState,
   action: TUserActionTypes,
 ): TUserState => {

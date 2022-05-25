@@ -37,7 +37,7 @@ export const createOrder: TAppThunk = () => (
       const { order } = await createOrderApi(burger);
       const { number } = order;
 
-      dispatch(createOrderSuccess(number));
+      dispatch(createOrderSuccess());
       dispatch(setCurrentOrder(number));
       dispatch(removeBurger());
     } catch (orderError) {
