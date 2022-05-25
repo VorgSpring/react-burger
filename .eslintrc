@@ -6,11 +6,13 @@
     "project": "./tsconfig.json"
   },
   "plugins": [
+    "cypress",
     "@typescript-eslint",
     "react-hooks",
     "react"
   ],
   "extends": [
+    "plugin:cypress/recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "airbnb",
