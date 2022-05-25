@@ -107,12 +107,12 @@ export const Router = () => {
               <Route path=":number" element={<DetailedOrder />} />
             </Route>
           </Route>
-
-          <Route
-            path={RouteNames.ANY}
-            element={<Navigate to={RoutePaths[RouteNames.MAIN]} replace />}
-          />
         </Route>
+
+        <Route
+          path={RouteNames.ANY}
+          element={<Navigate to={RoutePaths[RouteNames.MAIN]} replace />}
+        />
       </Routes>
 
       {state?.backgroundLocation && (
